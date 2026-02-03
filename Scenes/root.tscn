@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpcu337p0uktb"]
+
+[ext_resource type="Script" uid="uid://bmwuiicvslpgu" path="res://Scripts/seed_manager.gd" id="1_i04dx"]
+
+[node name="Root" type="Node"]
+
+[node name="SeedManager" type="Node" parent="."]
+script = ExtResource("1_i04dx")
