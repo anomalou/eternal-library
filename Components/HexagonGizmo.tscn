@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ksabwyoarwli"]
+
+[ext_resource type="Script" uid="uid://f5wlkyub7xt3" path="res://Scripts/Components/hexagon_gizmo.gd" id="1_7y75b"]
+
+[node name="HexagonGizmo" type="MeshInstance3D"]
+script = ExtResource("1_7y75b")

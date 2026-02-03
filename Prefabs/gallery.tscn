@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=4 uid="uid://bed5rglkmc220"]
+
+[ext_resource type="Script" uid="uid://dvvp722mn1ybu" path="res://Scripts/gallery.gd" id="1_6sual"]
+[ext_resource type="PackedScene" uid="uid://cocrr0tn5562q" path="res://Components/HexagonTransform.tscn" id="2_6sual"]
+[ext_resource type="PackedScene" uid="uid://ksabwyoarwli" path="res://Components/HexagonGizmo.tscn" id="3_1efjt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1efjt"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_261qs"]
+_surfaces = [{
+"aabb": AABB(-64, 0, -55.425625, 128, 1e-05, 110.85125),
+"format": 34359742465,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAAACAAMAAAADAAQAAAAEAAUAAAAFAAYAAAAGAAcA"),
+"material": SubResource("StandardMaterial3D_1efjt"),
+"primitive": 2,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAACAQgAAAAAAAAAAAAAAQgAAAADXs11CAAAAwgAAAADXs11CAACAwgAAAAAAMA0oAAAAwgAAAADXs13CAAAAQgAAAADXs13CAACAQgAAAAAAMI2o")
+}]
+
+[node name="Gallery" type="Node3D"]
+script = ExtResource("1_6sual")
+
+[node name="Floor" type="Node3D" parent="."]
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="HexagonGizmo" parent="." instance=ExtResource("3_1efjt")]
+mesh = SubResource("ArrayMesh_261qs")
+
+[node name="HexagonTransform" parent="." instance=ExtResource("2_6sual")]

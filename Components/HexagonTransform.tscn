@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cocrr0tn5562q"]
+
+[ext_resource type="Script" uid="uid://c5dofrvxmwd38" path="res://Scripts/Components/hexagon_transform.gd" id="1_rr61e"]
+
+[node name="HexagonTransform" type="Node"]
+script = ExtResource("1_rr61e")
