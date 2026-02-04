@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://bed5rglkmc220"]
+[gd_scene load_steps=8 format=4 uid="uid://bed5rglkmc220"]
 
-[ext_resource type="Script" uid="uid://dvvp722mn1ybu" path="res://Scripts/gallery.gd" id="1_6sual"]
-[ext_resource type="PackedScene" uid="uid://cocrr0tn5562q" path="res://Components/HexagonTransform.tscn" id="2_6sual"]
-[ext_resource type="PackedScene" uid="uid://vmtqj2aw7t77" path="res://Components/SpawnPointManager.tscn" id="2_261qs"]
-[ext_resource type="PackedScene" uid="uid://ksabwyoarwli" path="res://Components/HexagonGizmo.tscn" id="3_1efjt"]
+[ext_resource type="Script" uid="uid://dvvp722mn1ybu" path="res://Scripts/gallery.gd" id="1_vnw65"]
+[ext_resource type="PackedScene" uid="uid://vmtqj2aw7t77" path="res://Components/SpawnPointManager.tscn" id="2_2iksw"]
+[ext_resource type="PackedScene" uid="uid://ksabwyoarwli" path="res://Components/HexagonGizmo.tscn" id="3_o8mrs"]
+[ext_resource type="PackedScene" uid="uid://cocrr0tn5562q" path="res://Components/HexagonTransform.tscn" id="4_r0hsk"]
+[ext_resource type="PackedScene" uid="uid://ctl0et6b6xca4" path="res://Components/WallsManager.tscn" id="5_uq37l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1efjt"]
 transparency = 1
@@ -25,11 +26,13 @@ _surfaces = [{
 }]
 
 [node name="Gallery" type="Node3D"]
-script = ExtResource("1_6sual")
+script = ExtResource("1_vnw65")
 
-[node name="SpawnPointManager" parent="." instance=ExtResource("2_261qs")]
+[node name="SpawnPointManager" parent="." instance=ExtResource("2_2iksw")]
 
-[node name="HexagonGizmo" parent="." instance=ExtResource("3_1efjt")]
+[node name="HexagonGizmo" parent="." instance=ExtResource("3_o8mrs")]
 mesh = SubResource("ArrayMesh_261qs")
 
-[node name="HexagonTransform" parent="." instance=ExtResource("2_6sual")]
+[node name="HexagonTransform" parent="." instance=ExtResource("4_r0hsk")]
+
+[node name="WallsManager" parent="." instance=ExtResource("5_uq37l")]

@@ -26,7 +26,8 @@ func _draw_gizmo():
 	if not _position:
 		self._position = HexCoord.new(0, 0, 0)
 	
-	print_debug("Try draw gizmo in position ", _position.to_str())
+	print_debug("Try draw gizmo in position ", _position.to_str(), " with size ", _position.size)
+	_draw_armature()
 	
 
 func _draw_armature():
