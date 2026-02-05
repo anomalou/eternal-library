@@ -10,6 +10,13 @@ var global_coord : Vector3
 var size : float
 var spacing : float
 
+var _hex_width : float
+var _hex_height : float
+var _q_basis : Vector3
+var _r_basis : Vector3
+var _q_normal : Vector3
+var _r_normal : Vector3
+
 func _init(_x = 0, _y = 0, _z = 0) -> void:
 	self.size = 64
 	self.spacing = 64
@@ -17,30 +24,27 @@ func _init(_x = 0, _y = 0, _z = 0) -> void:
 	self.y = _y
 	self.r = _z
 	self.s = -self.q - self.r
-	_calculate_global()
 	
+	_calculate_vectors()
+	_calculate_global()
+
+func _calculate_vectors():
+	self._hex_width = size * 2.0
+	self._hex_height = size * sqrt(3.0)
+	self._q_basis = Vector3(self._hex_width * 0.75, 0, self._hex_height * 0.5)
+	self._r_basis = Vector3(0, 0, self._hex_height)
+	self._q_normal = Vector3(self._hex_width * 0.75, 0, self._hex_height * 0.5).normalized()
+	self._r_normal = Vector3(0, 0, self._hex_height).normalized()
 
 func _calculate_global():
-	var hex_width = size * 2.0
-	var hex_height = size * sqrt(3.0)
+	var world_x = self._q_basis.x * float(q) + self._r_basis.x * float(r)
+	var world_z = self._q_basis.z * float(q) + self._r_basis.z * float(r)
 	
-	var world_x = hex_width * float(q) * 0.75
-	var world_z = hex_height * (float(r) + float(q) / 2)
+	if spacing > 0:
+		world_x += spacing * (self._q_normal.x * q + self._r_normal.x * r)
+		world_z += spacing * (self._q_normal.z * q + self._r_normal.z * r)
 	
 	self.global_coord = Vector3(world_x, y, world_z)
-	
-	#var short_side = int(size * sqrt(3) / 2)
-	#var long_side = int(size / 2)
-	#if (self.x % 2 == 0):
-		#self.global_coord = Vector3(
-			#x * long_side * 3 + long_side * 2 + clamp(x, -1, 1) * spacing, 
-			#y, 
-			#z * short_side * 2 + short_side + clamp(z, -1, 1) * spacing)
-	#else:
-		#self.global_coord = Vector3(
-			#x * long_side * 3 + long_side * 2 + clamp(x, -1, 1) * spacing, 
-			#y, 
-			#z * short_side * 2 + short_side * 2 + clamp(z, -1, 1) * spacing)
 
 func update(coord : HexCoord):
 	self._init(coord.x, coord.y, coord.z)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bed5rglkmc220"]
+[gd_scene load_steps=9 format=4 uid="uid://bed5rglkmc220"]
 
 [ext_resource type="Script" uid="uid://dvvp722mn1ybu" path="res://Scripts/gallery.gd" id="1_vnw65"]
 [ext_resource type="PackedScene" uid="uid://vmtqj2aw7t77" path="res://Components/SpawnPointManager.tscn" id="2_2iksw"]
@@ -6,24 +6,27 @@
 [ext_resource type="PackedScene" uid="uid://cocrr0tn5562q" path="res://Components/HexagonTransform.tscn" id="4_r0hsk"]
 [ext_resource type="PackedScene" uid="uid://ctl0et6b6xca4" path="res://Components/WallsManager.tscn" id="5_uq37l"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1efjt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnw65"]
 transparency = 1
 no_depth_test = true
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_261qs"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_2iksw"]
 _surfaces = [{
 "aabb": AABB(-64, 0, -55.425625, 128, 32, 110.85125),
 "format": 34359742465,
 "index_count": 42,
 "index_data": PackedByteArray("AAABAAIAAAACAAMAAAADAAQAAAAEAAUAAAAFAAYAAAAGAAcACAAJAAoACwAMAA0ADgAPABAAEQASABMAFAAVABYAFwAYABkAGgAbABwAHQAeAB8A"),
-"material": SubResource("StandardMaterial3D_1efjt"),
+"material": SubResource("StandardMaterial3D_vnw65"),
 "primitive": 2,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 32,
-"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAACAQgAAAAAAAAAAAAAAQgAAAADXs11CAAAAwgAAAADXs11CAACAwgAAAAAyMQ0oAAAAwgAAAADXs13CAAAAQgAAAADXs13CAACAQgAAAAAyMY2oAACAQgAAAAAAAAAAAACAQgAAAEIAAAAAAAAAQgAAAELXs11CAAAAQgAAAADXs11CAAAAQgAAAADXs11CAAAAQgAAAELXs11CAAAAwgAAAELXs11CAAAAwgAAAADXs11CAAAAwgAAAADXs11CAAAAwgAAAELXs11CAACAwgAAAEIyMQ0oAACAwgAAAAAyMQ0oAACAwgAAAAAyMQ0oAACAwgAAAEIyMQ0oAAAAwgAAAELXs13CAAAAwgAAAADXs13CAAAAwgAAAADXs13CAAAAwgAAAELXs13CAAAAQgAAAELXs13CAAAAQgAAAADXs13CAAAAQgAAAADXs13CAAAAQgAAAELXs13CAACAQgAAAEIyMY2oAACAQgAAAAAyMY2o")
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAACAQgAAAAAAAAAAAAAAQgAAAADXs11CAAAAwgAAAADXs11CAACAwgAAAAAAMA0oAAAAwgAAAADXs13CAAAAQgAAAADXs13CAACAQgAAAAAAMI2oAACAQgAAAAAAAAAAAACAQgAAAEIAAAAAAAAAQgAAAELXs11CAAAAQgAAAADXs11CAAAAQgAAAADXs11CAAAAQgAAAELXs11CAAAAwgAAAELXs11CAAAAwgAAAADXs11CAAAAwgAAAADXs11CAAAAwgAAAELXs11CAACAwgAAAEIAMA0oAACAwgAAAAAAMA0oAACAwgAAAAAAMA0oAACAwgAAAEIAMA0oAAAAwgAAAELXs13CAAAAwgAAAADXs13CAAAAwgAAAADXs13CAAAAwgAAAELXs13CAAAAQgAAAELXs13CAAAAQgAAAADXs13CAAAAQgAAAADXs13CAAAAQgAAAELXs13CAACAQgAAAEIAMI2oAACAQgAAAAAAMI2o")
 }]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2iksw"]
+shading_mode = 0
 
 [node name="Gallery" type="Node3D"]
 script = ExtResource("1_vnw65")
@@ -31,8 +34,10 @@ script = ExtResource("1_vnw65")
 [node name="SpawnPointManager" parent="." instance=ExtResource("2_2iksw")]
 
 [node name="HexagonGizmo" parent="." instance=ExtResource("3_o8mrs")]
-mesh = SubResource("ArrayMesh_261qs")
+mesh = SubResource("ArrayMesh_2iksw")
 
 [node name="HexagonTransform" parent="." instance=ExtResource("4_r0hsk")]
+size = 64.0
 
 [node name="WallsManager" parent="." instance=ExtResource("5_uq37l")]
+wall_material = SubResource("StandardMaterial3D_2iksw")

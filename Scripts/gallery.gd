@@ -1,5 +1,5 @@
 @tool
-extends Node
+extends Node3D
 class_name Gallery
 
 var _gallery_seed : int
@@ -25,3 +25,4 @@ func apply_position(hex_position : HexCoord):
 	
 func generate_gallery(_seed : int):
 	self._gallery_seed = _seed
+	self._walls_manager.generate()
