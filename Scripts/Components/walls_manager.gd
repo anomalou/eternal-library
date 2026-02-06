@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 class_name WallsManager
 
@@ -7,23 +6,28 @@ class_name WallsManager
 
 var _trfm : HexCoord
 var _height : int
+var _required_entrancies : Array[EnumTypes.Direction]
 
 func setup(trfm : HexCoord, height : int):
 	self._trfm = trfm
 	self._height = height
 
-func generate():
+func generate(gallery_seed : int, required_entrancies : Array[EnumTypes.Direction]):
+	self._required_entrancies = required_entrancies
+	
 	if not wall_material:
 		wall_material = StandardMaterial3D.new()
 	
 	var colors = [Color.DARK_RED, Color.DARK_GREEN, Color.DARK_BLUE, Color.DARK_GOLDENROD, Color.DARK_MAGENTA, Color.DARK_CYAN]
-	for dir in range(EnumTypes.Direction.keys().size()):
-		var wall : MeshInstance3D = _create_wall(dir, colors.get(dir))
-		self.add_child(wall)
-		wall.owner = get_tree().edited_scene_root
+	var directions = EnumTypes.Direction.values()
+	for dir in directions:
+		if dir not in self._required_entrancies:
+			var wall : MeshInstance3D = _create_wall(dir, colors.get(dir))
+			self.add_child(wall)
+			wall.set_deferred("owner", self)
 	
 
-func _create_wall(direction : int, color : Color) -> MeshInstance3D:
+func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) -> MeshInstance3D:
 	var wall : MeshInstance3D = MeshInstance3D.new()
 	
 	var mesh = ArrayMesh.new()
@@ -42,7 +46,8 @@ func _create_wall(direction : int, color : Color) -> MeshInstance3D:
 	indices.append_array([2, 1, 3])
 	
 	var material = wall_material.duplicate(true)
-	material.albedo_color = color
+	if material is StandardMaterial3D:
+		material.albedo_color = color
 	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)

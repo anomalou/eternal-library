@@ -1,5 +1,13 @@
 class_name EnumTypes
 
+enum SystemType {
+	GALLERY_LAYOUT,
+	GALLERY
+}
+
+static func system_to_str(system : SystemType) -> String:
+	return SystemType.keys().get(system)
+
 enum EnvironmentType {
 	BOOKSHELL,
 }
