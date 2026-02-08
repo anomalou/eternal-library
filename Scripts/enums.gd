@@ -17,10 +17,19 @@ enum GalleryType {
 }
 
 enum Direction {
-	NE = 0,
-	N = 1,
-	NW = 2,
-	SW = 3,
-	S = 4,
-	SE = 5
+	E = 0,
+	SE = 1,
+	SW = 2,
+	W = 3,
+	NW = 4,
+	NE = 5
+}
+
+enum WallDirection {
+	SE = 0,
+	S = 1,
+	SW = 2,
+	NW = 3,
+	N = 4,
+	NE = 5
 }

@@ -1,8 +1,11 @@
 extends Node3D
-class_name FloorManager
+class_name FloorGenerator
 
 @export var floor_material : Material
 @export var ceil_material : Material
+
+@export_flags_3d_physics var collision_layers : int
+@export_flags_3d_physics var collision_mask : int
 
 var _position : HexCoord
 var _height : int
@@ -19,11 +22,7 @@ func generate():
 	
 	var _floor = _generate_hex(self.floor_material, 0, Color.DIM_GRAY) as MeshInstance3D
 	var _ceil = _generate_hex(self.ceil_material, self._height, Color.DEEP_SKY_BLUE, false) as MeshInstance3D
-	
-	add_child(_floor)
-	add_child(_ceil)
-	_floor.set_deferred("owner", self)
-	_ceil.set_deferred("owner", self)
+	_generate_collision_for_hex(_floor)
 
 func _generate_hex(material : Material, height : int = 0, color : Color = Color.WHITE, clockwise : bool = true) -> MeshInstance3D:
 	var hex = MeshInstance3D.new()
@@ -65,4 +64,30 @@ func _generate_hex(material : Material, height : int = 0, color : Color = Color.
 	mesh.surface_set_material(0, _material)
 	
 	hex.mesh = mesh
+	
+	add_child(hex)
+	hex.set_deferred("owner", self)
+	
 	return hex
+
+func _generate_collision_for_hex(hex : MeshInstance3D) -> StaticBody3D:
+	var static_body = StaticBody3D.new()
+	
+	static_body.collision_layer = collision_layers
+	static_body.collision_mask = collision_mask
+	
+	var collision_shape = CollisionShape3D.new()
+	var shape = hex.mesh.create_trimesh_shape()
+	if shape:
+		collision_shape.shape = shape
+		static_body.add_child(collision_shape)
+		hex.add_child(static_body)
+		static_body.set_deferred("owner", hex)
+		collision_shape.set_deferred("owner", static_body)
+		
+		print_debug("Collision for hex ", hex, " created")
+		return static_body
+	else:
+		push_error("Cant create collision for hex ", hex)
+		static_body.queue_free()
+		return null

@@ -1,18 +1,24 @@
 extends Node3D
-class_name WallsManager
+class_name WallsGenerator
 
 @export var wall_material : Material
 @export var entrance_material : Material
 
+@export_flags_3d_physics var collision_layers : int
+@export_flags_3d_physics var collision_mask : int
+@export var thickness : float
+
+var _gallery_id : String
 var _trfm : HexCoord
 var _height : int
 var _required_entrancies : Array[EnumTypes.Direction]
 
-func setup(trfm : HexCoord, height : int):
+func setup(id : String, trfm : HexCoord, height : int):
+	self._gallery_id = id
 	self._trfm = trfm
 	self._height = height
 
-func generate(gallery_seed : int, required_entrancies : Array[EnumTypes.Direction]):
+func generate(required_entrancies : Array[EnumTypes.Direction]):
 	self._required_entrancies = required_entrancies
 	
 	if not wall_material:
@@ -58,5 +64,35 @@ func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) 
 	
 	wall.mesh = mesh
 	
+	_create_wall_collision(wall, direction)
+	
 	return wall
+
+
+func _create_wall_collision(wall : MeshInstance3D, direction : EnumTypes.Direction) -> StaticBody3D:
+	var static_body = StaticBody3D.new()
+	static_body.collision_layer = collision_layers
+	static_body.collision_mask = collision_mask
+	
+	var collision_shape = CollisionShape3D.new()
+	var shape = BoxShape3D.new()
+	var angle = deg_to_rad(60 * direction + 30)
+	
+	var center_x = _trfm.size * cos(deg_to_rad(30)) * cos(angle)
+	var center_z = _trfm.size * cos(deg_to_rad(30)) * sin(angle)
+	var center_y = _height / 2.0
+	
+	shape.size = Vector3(_trfm.size, _height, thickness)
+	
+	collision_shape.shape = shape
+	collision_shape.position = Vector3(center_x, center_y, center_z)
+	
+	collision_shape.rotation.y = deg_to_rad(60 + 120 * direction)
+	
+	static_body.add_child(collision_shape)
+	wall.add_child(static_body)
+	collision_shape.set_deferred("owner", static_body)
+	static_body.set_deferred("owner", wall)
+	
+	return static_body
 	

@@ -11,9 +11,22 @@ config_version=5
 [application]
 
 config/name="EternalLibrary"
-run/main_scene="uid://bpcu337p0uktb"
+run/main_scene="uid://busuj7ik35y8"
 config/features=PackedStringArray("26.1", "GL Compatibility", "Redot")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SeedManager="*res://Scripts/seed_manager.gd"
+
+[layer_names]
+
+3d_physics/layer_1="wall"
+3d_physics/layer_2="floor"
+3d_physics/layer_3="bookshell"
+3d_physics/layer_4="entrance"
+3d_physics/layer_9="enemy"
+3d_physics/layer_10="player"
 
 [rendering]
 

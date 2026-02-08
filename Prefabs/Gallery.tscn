@@ -1,38 +1,19 @@
-[gd_scene load_steps=12 format=4 uid="uid://bed5rglkmc220"]
+[gd_scene load_steps=10 format=3 uid="uid://bed5rglkmc220"]
 
 [ext_resource type="Script" uid="uid://dvvp722mn1ybu" path="res://Scripts/gallery.gd" id="1_2iksw"]
 [ext_resource type="PackedScene" uid="uid://vmtqj2aw7t77" path="res://Components/SpawnPointManager.tscn" id="2_o8mrs"]
 [ext_resource type="PackedScene" uid="uid://ksabwyoarwli" path="res://Components/HexagonGizmo.tscn" id="3_r0hsk"]
 [ext_resource type="PackedScene" uid="uid://cocrr0tn5562q" path="res://Components/HexagonTransform.tscn" id="4_uq37l"]
-[ext_resource type="PackedScene" uid="uid://ctl0et6b6xca4" path="res://Components/WallsManager.tscn" id="5_6csmm"]
-[ext_resource type="PackedScene" uid="uid://cmuj02u8wt11k" path="res://Components/FloorManager.tscn" id="6_k7idi"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8mrs"]
-transparency = 1
-no_depth_test = true
-shading_mode = 0
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_r0hsk"]
-_surfaces = [{
-"aabb": AABB(-64, 0, -55.425625, 128, 32, 110.85125),
-"format": 34359742465,
-"index_count": 42,
-"index_data": PackedByteArray("AAABAAIAAAACAAMAAAADAAQAAAAEAAUAAAAFAAYAAAAGAAcACAAJAAoACwAMAA0ADgAPABAAEQASABMAFAAVABYAFwAYABkAGgAbABwAHQAeAB8A"),
-"material": SubResource("StandardMaterial3D_o8mrs"),
-"primitive": 2,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 32,
-"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAACAQgAAAAAAAAAAAAAAQgAAAADXs11CAAAAwgAAAADXs11CAACAwgAAAAAyMQ0oAAAAwgAAAADXs13CAAAAQgAAAADXs13CAACAQgAAAAAyMY2oAACAQgAAAAAAAAAAAACAQgAAAEIAAAAAAAAAQgAAAELXs11CAAAAQgAAAADXs11CAAAAQgAAAADXs11CAAAAQgAAAELXs11CAAAAwgAAAELXs11CAAAAwgAAAADXs11CAAAAwgAAAADXs11CAAAAwgAAAELXs11CAACAwgAAAEIyMQ0oAACAwgAAAAAyMQ0oAACAwgAAAAAyMQ0oAACAwgAAAEIyMQ0oAAAAwgAAAELXs13CAAAAwgAAAADXs13CAAAAwgAAAADXs13CAAAAwgAAAELXs13CAAAAQgAAAELXs13CAAAAQgAAAADXs13CAAAAQgAAAADXs13CAAAAQgAAAELXs13CAACAQgAAAEIyMY2oAACAQgAAAAAyMY2o")
-}]
+[ext_resource type="PackedScene" uid="uid://ctl0et6b6xca4" path="res://Components/WallsGenerator.tscn" id="5_6csmm"]
+[ext_resource type="PackedScene" uid="uid://cmuj02u8wt11k" path="res://Components/FloorGenerator.tscn" id="6_k7idi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2iksw"]
 shading_mode = 0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0hsk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8mrs"]
 shading_mode = 0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uq37l"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0hsk"]
 shading_mode = 0
 
 [node name="Gallery" type="Node3D"]
@@ -41,14 +22,15 @@ script = ExtResource("1_2iksw")
 [node name="SpawnPointManager" parent="." instance=ExtResource("2_o8mrs")]
 
 [node name="HexagonGizmo" parent="." instance=ExtResource("3_r0hsk")]
-mesh = SubResource("ArrayMesh_r0hsk")
+gizmo_visible = false
 
 [node name="HexagonTransform" parent="." instance=ExtResource("4_uq37l")]
 size = 64.0
 
-[node name="WallsManager" parent="." instance=ExtResource("5_6csmm")]
-wall_material = SubResource("StandardMaterial3D_2iksw")
+[node name="FloorGenerator" parent="." instance=ExtResource("6_k7idi")]
+floor_material = SubResource("StandardMaterial3D_2iksw")
+ceil_material = SubResource("StandardMaterial3D_o8mrs")
 
-[node name="FloorManager" parent="." instance=ExtResource("6_k7idi")]
-floor_material = SubResource("StandardMaterial3D_r0hsk")
-ceil_material = SubResource("StandardMaterial3D_uq37l")
+[node name="WallsGenerator" parent="." instance=ExtResource("5_6csmm")]
+wall_material = SubResource("StandardMaterial3D_r0hsk")
+thickness = 1.0
