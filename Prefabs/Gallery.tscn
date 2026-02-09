@@ -33,4 +33,3 @@ ceil_material = SubResource("StandardMaterial3D_o8mrs")
 
 [node name="WallsGenerator" parent="." instance=ExtResource("5_6csmm")]
 wall_material = SubResource("StandardMaterial3D_r0hsk")
-thickness = 1.0
