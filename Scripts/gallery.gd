@@ -18,6 +18,7 @@ func _ready() -> void:
 	self._floor_generator = $FloorGenerator as FloorGenerator
 
 func setup(_id : String):
+	self.id = _id
 	print_debug("Gallery " + gallery_transform.hex_position.to_str() + " is ready")
 
 func apply_position(hex_position : HexCoord):

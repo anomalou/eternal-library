@@ -1,8 +1,8 @@
 extends Node3D
 class_name FloorGenerator
 
-@export var floor_material : Material
-@export var ceil_material : Material
+@export var floor_material : ShaderMaterial
+@export var ceil_material : ShaderMaterial
 
 @export_flags_3d_physics var collision_layers : int
 @export_flags_3d_physics var collision_mask : int
@@ -15,10 +15,9 @@ func setup(pos : HexCoord, height : int):
 	self._height = height
 
 func generate():
-	if not self.floor_material:
-		self.floor_material = StandardMaterial3D.new()
-	if not self.ceil_material:
-		self.ceil_material = StandardMaterial3D.new()
+	if not self.floor_material or not self.ceil_material:
+		push_error("Cant generate floor and ceil cause shader material not provided")
+		return
 	
 	var _floor = _generate_hex(self.floor_material, 0, Color.DIM_GRAY) as MeshInstance3D
 	var _ceil = _generate_hex(self.ceil_material, self._height, Color.DEEP_SKY_BLUE, false) as MeshInstance3D
@@ -55,9 +54,9 @@ func _generate_hex(material : Material, height : int = 0, color : Color = Color.
 	array[Mesh.ARRAY_VERTEX] = vertices
 	array[Mesh.ARRAY_INDEX] = indices
 	
-	var _material = material.duplicate(true)
-	if _material is StandardMaterial3D:
-		_material.albedo_color = color
+	var _material = material.duplicate(true) as WobbleShader
+	_material.set_color(color)
+	
 	
 	var mesh = ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)

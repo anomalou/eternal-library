@@ -1,8 +1,7 @@
 extends Node3D
 class_name WallsGenerator
 
-@export var wall_material : Material
-@export var entrance_material : Material
+@export var wall_shader : ShaderMaterial
 
 @export_flags_3d_physics var collision_layers : int
 @export_flags_3d_physics var collision_mask : int
@@ -21,8 +20,9 @@ func setup(id : String, trfm : HexCoord, height : int):
 func generate(required_entrancies : Array[EnumTypes.Direction]):
 	self._required_entrancies = required_entrancies
 	
-	if not wall_material:
-		wall_material = StandardMaterial3D.new()
+	if not wall_shader:
+		push_error("Wall shader not set up")
+		return
 	
 	var colors = [Color.DARK_RED, Color.DARK_GREEN, Color.DARK_BLUE, Color.DARK_GOLDENROD, Color.DARK_MAGENTA, Color.DARK_CYAN]
 	var directions = EnumTypes.Direction.values()
@@ -51,9 +51,8 @@ func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) 
 	indices.append_array([0, 1, 2])
 	indices.append_array([2, 1, 3])
 	
-	var material = wall_material.duplicate(true)
-	if material is StandardMaterial3D:
-		material.albedo_color = color
+	var material = wall_shader.duplicate(true)
+	material.set_color(color)
 	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)

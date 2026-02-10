@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dexydb78b1xtx"]
+
+[ext_resource type="Script" uid="uid://bcbo1qabm3bcw" path="res://Scripts/game_session.gd" id="1_u852i"]
+[ext_resource type="PackedScene" uid="uid://cwharlrhxsgvc" path="res://Prefabs/WorldGenerator.tscn" id="2_2kh3l"]
+
+[node name="GameSession" type="Node"]
+script = ExtResource("1_u852i")
+
+[node name="WorldGenerator" parent="." instance=ExtResource("2_2kh3l")]
