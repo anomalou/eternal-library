@@ -54,7 +54,7 @@ func _generate_hex(material : Material, height : int = 0, color : Color = Color.
 	array[Mesh.ARRAY_VERTEX] = vertices
 	array[Mesh.ARRAY_INDEX] = indices
 	
-	var _material = material.duplicate(true) as WobbleShader
+	var _material = material.duplicate(true) as ColorShader
 	_material.set_color(color)
 	
 	

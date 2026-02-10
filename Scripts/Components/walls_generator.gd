@@ -51,7 +51,7 @@ func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) 
 	indices.append_array([0, 1, 2])
 	indices.append_array([2, 1, 3])
 	
-	var material = wall_shader.duplicate(true)
+	var material = wall_shader.duplicate(true) as ColorShader
 	material.set_color(color)
 	
 	var array = []

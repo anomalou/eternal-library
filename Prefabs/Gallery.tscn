@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bed5rglkmc220"]
+[gd_scene load_steps=11 format=3 uid="uid://bed5rglkmc220"]
 
 [ext_resource type="Script" uid="uid://dvvp722mn1ybu" path="res://Scripts/gallery.gd" id="1_2iksw"]
 [ext_resource type="PackedScene" uid="uid://vmtqj2aw7t77" path="res://Components/SpawnPointManager.tscn" id="2_o8mrs"]
@@ -6,26 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://cocrr0tn5562q" path="res://Components/HexagonTransform.tscn" id="4_uq37l"]
 [ext_resource type="PackedScene" uid="uid://ctl0et6b6xca4" path="res://Components/WallsGenerator.tscn" id="5_6csmm"]
 [ext_resource type="PackedScene" uid="uid://cmuj02u8wt11k" path="res://Components/FloorGenerator.tscn" id="6_k7idi"]
-[ext_resource type="Script" uid="uid://crp5oihgpn645" path="res://Shaders/wobble_shader.gd" id="7_o8mrs"]
-[ext_resource type="Shader" uid="uid://com15tc4kbo2r" path="res://Shaders/vertex_wobble.gdshader" id="8_r0hsk"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uq37l"]
-script = ExtResource("7_o8mrs")
-metadata/_custom_type_script = "uid://crp5oihgpn645"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6csmm"]
-script = ExtResource("7_o8mrs")
-metadata/_custom_type_script = "uid://crp5oihgpn645"
+[ext_resource type="Script" uid="uid://d1oafoin5mdbf" path="res://Shaders/color_shader.gd" id="6_o8mrs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r0hsk"]
-render_priority = 0
-shader = ExtResource("8_r0hsk")
-shader_parameter/intensity = 0.1
-shader_parameter/speed = 2.0
-shader_parameter/quant = 3.0
-shader_parameter/color = Vector4(1, 1, 1, 1)
-script = ExtResource("7_o8mrs")
-metadata/_custom_type_script = "uid://crp5oihgpn645"
+script = ExtResource("6_o8mrs")
+metadata/_custom_type_script = "uid://d1oafoin5mdbf"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uq37l"]
+script = ExtResource("6_o8mrs")
+metadata/_custom_type_script = "uid://d1oafoin5mdbf"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6csmm"]
+script = ExtResource("6_o8mrs")
+metadata/_custom_type_script = "uid://d1oafoin5mdbf"
 
 [node name="Gallery" type="Node3D"]
 script = ExtResource("1_2iksw")
@@ -39,8 +32,8 @@ gizmo_visible = false
 size = 64.0
 
 [node name="FloorGenerator" parent="." instance=ExtResource("6_k7idi")]
-floor_material = SubResource("ShaderMaterial_uq37l")
-ceil_material = SubResource("ShaderMaterial_6csmm")
+floor_material = SubResource("ShaderMaterial_r0hsk")
+ceil_material = SubResource("ShaderMaterial_uq37l")
 
 [node name="WallsGenerator" parent="." instance=ExtResource("5_6csmm")]
-wall_shader = SubResource("ShaderMaterial_r0hsk")
+wall_shader = SubResource("ShaderMaterial_6csmm")
