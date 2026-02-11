@@ -30,7 +30,7 @@ func apply_position(hex_position : HexCoord):
 	
 func generate_gallery(_id : String):
 	self.id = _id
-	self._walls_generator.generate([])
+	#self._walls_generator.generate([])
 	self._floor_generator.generate()
 
 func context():

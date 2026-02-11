@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameEnv="*res://Scripts/game_env.gd"
+Signals="*res://Scripts/signals.gd"
 
 [input]
 

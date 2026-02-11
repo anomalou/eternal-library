@@ -7,7 +7,6 @@ radius = 1.5
 height = 6.0
 
 [node name="Player" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 collision_layer = 512
 collision_mask = 3
 script = ExtResource("1_um8lo")
@@ -16,4 +15,5 @@ script = ExtResource("1_um8lo")
 shape = SubResource("CapsuleShape3D_a5hps")
 
 [node name="FPV" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 current = true

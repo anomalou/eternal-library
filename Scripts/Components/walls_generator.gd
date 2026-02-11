@@ -94,4 +94,3 @@ func _create_wall_collision(wall : MeshInstance3D, direction : EnumTypes.Directi
 	static_body.set_deferred("owner", wall)
 	
 	return static_body
-	

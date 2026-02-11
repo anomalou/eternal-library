@@ -18,8 +18,8 @@ var _q_normal : Vector3
 var _r_normal : Vector3
 
 func _init(_x = 0, _y = 0, _z = 0) -> void:
-	self.size = 64
-	self.spacing = 64
+	self.size = 32
+	self.spacing = 32
 	self.q = _x
 	self.y = _y
 	self.r = _z
@@ -57,3 +57,14 @@ func mul(value : int) -> HexCoord:
 
 func to_str():
 	return "({x}, {y}, {z})".format({"x":q, "y":y, "z":r})
+
+func neighbours() -> Array[HexCoord]:
+	return [
+		HexCoord.new(q + 1, y, r - 1),
+		HexCoord.new(q, y, r - 1),
+		HexCoord.new(q - 1, y, r),
+		HexCoord.new(q - 1, y, r + 1),
+		HexCoord.new(q, y, r + 1),
+		HexCoord.new(q + 1, y, r)
+	]
+	
