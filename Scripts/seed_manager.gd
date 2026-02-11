@@ -30,10 +30,12 @@ func generate_root_seed():
 	seed_cache.set(ROOT, root_seed)
 
 # also creates seed for this object
-func generate_object_id(parent_id : String, object_type : String, object : Object):
-	if not object.has_method("context"):
-		push_error("Cant create id for object type ", object_type, " it not have context method")
-	var context = object.call("context")
+func generate_object_id(object_type : String, context_data = "", parent_id : String = ""):
+	var context
+	if context_data is String or not context_data.has_method("context"):
+		context = str(context_data)
+	else:
+		context = context_data.call("context")
 	if parent_id == null or parent_id.is_empty():
 		parent_id = ROOT
 	var parent_seed = get_seed(parent_id)
@@ -51,6 +53,13 @@ func get_seed(id : String):
 	_generate_seed(id)
 	return seed_cache.get(id, get_root_seed())
 		
+
+func get_rnd_generator(id : String):
+	if not rand_cache.has(id):
+		var rnd = RandomNumberGenerator.new()
+		rnd.seed = get_seed(id)
+		rand_cache.set(id, rnd)
+	return rand_cache.get(id)
 
 func _generate_seed(id : String):
 	var parent_id = LibraryUtils.get_parent_id(id)

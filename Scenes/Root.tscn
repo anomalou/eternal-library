@@ -1,47 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://busuj7ik35y8"]
+[gd_scene load_steps=5 format=3 uid="uid://busuj7ik35y8"]
 
 [ext_resource type="Script" uid="uid://c6k4ay6r0w556" path="res://Scripts/game_master.gd" id="1_a5hps"]
-[ext_resource type="Script" uid="uid://b2nvt4aaiyo50" path="res://Scripts/test_control.gd" id="1_kqog5"]
-[ext_resource type="Shader" uid="uid://bspljtki2cnip" path="res://Shaders/ps1_posteffect.gdshader" id="3_knkkn"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a5hps"]
-radius = 1.5
-height = 6.0
+[ext_resource type="Script" uid="uid://dk1u4q6a7iphx" path="res://Shaders/vignette_shader.gd" id="3_sxhdm"]
+[ext_resource type="Shader" uid="uid://cidfo8ltamdor" path="res://Shaders/vignette_posteffect.gdshader" id="4_oss8w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxhdm"]
-shader = ExtResource("3_knkkn")
-shader_parameter/pixel_size = 2.0
-shader_parameter/color_depth = 16.0
+shader = ExtResource("4_oss8w")
+shader_parameter/vignette_intensity = 1.0
+shader_parameter/vignette_color = Vector4(0, 0, 0, 1)
+script = ExtResource("3_sxhdm")
+metadata/_custom_type_script = "uid://dk1u4q6a7iphx"
 
 [node name="Root" type="Node"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-collision_layer = 512
-collision_mask = 3
-script = ExtResource("1_kqog5")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("CapsuleShape3D_a5hps")
-
-[node name="FPV" type="Camera3D" parent="CharacterBody3D"]
-current = true
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 150, 0)
-shadow_enabled = true
-
-[node name="GameMaster" type="Node" parent="."]
-script = ExtResource("1_a5hps")
-metadata/_custom_type_script = "uid://c6k4ay6r0w556"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_sxhdm")
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ControlContainer" type="SubViewportContainer" parent="Control"]
+material = SubResource("ShaderMaterial_sxhdm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="WorldRenderer" type="SubViewport" parent="Control/ControlContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(576, 324)
+render_target_update_mode = 4
+
+[node name="GameMaster" type="Node" parent="Control/ControlContainer/WorldRenderer"]
+script = ExtResource("1_a5hps")
+metadata/_custom_type_script = "uid://c6k4ay6r0w556"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Control/ControlContainer/WorldRenderer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 150, 0)
+shadow_enabled = true

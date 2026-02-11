@@ -1,8 +1,9 @@
 extends Node
-class_name WorldGenerator
+class_name WorldManager
 
 var _game_session : GameSession
 var _seed_manager : SeedManager
+
 var _gallery_types : Dictionary[EnumTypes.GalleryType, PackedScene]
 
 func _ready() -> void:
@@ -11,6 +12,10 @@ func _ready() -> void:
 	self._gallery_types = {
 		EnumTypes.GalleryType.GENERAL : load("res://Prefabs/Gallery.tscn")
 	}
+
+func init(game_session : GameSession):
+	self._game_session = game_session
+	self._seed_manager = self._game_session.seed_manager
 
 func generate_world():
 	var gallery_pref = _gallery_types.get(EnumTypes.GalleryType.GENERAL) as PackedScene
@@ -22,5 +27,5 @@ func generate_world():
 			add_child(gallery)
 			gallery.set_deferred("owner", self)
 			gallery.apply_position(HexCoord.new(x, 0, y))
-			gallery.generate_gallery(_seed_manager.generate_object_id("", "gallery", gallery))
+			gallery.generate_gallery(_seed_manager.generate_object_id("gallery", gallery))
 			
