@@ -3,7 +3,7 @@ class_name PlayerManager
 
 var player_id : String
 var player : CharacterBody3D
-var player_room : HexCoord # current room player visiting
+var player_galley : HexCoord # current gallery player visiting
 
 var _randomizer : RandomNumberGenerator
 var _player_pref : PackedScene
@@ -13,23 +13,7 @@ func _init() -> void:
 	Signals.player_enter_gallery.connect(debug_player_room)
 
 func _process(_delta):
-	if not player:
-		return # player not exists so no need to calculate
-	
-	var player_position = player.global_position
-	var room_position = player_room.global_coord
-	
-	var current_distance = player_position.distance_to(room_position)
-	if current_distance > (player_room.size * sqrt(3) / 2 + player_room.spacing * 0.75):
-		var min_distance = current_distance
-		var closest_room : HexCoord = player_room
-		for neigh in player_room.neighbours():
-			var dist = player_position.distance_to(neigh.global_coord)
-			if dist < min_distance:
-				min_distance = dist
-				closest_room = neigh
-		Signals.player_enter_gallery.emit(player_room, closest_room)
-		player_room = closest_room
+	_calculate_player_transition()
 
 func debug_player_room(from : HexCoord, to : HexCoord):
 	var distance_from = player.global_position.distance_to(from.global_coord)
@@ -50,6 +34,25 @@ func spawn_player():
 	add_child(player)
 	player.set_deferred("owner", self)
 	# randomize player position by seed generator (but for now it will be ZERO
-	player_room = HexCoord.new()
-	player.position = player_room.global_coord
+	player_galley = HexCoord.new()
+	player.position = player_galley.global_coord
 	player.position += Vector3(0, 6, 0)
+
+func _calculate_player_transition():
+	if not player:
+		return # player not exists so no need to calculate
+	
+	var player_position = player.global_position
+	var room_position = player_galley.global_coord
+	
+	var current_distance = player_position.distance_to(room_position)
+	if current_distance > (player_galley.size * sqrt(3) / 2 + player_galley.spacing * 0.75):
+		var min_distance = current_distance
+		var closest_gallery : HexCoord = player_galley
+		for neigh in player_galley.neighbours():
+			var dist = player_position.distance_to(neigh.global_coord)
+			if dist < min_distance:
+				min_distance = dist
+				closest_gallery = neigh
+		Signals.player_enter_gallery.emit(player_galley, closest_gallery)
+		player_galley = closest_gallery

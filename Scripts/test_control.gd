@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 		if event.keycode == KEY_ESCAPE and event.pressed:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	

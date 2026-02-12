@@ -7,4 +7,4 @@ var id : String
 
 # for id generation
 func get_context() -> String:
-	return LibraryUtils.get_context_from_position(self)
+	return ContextBuilder.from_vec3(position)

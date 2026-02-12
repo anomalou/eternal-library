@@ -3,15 +3,21 @@ class_name WorldManager
 
 var _game_session : GameSession
 var _seed_manager : SeedManager
+var _entity_manager : EntityManager
 
 var _gallery_types : Dictionary[EnumTypes.GalleryType, PackedScene]
 
 func _ready() -> void:
 	self._game_session = GameEnv.get_current_session()
 	self._seed_manager = self._game_session.seed_manager
+	self._entity_manager = self._game_session.entity_manager
 	self._gallery_types = {
 		EnumTypes.GalleryType.GENERAL : load("res://Prefabs/Gallery.tscn")
 	}
+	Signals.player_enter_gallery.connect(_process_player_transition)
+
+func _process_player_transition(prev_gallery : HexCoord, curr_galley : HexCoord):
+	_generate_in_range(curr_galley, 2) # rendering distance as secont property
 
 func init(game_session : GameSession):
 	self._game_session = game_session
@@ -27,5 +33,7 @@ func generate_world():
 			add_child(gallery)
 			gallery.set_deferred("owner", self)
 			gallery.apply_position(HexCoord.new(x, 0, y))
-			gallery.generate_gallery(_seed_manager.generate_object_id("gallery", gallery))
-			
+			gallery.generate_gallery(_seed_manager.generate_object_id("gallery", ContextBuilder.gallery_hex(gallery.hex_transform.hex_position)))
+
+func _generate_in_range(_start_gallery : HexCoord, _range : int):
+	pass

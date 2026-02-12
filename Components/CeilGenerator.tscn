@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm6p5h28b3rey"]
+
+[ext_resource type="Script" uid="uid://3r4nq7c6d6ab" path="res://Scripts/Components/ceil_generator.gd" id="1_kjg6w"]
+
+[node name="CeilGenerator" type="Node3D"]
+script = ExtResource("1_kjg6w")

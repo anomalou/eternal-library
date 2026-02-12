@@ -14,7 +14,7 @@ func init_subsystems(_seed : int = 0):
 	
 	_world_manager.init(self)
 	var player_id = seed_manager.generate_object_id("player")
-	_player_manager.init(player_id, seed_manager.get_rnd_generator(player_id))
+	_player_manager.init(player_id, seed_manager.get_rnd(player_id))
 
 # call only when game session exists on game scene
 func generate_world():

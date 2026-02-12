@@ -2,40 +2,36 @@ extends Node3D
 class_name FloorGenerator
 
 @export var floor_material : ShaderMaterial
-@export var ceil_material : ShaderMaterial
 
 @export_flags_3d_physics var collision_layers : int
 @export_flags_3d_physics var collision_mask : int
 
 var _position : HexCoord
-var _height : int
 
-func setup(pos : HexCoord, height : int):
+func setup(pos : HexCoord):
 	self._position = pos
-	self._height = height
 
 func generate():
-	if not self.floor_material or not self.ceil_material:
-		push_error("Cant generate floor and ceil cause shader material not provided")
+	if not self.floor_material:
+		push_error("Cant generate floor cause shader material not provided")
 		return
 	
 	var _floor = _generate_hex(self.floor_material, 0, Color.DIM_GRAY) as MeshInstance3D
-	var _ceil = _generate_hex(self.ceil_material, self._height, Color.DEEP_SKY_BLUE, false) as MeshInstance3D
 	_generate_collision_for_hex(_floor)
 
-func _generate_hex(material : Material, height : int = 0, color : Color = Color.WHITE, clockwise : bool = true) -> MeshInstance3D:
+func _generate_hex(material : Material, depth : int = 0, color : Color = Color.WHITE, clockwise : bool = true) -> MeshInstance3D:
 	var hex = MeshInstance3D.new()
 	
 	var vertices = PackedVector3Array()
 	var indices = PackedInt32Array()
 	
-	vertices.append(Vector3(0, height, 0))
+	vertices.append(Vector3(0, depth, 0))
 	
 	for i in range(7):
 		var angle = deg_to_rad(60 * i)
 		vertices.append(Vector3(
 			_position.size * cos(angle),
-			height,
+			depth,
 			_position.size * sin(angle)
 		))
 	

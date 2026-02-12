@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bed5rglkmc220"]
+[gd_scene load_steps=14 format=4 uid="uid://bed5rglkmc220"]
 
 [ext_resource type="Script" uid="uid://dvvp722mn1ybu" path="res://Scripts/gallery.gd" id="1_2iksw"]
 [ext_resource type="PackedScene" uid="uid://vmtqj2aw7t77" path="res://Components/SpawnPointManager.tscn" id="2_o8mrs"]
@@ -7,35 +7,36 @@
 [ext_resource type="PackedScene" uid="uid://ctl0et6b6xca4" path="res://Components/WallsGenerator.tscn" id="5_6csmm"]
 [ext_resource type="PackedScene" uid="uid://cmuj02u8wt11k" path="res://Components/FloorGenerator.tscn" id="6_k7idi"]
 [ext_resource type="Script" uid="uid://d1oafoin5mdbf" path="res://Shaders/color_shader.gd" id="6_o8mrs"]
+[ext_resource type="PackedScene" uid="uid://cm6p5h28b3rey" path="res://Components/CeilGenerator.tscn" id="8_r0hsk"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8mrs"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uq37l"]
 transparency = 1
 no_depth_test = true
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_r0hsk"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_6csmm"]
 _surfaces = [{
 "aabb": AABB(-32, 0, -27.712812, 64, 32, 55.425625),
 "format": 34359742465,
 "index_count": 42,
 "index_data": PackedByteArray("AAABAAIAAAACAAMAAAADAAQAAAAEAAUAAAAFAAYAAAAGAAcACAAJAAoACwAMAA0ADgAPABAAEQASABMAFAAVABYAFwAYABkAGgAbABwAHQAeAB8A"),
-"material": SubResource("StandardMaterial3D_o8mrs"),
+"material": SubResource("StandardMaterial3D_uq37l"),
 "primitive": 2,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 32,
-"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQgAAAAAAAAAAAACAQQAAAADXs91BAACAwQAAAADXs91BAAAAwgAAAAAAMI0nAACAwQAAAADXs93BAACAQQAAAADXs93BAAAAQgAAAAAAMA2oAAAAQgAAAAAAAAAAAAAAQgAAAEIAAAAAAACAQQAAAELXs91BAACAQQAAAADXs91BAACAQQAAAADXs91BAACAQQAAAELXs91BAACAwQAAAELXs91BAACAwQAAAADXs91BAACAwQAAAADXs91BAACAwQAAAELXs91BAAAAwgAAAEIAMI0nAAAAwgAAAAAAMI0nAAAAwgAAAAAAMI0nAAAAwgAAAEIAMI0nAACAwQAAAELXs93BAACAwQAAAADXs93BAACAwQAAAADXs93BAACAwQAAAELXs93BAACAQQAAAELXs93BAACAQQAAAADXs93BAACAQQAAAADXs93BAACAQQAAAELXs93BAAAAQgAAAEIAMA2oAAAAQgAAAAAAMA2o")
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQgAAAAAAAAAAAACAQQAAAADXs91BAACAwQAAAADXs91BAAAAwgAAAAAyMY0nAACAwQAAAADXs93BAACAQQAAAADXs93BAAAAQgAAAAAyMQ2oAAAAQgAAAAAAAAAAAAAAQgAAAEIAAAAAAACAQQAAAELXs91BAACAQQAAAADXs91BAACAQQAAAADXs91BAACAQQAAAELXs91BAACAwQAAAELXs91BAACAwQAAAADXs91BAACAwQAAAADXs91BAACAwQAAAELXs91BAAAAwgAAAEIyMY0nAAAAwgAAAAAyMY0nAAAAwgAAAAAyMY0nAAAAwgAAAEIyMY0nAACAwQAAAELXs93BAACAwQAAAADXs93BAACAwQAAAADXs93BAACAwQAAAELXs93BAACAQQAAAELXs93BAACAQQAAAADXs93BAACAQQAAAADXs93BAACAQQAAAELXs93BAAAAQgAAAEIyMQ2oAAAAQgAAAAAyMQ2o")
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r0hsk"]
 script = ExtResource("6_o8mrs")
 metadata/_custom_type_script = "uid://d1oafoin5mdbf"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uq37l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6csmm"]
 script = ExtResource("6_o8mrs")
 metadata/_custom_type_script = "uid://d1oafoin5mdbf"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6csmm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uq37l"]
 script = ExtResource("6_o8mrs")
 metadata/_custom_type_script = "uid://d1oafoin5mdbf"
 
@@ -45,14 +46,16 @@ script = ExtResource("1_2iksw")
 [node name="SpawnPointManager" parent="." instance=ExtResource("2_o8mrs")]
 
 [node name="HexagonGizmo" parent="." instance=ExtResource("3_r0hsk")]
-mesh = SubResource("ArrayMesh_r0hsk")
+mesh = SubResource("ArrayMesh_6csmm")
 
 [node name="HexagonTransform" parent="." instance=ExtResource("4_uq37l")]
 size = 32.0
 
 [node name="FloorGenerator" parent="." instance=ExtResource("6_k7idi")]
 floor_material = SubResource("ShaderMaterial_r0hsk")
-ceil_material = SubResource("ShaderMaterial_uq37l")
 
 [node name="WallsGenerator" parent="." instance=ExtResource("5_6csmm")]
 wall_shader = SubResource("ShaderMaterial_6csmm")
+
+[node name="CeilGenerator" parent="." instance=ExtResource("8_r0hsk")]
+ceil_material = SubResource("ShaderMaterial_uq37l")
