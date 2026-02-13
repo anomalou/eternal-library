@@ -14,4 +14,4 @@ func start_new_game():
 	
 	game_session.init_subsystems()
 	game_session.generate_world()
-	game_session.create_player()
+	#game_session.create_player()

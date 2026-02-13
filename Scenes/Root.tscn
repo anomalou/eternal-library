@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://busuj7ik35y8"]
+[gd_scene load_steps=6 format=3 uid="uid://busuj7ik35y8"]
 
 [ext_resource type="Script" uid="uid://c6k4ay6r0w556" path="res://Scripts/game_master.gd" id="1_a5hps"]
 [ext_resource type="Script" uid="uid://dk1u4q6a7iphx" path="res://Shaders/vignette_shader.gd" id="3_sxhdm"]
 [ext_resource type="Shader" uid="uid://cidfo8ltamdor" path="res://Shaders/vignette_posteffect.gdshader" id="4_oss8w"]
+[ext_resource type="Script" uid="uid://c7q0vlrpfnn16" path="res://Scripts/Debug/observer.gd" id="4_sxhdm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxhdm"]
 shader = ExtResource("4_oss8w")
@@ -44,6 +45,14 @@ render_target_update_mode = 4
 script = ExtResource("1_a5hps")
 metadata/_custom_type_script = "uid://c6k4ay6r0w556"
 
+[node name="Debugger" type="Node" parent="Control/ControlContainer/WorldRenderer"]
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Control/ControlContainer/WorldRenderer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 150, 0)
 shadow_enabled = true
+
+[node name="DebugCamera" type="Node3D" parent="Control/ControlContainer/WorldRenderer"]
+script = ExtResource("4_sxhdm")
+
+[node name="FPV" type="Camera3D" parent="Control/ControlContainer/WorldRenderer/DebugCamera"]
+current = true
