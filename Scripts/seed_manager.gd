@@ -1,3 +1,4 @@
+extends Node
 class_name SeedManager
 
 const ROOT = "root"
@@ -11,7 +12,7 @@ const SEP4 = "/"
 var seed_cache : Dictionary[String, int]
 var rand_cache : Dictionary[String, RandomNumberGenerator]
 
-func _init(_seed : int = 0):
+func init(_seed : int = 0):
 	if _seed == 0:
 		generate_root_seed()
 	else:

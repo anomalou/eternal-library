@@ -9,23 +9,23 @@
 [ext_resource type="Script" uid="uid://d1oafoin5mdbf" path="res://Shaders/color_shader.gd" id="6_o8mrs"]
 [ext_resource type="PackedScene" uid="uid://cm6p5h28b3rey" path="res://Components/CeilGenerator.tscn" id="8_r0hsk"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uq37l"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0hsk"]
 transparency = 1
 no_depth_test = true
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_6csmm"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_uq37l"]
 _surfaces = [{
 "aabb": AABB(-32, 0, -27.712812, 64, 32, 55.425625),
 "format": 34359742465,
 "index_count": 42,
 "index_data": PackedByteArray("AAABAAIAAAACAAMAAAADAAQAAAAEAAUAAAAFAAYAAAAGAAcACAAJAAoACwAMAA0ADgAPABAAEQASABMAFAAVABYAFwAYABkAGgAbABwAHQAeAB8A"),
-"material": SubResource("StandardMaterial3D_uq37l"),
+"material": SubResource("StandardMaterial3D_r0hsk"),
 "primitive": 2,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 32,
-"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQgAAAAAAAAAAAACAQQAAAADXs91BAACAwQAAAADXs91BAAAAwgAAAAAyMY0nAACAwQAAAADXs93BAACAQQAAAADXs93BAAAAQgAAAAAyMQ2oAAAAQgAAAAAAAAAAAAAAQgAAAEIAAAAAAACAQQAAAELXs91BAACAQQAAAADXs91BAACAQQAAAADXs91BAACAQQAAAELXs91BAACAwQAAAELXs91BAACAwQAAAADXs91BAACAwQAAAADXs91BAACAwQAAAELXs91BAAAAwgAAAEIyMY0nAAAAwgAAAAAyMY0nAAAAwgAAAAAyMY0nAAAAwgAAAEIyMY0nAACAwQAAAELXs93BAACAwQAAAADXs93BAACAwQAAAADXs93BAACAwQAAAELXs93BAACAQQAAAELXs93BAACAQQAAAADXs93BAACAQQAAAADXs93BAACAQQAAAELXs93BAAAAQgAAAEIyMQ2oAAAAQgAAAAAyMQ2o")
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQgAAAAAAAAAAAACAQQAAAADXs91BAACAwQAAAADXs91BAAAAwgAAAAAAMI0nAACAwQAAAADXs93BAACAQQAAAADXs93BAAAAQgAAAAAAMA2oAAAAQgAAAAAAAAAAAAAAQgAAAEIAAAAAAACAQQAAAELXs91BAACAQQAAAADXs91BAACAQQAAAADXs91BAACAQQAAAELXs91BAACAwQAAAELXs91BAACAwQAAAADXs91BAACAwQAAAADXs91BAACAwQAAAELXs91BAAAAwgAAAEIAMI0nAAAAwgAAAAAAMI0nAAAAwgAAAAAAMI0nAAAAwgAAAEIAMI0nAACAwQAAAELXs93BAACAwQAAAADXs93BAACAwQAAAADXs93BAACAwQAAAELXs93BAACAQQAAAELXs93BAACAQQAAAADXs93BAACAQQAAAADXs93BAACAQQAAAELXs93BAAAAQgAAAEIAMA2oAAAAQgAAAAAAMA2o")
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r0hsk"]
@@ -46,7 +46,7 @@ script = ExtResource("1_2iksw")
 [node name="SpawnPointManager" parent="." instance=ExtResource("2_o8mrs")]
 
 [node name="HexagonGizmo" parent="." instance=ExtResource("3_r0hsk")]
-mesh = SubResource("ArrayMesh_6csmm")
+mesh = SubResource("ArrayMesh_uq37l")
 
 [node name="HexagonTransform" parent="." instance=ExtResource("4_uq37l")]
 size = 32.0

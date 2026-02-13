@@ -16,6 +16,9 @@ enum GalleryType {
 	GENERAL,
 }
 
+static func gallery_to_str(gallery : GalleryType) -> String:
+	return GalleryType.keys().get(gallery)
+
 enum Direction {
 	E = 0,
 	SE = 1,

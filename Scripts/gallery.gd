@@ -3,6 +3,7 @@ extends Node3D
 class_name Gallery
 
 var id : String
+var type : EnumTypes.GalleryType
 
 var hex_transform : HexagonTransform
 var _gallery_gizmo : HexagonGizmo
@@ -20,11 +21,7 @@ func _ready() -> void:
 	self._ceil_generator = $CeilGenerator as CeilGenerator
 	
 
-func setup(_id : String):
-	self.id = _id
-	print_debug("Gallery " + hex_transform.hex_position.to_str() + " is ready")
-
-func apply_position(hex_position : HexCoord):
+func _apply_position(hex_position : HexCoord):
 	self.hex_transform.hex_position = hex_position
 	_gallery_gizmo.setup(hex_transform.hex_position, hex_transform.height)
 	_walls_generator.setup(id, hex_transform.hex_position, hex_transform.height)
@@ -32,11 +29,10 @@ func apply_position(hex_position : HexCoord):
 	_ceil_generator.setup(hex_transform.hex_position, hex_transform.height)
 	self.position = hex_transform.hex_position.global_coord
 	
-func generate_gallery(_id : String):
+func generate_gallery(_id : String, hex_position : HexCoord, entrances : Array[EnumTypes.Direction] = []):
 	self.id = _id
-	#self._walls_generator.generate([])
+	_apply_position(hex_position)
+	#self._walls_generator.generate(entrances)
 	self._floor_generator.generate()
 	self._ceil_generator.generate()
-
-func context():
-	return hex_transform.hex_position.to_str()
+	print_debug("Gallery ", hex_transform.hex_position.to_str(), " is ready with id = ", _id)
