@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="GalleryData" load_steps=2 format=3 uid="uid://bfq6umsdr88ce"]
+
+[ext_resource type="Script" uid="uid://drw60ptxrf7uk" path="res://Scripts/Data/gallery_data.gd" id="1_d8ls0"]
+
+[resource]
+script = ExtResource("1_d8ls0")
+max_entramces = 6

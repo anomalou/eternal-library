@@ -45,7 +45,3 @@ script = ExtResource("1_a5hps")
 metadata/_custom_type_script = "uid://c6k4ay6r0w556"
 
 [node name="Debugger" type="Node" parent="Control/ControlContainer/WorldRenderer"]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Control/ControlContainer/WorldRenderer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 150, 0)
-shadow_enabled = true

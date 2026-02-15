@@ -16,7 +16,7 @@ func init_subsystems(_seed : int = 0):
 
 # call only when game session exists on game scene
 func generate_world():
-	world_manager.generate_in_range(HexCoord.new(), 1)
+	world_manager.generate_in_range(HexCoord.new(), 3)
 
 func create_player():
 	player_manager.spawn_player()

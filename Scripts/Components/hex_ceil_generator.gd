@@ -1,5 +1,5 @@
 extends Node3D
-class_name CeilGenerator
+class_name HexCeilGenerator
 
 @export var ceil_material : ShaderMaterial
 

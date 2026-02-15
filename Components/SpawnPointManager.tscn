@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://1x0sto4gwmri" path="res://Scripts/Components/spawnpoint_manager.gd" id="1_7cl1t"]
 
-[node name="SpawnPointManager" type="Node"]
+[node name="SpawnPointManager" type="Node3D"]
 script = ExtResource("1_7cl1t")

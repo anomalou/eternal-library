@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmuj02u8wt11k"]
-
-[ext_resource type="Script" uid="uid://cilulirkbci74" path="res://Scripts/Components/floor_generator.gd" id="1_tjg2k"]
-
-[node name="FloorGenerator" type="Node3D"]
-script = ExtResource("1_tjg2k")
-collision_layers = 2
-collision_mask = 768

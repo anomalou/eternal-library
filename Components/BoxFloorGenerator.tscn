@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chwwq87prwld0"]
+
+[ext_resource type="Script" uid="uid://bm3sf22evkpce" path="res://Scripts/Components/box_floor_generator.gd" id="1_ebul4"]
+
+[node name="BoxFloorGenerator" type="Node3D"]
+script = ExtResource("1_ebul4")

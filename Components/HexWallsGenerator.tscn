@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctl0et6b6xca4"]
+
+[ext_resource type="Script" uid="uid://cmfyt78s8was6" path="res://Scripts/Components/hex_walls_generator.gd" id="1_w32ys"]
+
+[node name="HexWallsGenerator" type="Node3D"]
+script = ExtResource("1_w32ys")
+collision_layers = 1
+collision_mask = 768
+thickness = 1.0

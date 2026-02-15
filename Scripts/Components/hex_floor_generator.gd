@@ -1,5 +1,5 @@
 extends Node3D
-class_name FloorGenerator
+class_name HexFloorGenerator
 
 @export var floor_material : ShaderMaterial
 
@@ -52,7 +52,6 @@ func _generate_hex(material : Material, depth : int = 0, color : Color = Color.W
 	
 	var _material = material.duplicate(true) as ColorShader
 	_material.set_color(color)
-	
 	
 	var mesh = ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dexydb78b1xtx"]
 
 [ext_resource type="Script" uid="uid://bcbo1qabm3bcw" path="res://Scripts/game_session.gd" id="1_u852i"]
-[ext_resource type="Script" uid="uid://bb6ch6olcwpsd" path="res://Scripts/world_manager.gd" id="2_2kh3l"]
-[ext_resource type="Script" uid="uid://docmvalc37osn" path="res://Scripts/player_manager.gd" id="3_o6vwh"]
-[ext_resource type="Script" uid="uid://bmwuiicvslpgu" path="res://Scripts/seed_manager.gd" id="5_6b235"]
-[ext_resource type="Script" uid="uid://bq8dun44btrkl" path="res://Scripts/entity_manager.gd" id="6_468i8"]
+[ext_resource type="Script" uid="uid://bb6ch6olcwpsd" path="res://Scripts/Managers/world_manager.gd" id="2_2kh3l"]
+[ext_resource type="Script" uid="uid://docmvalc37osn" path="res://Scripts/Managers/player_manager.gd" id="3_o6vwh"]
+[ext_resource type="Script" uid="uid://bmwuiicvslpgu" path="res://Scripts/Managers/seed_manager.gd" id="5_6b235"]
+[ext_resource type="Script" uid="uid://bq8dun44btrkl" path="res://Scripts/Managers/entity_manager.gd" id="6_468i8"]
 
 [node name="GameSession" type="Node"]
 script = ExtResource("1_u852i")

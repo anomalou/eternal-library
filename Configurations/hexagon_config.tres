@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="HexagonConfig" load_steps=2 format=3 uid="uid://balb3ebm5k2jd"]
+
+[ext_resource type="Script" uid="uid://bnwqomhhbfh1k" path="res://Configurations/hexagon_config.gd" id="1_254hq"]
+
+[resource]
+script = ExtResource("1_254hq")
