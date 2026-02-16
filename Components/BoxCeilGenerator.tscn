@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjs73x80820g6"]
+
+[ext_resource type="Script" uid="uid://bfs3b8mh1kn35" path="res://Scripts/Components/box_ceil_generator.gd" id="1_i1lbk"]
+
+[node name="BoxCeilGenerator" type="Node3D"]
+script = ExtResource("1_i1lbk")

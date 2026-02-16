@@ -1,15 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvuco1yri0imk"]
+[gd_scene load_steps=8 format=3 uid="uid://cvuco1yri0imk"]
 
 [ext_resource type="Script" uid="uid://bfokt0k31fd3d" path="res://Scripts/Entities/corridor.gd" id="1_vdkqu"]
 [ext_resource type="PackedScene" uid="uid://chwwq87prwld0" path="res://Components/BoxFloorGenerator.tscn" id="2_skugv"]
 [ext_resource type="PackedScene" uid="uid://dtfgvd0jumdin" path="res://Components/BoxWallsGenerator.tscn" id="3_skugv"]
+[ext_resource type="PackedScene" uid="uid://bjs73x80820g6" path="res://Components/BoxCeilGenerator.tscn" id="4_25di1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25di1"]
 shading_mode = 0
 albedo_color = Color(0.740336, 0.6068112, 0.9996802, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apm5d"]
+shading_mode = 0
+albedo_color = Color(0, 0.7294118, 0.9764706, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skugv"]
-cull_mode = 2
 shading_mode = 0
 albedo_color = Color(0.29959995, 0.23799998, 0.7, 1)
 
@@ -18,6 +22,9 @@ script = ExtResource("1_vdkqu")
 
 [node name="BoxFloorGenerator" parent="." instance=ExtResource("2_skugv")]
 floor_material = SubResource("StandardMaterial3D_25di1")
+
+[node name="BoxCeilGenerator" parent="." instance=ExtResource("4_25di1")]
+ceil_material = SubResource("StandardMaterial3D_apm5d")
 
 [node name="BoxWallsGenerator" parent="." instance=ExtResource("3_skugv")]
 walls_material = SubResource("StandardMaterial3D_skugv")

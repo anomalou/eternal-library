@@ -1,5 +1,5 @@
 @tool
-extends Node3D
+extends Component
 class_name SpawnPointManager
 
 @warning_ignore("unused_private_class_variable")

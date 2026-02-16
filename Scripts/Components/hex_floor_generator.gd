@@ -1,14 +1,16 @@
-extends Node3D
+extends Component
 class_name HexFloorGenerator
 
 @export var floor_material : ShaderMaterial
+@export var floor_texture : Texture
 
 @export_flags_3d_physics var collision_layers : int
 @export_flags_3d_physics var collision_mask : int
 
 var _position : HexCoord
 
-func setup(pos : HexCoord):
+func setup(_id : String, pos : HexCoord):
+	self.id = _id
 	self._position = pos
 
 func generate():
@@ -23,9 +25,14 @@ func _generate_hex(material : Material, depth : int = 0, color : Color = Color.W
 	var hex = MeshInstance3D.new()
 	
 	var vertices = PackedVector3Array()
+	var uv = PackedVector2Array()
 	var indices = PackedInt32Array()
 	
+	var rnd = _seed_manager.get_temp_rnd(id)
+	var rnd_texture_diff = rnd.randf() * PI
+	
 	vertices.append(Vector3(0, depth, 0))
+	uv.append(Vector2.ZERO)
 	
 	for i in range(7):
 		var angle = deg_to_rad(60 * i)
@@ -34,6 +41,7 @@ func _generate_hex(material : Material, depth : int = 0, color : Color = Color.W
 			depth,
 			_position.size * sin(angle)
 		))
+		uv.append(Vector2(cos(angle + rnd_texture_diff), sin(angle + rnd_texture_diff)))
 	
 	for i in range(6):
 		if clockwise:
@@ -49,9 +57,13 @@ func _generate_hex(material : Material, depth : int = 0, color : Color = Color.W
 	array.resize(Mesh.ARRAY_MAX)
 	array[Mesh.ARRAY_VERTEX] = vertices
 	array[Mesh.ARRAY_INDEX] = indices
+	array[Mesh.ARRAY_TEX_UV] = uv
 	
-	var _material = material.duplicate(true) as ColorShader
-	_material.set_color(color)
+	var _material = material.duplicate(true)
+	if _material is ColorShader:
+		_material.set_color(color)
+	elif _material is TextureShader:
+		_material.set_texture(floor_texture)
 	
 	var mesh = ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)

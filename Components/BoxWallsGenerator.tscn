@@ -4,3 +4,5 @@
 
 [node name="BoxWallsGenerator" type="Node3D"]
 script = ExtResource("1_jie6e")
+collision_layers = 1
+collision_mask = 768

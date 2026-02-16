@@ -2,15 +2,16 @@ extends WallGenerator
 class_name HexWallsGenerator
 
 @export var wall_shader : ShaderMaterial
+@export var wall_texture : Texture
 
-var _gallery_id : String
+var _id : String
 var _trfm : HexCoord
 var _height : float = 32.0
 var _required_entrancies : Array[EnumTypes.Direction]
 var _wall_cache : Dictionary[EnumTypes.Direction, MeshInstance3D]
 
 func setup(id : String, trfm : HexCoord, height : float):
-	self._gallery_id = id
+	self._id = id
 	self._trfm = trfm
 	self._height = height
 
@@ -52,6 +53,7 @@ func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) 
 	var mesh = ArrayMesh.new()
 	var vertices = PackedVector3Array()
 	var indices = PackedInt32Array()
+	var uv = PackedVector2Array()
 	
 	var angle1 = deg_to_rad(60 * direction)
 	var angle2 = deg_to_rad(60 * (direction + 1))
@@ -64,13 +66,22 @@ func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) 
 	indices.append_array([0, 1, 2])
 	indices.append_array([2, 1, 3])
 	
-	var material = wall_shader.duplicate(true) as ColorShader
-	material.set_color(color)
+	uv.append(Vector2(0, 0))
+	uv.append(Vector2(0, 1))
+	uv.append(Vector2(1, 0))
+	uv.append(Vector2(1, 1))
+	
+	var material = wall_shader.duplicate(true)
+	if material is ColorShader:
+		material.set_color(color)
+	elif material is TextureShader:
+		material.set_texture(wall_texture)
 	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)
 	array.set(Mesh.ARRAY_VERTEX, vertices)
 	array.set(Mesh.ARRAY_INDEX, indices)
+	array.set(Mesh.ARRAY_TEX_UV, uv)
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)
 	mesh.surface_set_material(0, material)
 	

@@ -2,5 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c5dofrvxmwd38" path="res://Scripts/Components/hexagon_transform.gd" id="1_rr61e"]
 
-[node name="HexagonTransform" type="Node"]
+[node name="HexagonTransform" type="Node3D"]
 script = ExtResource("1_rr61e")
+size = 32.0
+height = 32.0

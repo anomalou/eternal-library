@@ -1,5 +1,5 @@
 @tool
-extends Node
+extends Node3D
 class_name HexagonTransform
 
 var hex_position : HexCoord = HexCoord.new()

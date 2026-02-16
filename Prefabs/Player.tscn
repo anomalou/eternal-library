@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfr681nh8onpb"]
+[gd_scene load_steps=4 format=3 uid="uid://bfr681nh8onpb"]
 
 [ext_resource type="Script" uid="uid://b2nvt4aaiyo50" path="res://Scripts/Debug/test_control.gd" id="1_um8lo"]
+[ext_resource type="Environment" uid="uid://ccjcp7s2720r2" path="res://Configurations/player_env.tres" id="2_x3d5u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a5hps"]
 radius = 1.5
@@ -18,4 +19,5 @@ shape = SubResource("CapsuleShape3D_a5hps")
 
 [node name="FPV" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+environment = ExtResource("2_x3d5u")
 current = true

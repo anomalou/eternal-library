@@ -1,4 +1,4 @@
-extends Node3D
+extends Component
 class_name HexCeilGenerator
 
 @export var ceil_material : ShaderMaterial

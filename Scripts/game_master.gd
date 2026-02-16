@@ -12,6 +12,6 @@ func start_new_game():
 	add_child(game_session)
 	game_session.set_deferred("owner", self)
 	
-	game_session.init_subsystems(1234)
+	game_session.init_subsystems()
 	game_session.generate_world()
 	game_session.create_player()

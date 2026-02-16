@@ -1,9 +1,9 @@
 extends Component
-class_name BoxFloorGenerator
+class_name BoxCeilGenerator
 
-@export var floor_material : Material
+@export var ceil_material : Material
 
-func generate(width : float, length : float, direction : Vector3):
+func generate(width : float, length : float, height : float, direction : Vector3):
 	var plate = MeshInstance3D.new()
 	
 	var verticies = PackedVector3Array()
@@ -11,13 +11,13 @@ func generate(width : float, length : float, direction : Vector3):
 	
 	var angle = direction.signed_angle_to(Vector3.RIGHT, Vector3.DOWN)
 	
-	verticies.append(Vector3(width / 2, 0, -length / 2))
-	verticies.append(Vector3(-width / 2, 0, -length / 2))
-	verticies.append(Vector3(-width / 2, 0, length / 2))
-	verticies.append(Vector3(width / 2, 0, length / 2))
+	verticies.append(Vector3(width / 2, height, -length / 2))
+	verticies.append(Vector3(-width / 2, height, -length / 2))
+	verticies.append(Vector3(-width / 2, height, length / 2))
+	verticies.append(Vector3(width / 2, height, length / 2))
 	
-	indices.append_array([2, 1, 0])
-	indices.append_array([3, 2, 0])
+	indices.append_array([0, 1, 2])
+	indices.append_array([0, 2, 3])
 	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)
@@ -25,7 +25,7 @@ func generate(width : float, length : float, direction : Vector3):
 	array.set(Mesh.ARRAY_VERTEX, verticies)
 	array.set(Mesh.ARRAY_INDEX, indices)
 	
-	var material = floor_material.duplicate(true)
+	var material = ceil_material.duplicate(true)
 	
 	var mesh = ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)

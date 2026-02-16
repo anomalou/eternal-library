@@ -1,5 +1,5 @@
 @abstract
-extends Node3D
+extends Component
 class_name WallGenerator
 
 @export_flags_3d_physics var collision_layers : int
