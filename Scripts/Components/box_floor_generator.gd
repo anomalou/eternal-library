@@ -3,24 +3,18 @@ class_name BoxFloorGenerator
 
 @export var floor_material : Material
 
-func generate(g1 : HexCoord, g2 : HexCoord):
+func generate(width : float, length : float, direction : Vector3):
 	var plate = MeshInstance3D.new()
 	
 	var verticies = PackedVector3Array()
 	var indices = PackedInt32Array()
 	
-	var v1 = g1.global_coord as Vector3
-	var v2 = g2.global_coord as Vector3
-	var direction = v2 - v1
-	
 	var angle = direction.signed_angle_to(Vector3.RIGHT, Vector3.DOWN)
-	var width = g1.size
-	var lenght = g1.spacing
 	
-	verticies.append(Vector3(width / 2, 0, -lenght / 2))
-	verticies.append(Vector3(-width / 2, 0, -lenght / 2))
-	verticies.append(Vector3(-width / 2, 0, lenght / 2))
-	verticies.append(Vector3(width / 2, 0, lenght / 2))
+	verticies.append(Vector3(width / 2, 0, -length / 2))
+	verticies.append(Vector3(-width / 2, 0, -length / 2))
+	verticies.append(Vector3(-width / 2, 0, length / 2))
+	verticies.append(Vector3(width / 2, 0, length / 2))
 	
 	indices.append_array([2, 1, 0])
 	indices.append_array([3, 2, 0])

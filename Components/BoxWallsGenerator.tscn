@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtfgvd0jumdin"]
+
+[ext_resource type="Script" uid="uid://6pdu6tls72d4" path="res://Scripts/Components/box_walls_generator.gd" id="1_jie6e"]
+
+[node name="BoxWallsGenerator" type="Node3D"]
+script = ExtResource("1_jie6e")

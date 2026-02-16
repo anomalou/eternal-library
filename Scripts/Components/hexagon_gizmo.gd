@@ -3,7 +3,7 @@ extends MeshInstance3D
 class_name HexagonGizmo
 
 var _position : HexCoord
-var _height : int = 32
+var _height : float = 32.0
 @export var gizmo_visible : bool = true:
 	set(value):
 		gizmo_visible = value
@@ -14,7 +14,7 @@ var _height : int = 32
 func _ready() -> void:
 	_draw_gizmo()
 
-func setup(pos : HexCoord, height : int):
+func setup(pos : HexCoord, height : float):
 	self._position = pos
 	self._height = height
 	_draw_gizmo()

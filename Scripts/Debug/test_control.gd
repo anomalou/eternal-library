@@ -19,11 +19,14 @@ func _input(event: InputEvent) -> void:
 	
 	if event is InputEventKey:
 		if event.keycode == KEY_ESCAPE and event.pressed:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_tree().quit()
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_RIGHT and event.pressed:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			else:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(_delta: float) -> void:
 	var input_dir = Input.get_vector("left", "right", "up", "down")

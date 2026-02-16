@@ -4,9 +4,9 @@ class_name HexCeilGenerator
 @export var ceil_material : ShaderMaterial
 
 var _position : HexCoord
-var _height : int
+var _height : float = 32.0
 
-func setup(pos : HexCoord, height : int):
+func setup(pos : HexCoord, height : float):
 	self._position = pos
 	self._height = height
 
@@ -17,7 +17,7 @@ func generate():
 	
 	_generate_hex(self.ceil_material, self._height, Color.DEEP_SKY_BLUE, false)
 
-func _generate_hex(material : Material, height : int = 0, color : Color = Color.WHITE, clockwise : bool = true) -> MeshInstance3D:
+func _generate_hex(material : Material, height : float, color : Color = Color.WHITE, clockwise : bool = true) -> MeshInstance3D:
 	var hex = MeshInstance3D.new()
 	
 	var vertices = PackedVector3Array()
