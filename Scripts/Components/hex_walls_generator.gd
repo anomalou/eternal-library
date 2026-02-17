@@ -4,14 +4,13 @@ class_name HexWallsGenerator
 @export var wall_shader : ShaderMaterial
 @export var wall_texture : Texture
 
-var _id : String
 var _trfm : HexCoord
 var _height : float = 32.0
 var _required_entrancies : Array[EnumTypes.Direction]
 var _wall_cache : Dictionary[EnumTypes.Direction, MeshInstance3D]
 
-func setup(id : String, trfm : HexCoord, height : float):
-	self._id = id
+func setup(_id : String, trfm : HexCoord, height : float):
+	self.id = _id
 	self._trfm = trfm
 	self._height = height
 

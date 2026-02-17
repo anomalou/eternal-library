@@ -4,3 +4,5 @@
 
 [node name="BoxFloorGenerator" type="Node3D"]
 script = ExtResource("1_ebul4")
+collision_layers = 2
+collision_mask = 768

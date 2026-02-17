@@ -1,30 +1,35 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvuco1yri0imk"]
+[gd_scene load_steps=11 format=3 uid="uid://cvuco1yri0imk"]
 
 [ext_resource type="Script" uid="uid://bfokt0k31fd3d" path="res://Scripts/Entities/corridor.gd" id="1_vdkqu"]
 [ext_resource type="PackedScene" uid="uid://chwwq87prwld0" path="res://Components/BoxFloorGenerator.tscn" id="2_skugv"]
+[ext_resource type="Texture2D" uid="uid://cf0t2vfshwuf3" path="res://Resources/Textures/planks.png" id="3_apm5d"]
+[ext_resource type="Script" uid="uid://d0f0rdolbfsro" path="res://Shaders/texture_shader.gd" id="3_drp33"]
 [ext_resource type="PackedScene" uid="uid://dtfgvd0jumdin" path="res://Components/BoxWallsGenerator.tscn" id="3_skugv"]
 [ext_resource type="PackedScene" uid="uid://bjs73x80820g6" path="res://Components/BoxCeilGenerator.tscn" id="4_25di1"]
+[ext_resource type="Texture2D" uid="uid://bcv2ix18ydagr" path="res://Resources/Textures/wallpaper.png" id="7_wca3y"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25di1"]
-shading_mode = 0
-albedo_color = Color(0.740336, 0.6068112, 0.9996802, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wca3y"]
+script = ExtResource("3_drp33")
+metadata/_custom_type_script = "uid://d0f0rdolbfsro"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apm5d"]
 shading_mode = 0
 albedo_color = Color(0, 0.7294118, 0.9764706, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skugv"]
-shading_mode = 0
-albedo_color = Color(0.29959995, 0.23799998, 0.7, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drp33"]
+script = ExtResource("3_drp33")
+metadata/_custom_type_script = "uid://d0f0rdolbfsro"
 
 [node name="Corridor" type="Node3D"]
 script = ExtResource("1_vdkqu")
 
 [node name="BoxFloorGenerator" parent="." instance=ExtResource("2_skugv")]
-floor_material = SubResource("StandardMaterial3D_25di1")
+floor_material = SubResource("ShaderMaterial_wca3y")
+floor_texture = ExtResource("3_apm5d")
 
 [node name="BoxCeilGenerator" parent="." instance=ExtResource("4_25di1")]
 ceil_material = SubResource("StandardMaterial3D_apm5d")
 
 [node name="BoxWallsGenerator" parent="." instance=ExtResource("3_skugv")]
-walls_material = SubResource("StandardMaterial3D_skugv")
+walls_material = SubResource("ShaderMaterial_drp33")
+wall_texture = ExtResource("7_wca3y")

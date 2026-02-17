@@ -39,8 +39,8 @@ func _physics_process(_delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	
-	#if not is_on_floor():
-		#velocity.y -= 9.8 * _delta
+	if not is_on_floor():
+		velocity.y -= 9.8 * _delta
 	
 	move_and_slide()
 	
