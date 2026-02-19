@@ -2,7 +2,7 @@ extends Node
 class_name PlayerManager
 
 var player_id : String
-var player : CharacterBody3D
+var player : PlayerTest
 var player_galley : HexCoord # current gallery player visiting
 
 var _randomizer : RandomNumberGenerator
@@ -14,6 +14,10 @@ func _init() -> void:
 
 func _process(_delta):
 	_calculate_player_transition()
+
+func _physics_process(_delta: float) -> void:
+	if player:
+		Signals.player_move.emit(player.position, Vector2(player.look_x, player.look_y))
 
 func debug_player_room(from : HexCoord, to : HexCoord):
 	var distance_from = player.global_position.distance_to(from.global_coord)

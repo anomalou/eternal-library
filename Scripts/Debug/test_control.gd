@@ -1,9 +1,11 @@
 extends CharacterBody3D
+class_name PlayerTest
 
 @export var speed : float = 5.0
 @export var mouse_sens : float = 0.003
 
-var _look_x : float = 0.0
+var look_x : float = 0.0
+var look_y : float = 0.0
 
 @onready var _camera : Camera3D = $FPV
 
@@ -13,9 +15,10 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sens)
-		_look_x -= event.relative.y * mouse_sens
-		_look_x = clamp(_look_x, -1.5, 1.5)
-		_camera.rotation.x = _look_x
+		look_y = rotation.y
+		look_x -= event.relative.y * mouse_sens
+		look_x = clamp(look_x, -1.5, 1.5)
+		_camera.rotation.x = look_x
 	
 	if event is InputEventKey:
 		if event.keycode == KEY_ESCAPE and event.pressed:
