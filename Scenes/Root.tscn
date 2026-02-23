@@ -1,25 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://busuj7ik35y8"]
+[gd_scene load_steps=5 format=3 uid="uid://busuj7ik35y8"]
 
 [ext_resource type="Script" uid="uid://c6k4ay6r0w556" path="res://Scripts/game_master.gd" id="1_a5hps"]
 [ext_resource type="Script" uid="uid://dk1u4q6a7iphx" path="res://Shaders/vignette_shader.gd" id="3_sxhdm"]
 [ext_resource type="Shader" uid="uid://cidfo8ltamdor" path="res://Shaders/vignette_posteffect.gdshader" id="4_oss8w"]
-[ext_resource type="PackedScene" uid="uid://c0ea7goyo5isv" path="res://Prefabs/portal.tscn" id="4_sxhdm"]
-[ext_resource type="Script" uid="uid://d0f0rdolbfsro" path="res://Shaders/texture_shader.gd" id="5_oss8w"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxhdm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kqog5"]
 shader = ExtResource("4_oss8w")
-shader_parameter/vignette_intensity = 1.0
+shader_parameter/vignette_intensity = 0.7
 shader_parameter/vignette_color = Vector4(0, 0, 0, 1)
 script = ExtResource("3_sxhdm")
 metadata/_custom_type_script = "uid://dk1u4q6a7iphx"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pl8e4"]
-script = ExtResource("5_oss8w")
-metadata/_custom_type_script = "uid://d0f0rdolbfsro"
-
 [node name="Root" type="Node"]
 
-[node name="Control" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,8 +23,8 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ControlContainer" type="SubViewportContainer" parent="Control"]
-material = SubResource("ShaderMaterial_sxhdm")
+[node name="WorldRendererContainer" type="SubViewportContainer" parent="UI"]
+material = SubResource("ShaderMaterial_kqog5")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,17 +34,14 @@ grow_vertical = 2
 stretch = true
 stretch_shrink = 2
 
-[node name="WorldRenderer" type="SubViewport" parent="Control/ControlContainer"]
+[node name="WorldRenderer" type="SubViewport" parent="UI/WorldRendererContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(576, 324)
 render_target_update_mode = 4
 
-[node name="GameMaster" type="Node" parent="Control/ControlContainer/WorldRenderer"]
+[node name="GameMaster" type="Node" parent="UI/WorldRendererContainer/WorldRenderer"]
 script = ExtResource("1_a5hps")
 metadata/_custom_type_script = "uid://c6k4ay6r0w556"
 
-[node name="Debugger" type="Node" parent="Control/ControlContainer/WorldRenderer"]
-
-[node name="Portal" parent="." instance=ExtResource("4_sxhdm")]
-shader = SubResource("ShaderMaterial_pl8e4")
+[node name="Debugger" type="Node" parent="UI/WorldRendererContainer/WorldRenderer"]

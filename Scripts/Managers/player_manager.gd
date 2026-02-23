@@ -50,12 +50,12 @@ func _calculate_player_transition():
 	var room_position = player_galley.global_coord
 	
 	var current_distance = player_position.distance_to(room_position)
-	if current_distance > (player_galley.size * sqrt(3) / 2 + player_galley.spacing * 0.75):
-		var min_distance = current_distance
+	if current_distance > (player_galley.size * sqrt(3) / 2 + player_galley.spacing * 0.55):
+		var min_distance = null
 		var closest_gallery : HexCoord = player_galley
 		for neigh in player_galley.neighbours():
 			var dist = player_position.distance_to(neigh.global_coord)
-			if dist < min_distance:
+			if min_distance == null or dist < min_distance:
 				min_distance = dist
 				closest_gallery = neigh
 		Signals.player_enter_gallery.emit(player_galley, closest_gallery)

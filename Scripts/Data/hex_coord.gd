@@ -24,7 +24,7 @@ func _init(_x = 0, _y = 0, _z = 0) -> void:
 	self.y = _y
 	self.r = _z
 	self.s = -self.q - self.r
-	self._config = load("res://Configurations/hexagon_config.tres")
+	self._config = load(Constants.get_value("hexagon_config"))
 	self.size = _config.size
 	self.spacing = _config.size
 	

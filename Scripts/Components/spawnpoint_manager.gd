@@ -18,5 +18,5 @@ func _create_spawnpoint():
 	spawnpoint.owner = get_tree().edited_scene_root
 	print_debug("Spawnpoint created")
 
-func get_spawpoint_list() -> Array[SpawnPoint]:
-	return get_children() as Array[SpawnPoint]
+func generate():
+	var spawnpoints : Array[SpawnPoint] = get_children() as Array[SpawnPoint]

@@ -1,11 +1,9 @@
-@tool
 extends Entity
 class_name Gallery
 
 var type : EnumTypes.GalleryType
 
 var hex_transform : HexagonTransform
-var _gallery_gizmo : HexagonGizmo
 var _spawnpoint_manager : SpawnPointManager
 var _walls_generator : HexWallsGenerator
 var _floor_generator : HexFloorGenerator
@@ -14,7 +12,6 @@ var _ceil_generator : HexCeilGenerator
 func _ready() -> void:
 	super()
 	self.hex_transform = $HexagonTransform as HexagonTransform
-	self._gallery_gizmo = $HexagonGizmo as HexagonGizmo
 	self._spawnpoint_manager = $SpawnPointManager as SpawnPointManager
 	self._walls_generator = $WallsGenerator as HexWallsGenerator
 	self._floor_generator = $FloorGenerator as HexFloorGenerator
@@ -23,7 +20,6 @@ func _ready() -> void:
 
 func _apply_position(hex_position : HexCoord):
 	self.hex_transform.hex_position = hex_position
-	_gallery_gizmo.setup(hex_transform.hex_position, hex_transform.height)
 	var walls_id = _seed_manager.generate_object_id("walls", "", id)
 	_walls_generator.setup(walls_id, hex_transform.hex_position, hex_transform.height)
 	var floor_id = _seed_manager.generate_object_id("floor", "", id)

@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 class_name HexagonTransform
 
@@ -17,5 +16,5 @@ var _config : HexagonConfig
 @export var height : float
 
 func _ready() -> void:
-	_config = load("res://Configurations/hexagon_config.tres") as HexagonConfig
+	_config = load(Constants.get_value("hexagon_config")) as HexagonConfig
 	height = _config.height

@@ -2,7 +2,7 @@
 extends MeshInstance3D
 class_name HexagonGizmo
 
-var _position : HexCoord
+var _size : float = 32.0
 var _height : float = 32.0
 @export var gizmo_visible : bool = true:
 	set(value):
@@ -11,22 +11,22 @@ var _height : float = 32.0
 	get:
 		return gizmo_visible
 
+@export_tool_button("Rebuild") var rebuild_action = _draw_gizmo
+
+
 func _ready() -> void:
 	_draw_gizmo()
 
-func setup(pos : HexCoord, height : float):
-	self._position = pos
-	self._height = height
-	_draw_gizmo()
-
 func _draw_gizmo():
+	print_debug("Start gizmo drawing")
 	if not Engine.is_editor_hint():
 		return
 	
-	if not _position:
-		self._position = HexCoord.new(0, 0, 0)
+	var _config = load(Constants.get_value("hexagon_config")) as HexagonConfig
+	_size = _config.size
+	_height = _config.height
 	
-	print_debug("Try draw gizmo in position ", _position.to_str(), " with size ", _position.size)
+	print_debug("Try draw gizmo with size ", _size)
 	_draw_armature()
 	
 
@@ -37,6 +37,34 @@ func _draw_armature():
 		return
 	
 	var _mesh = ArrayMesh.new()
+	
+	var _floor : Array = _get_floor()
+	
+	var floor_material = StandardMaterial3D.new()
+	floor_material.albedo_color = Color(Color.DARK_GRAY, 0.5)
+	floor_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	floor_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	floor_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	
+	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, _floor)
+	_mesh.surface_set_material(0, floor_material)
+	
+	var colors = [Color.DARK_RED, Color.DARK_GREEN, Color.DARK_BLUE, Color.DARK_GOLDENROD, Color.DARK_MAGENTA, Color.DARK_CYAN]
+	for i in range(6):
+		var wall = _get_wall(i)
+		
+		var wall_material = StandardMaterial3D.new()
+		wall_material.albedo_color = Color(colors.get(i), 0.5)
+		wall_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		wall_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		wall_material.cull_mode = BaseMaterial3D.CULL_DISABLED
+		
+		_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, wall)
+		_mesh.surface_set_material(1 + i, wall_material)
+
+	self.mesh = _mesh
+
+func _get_floor() -> Array:
 	var vertices = PackedVector3Array()
 	var indices = PackedInt32Array()
 	
@@ -45,34 +73,9 @@ func _draw_armature():
 	for i in range(7):
 		var angle = deg_to_rad(60 * i)
 		vertices.append(Vector3(
-			_position.size * cos(angle),
+			_size * cos(angle),
 			0.0,
-			_position.size * sin(angle)
-		))
-	
-	var wall_index = vertices.size()
-	for i in range(6):
-		var angle1 = deg_to_rad(60 * i)
-		var angle2 = deg_to_rad(60 * (i + 1))
-		vertices.append(Vector3(
-			_position.size * cos(angle1),
-			0.0,
-			_position.size * sin(angle1),
-		)) 
-		vertices.append(Vector3(
-			_position.size * cos(angle1),
-			float(_height),
-			_position.size * sin(angle1),
-		))
-		vertices.append(Vector3(
-			_position.size * cos(angle2),
-			float(_height),
-			_position.size * sin(angle2),
-		))
-		vertices.append(Vector3(
-			_position.size * cos(angle2),
-			0.0,
-			_position.size * sin(angle2)
+			_size * sin(angle)
 		))
 	
 	for i in range(6):
@@ -80,25 +83,46 @@ func _draw_armature():
 		indices.append(i + 1)
 		indices.append(i + 2)
 	
-	for i in range(6):
-		var base_index = wall_index + i * 4
-		indices.append(base_index)
-		indices.append(base_index + 1)
-		indices.append(base_index + 2)
-		indices.append(base_index + 3)
-		
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color.RED
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.no_depth_test = true
+	var array = []
+	array.resize(Mesh.ARRAY_MAX)
+	array[Mesh.ARRAY_VERTEX] = vertices
+	array[Mesh.ARRAY_INDEX] = indices
+	
+	return array
+
+func _get_wall(direction : int) -> Array:
+	var vertices = PackedVector3Array()
+	var indices = PackedInt32Array()
+	
+	var angle1 = deg_to_rad(60 * direction)
+	var angle2 = deg_to_rad(60 * (direction + 1))
+	vertices.append(Vector3(
+		_size * cos(angle1),
+		0.0,
+		_size * sin(angle1),
+	))
+	vertices.append(Vector3(
+		_size * cos(angle1),
+		float(_height),
+		_size * sin(angle1),
+	))
+	vertices.append(Vector3(
+		_size * cos(angle2),
+		float(_height),
+		_size * sin(angle2),
+	))
+	vertices.append(Vector3(
+		_size * cos(angle2),
+		0.0,
+		_size * sin(angle2)
+	))
+	
+	indices.append_array([0, 1, 3])
+	indices.append_array([1, 2, 3])
 	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)
 	array[Mesh.ARRAY_VERTEX] = vertices
 	array[Mesh.ARRAY_INDEX] = indices
 	
-	_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINE_STRIP, array)
-	_mesh.surface_set_material(0, material)
-
-	self.mesh = _mesh
+	return array

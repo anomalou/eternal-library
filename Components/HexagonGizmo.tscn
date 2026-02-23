@@ -1,6 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://ksabwyoarwli"]
+[gd_scene load_steps=4 format=4 uid="uid://ksabwyoarwli"]
 
 [ext_resource type="Script" uid="uid://f5wlkyub7xt3" path="res://Scripts/Components/hexagon_gizmo.gd" id="1_7y75b"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7y75b"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_coll1"]
+_surfaces = [{
+"aabb": AABB(-32, 0, -27.712812, 64, 32, 55.425625),
+"format": 34359742465,
+"index_count": 42,
+"index_data": PackedByteArray("AAABAAIAAAACAAMAAAADAAQAAAAEAAUAAAAFAAYAAAAGAAcACAAJAAoACwAMAA0ADgAPABAAEQASABMAFAAVABYAFwAYABkAGgAbABwAHQAeAB8A"),
+"material": SubResource("StandardMaterial3D_7y75b"),
+"primitive": 2,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAQgAAAAAAAAAAAACAQQAAAADXs91BAACAwQAAAADXs91BAAAAwgAAAAAAMI0nAACAwQAAAADXs93BAACAQQAAAADXs93BAAAAQgAAAAAAMA2oAAAAQgAAAAAAAAAAAAAAQgAAAEIAAAAAAACAQQAAAELXs91BAACAQQAAAADXs91BAACAQQAAAADXs91BAACAQQAAAELXs91BAACAwQAAAELXs91BAACAwQAAAADXs91BAACAwQAAAADXs91BAACAwQAAAELXs91BAAAAwgAAAEIAMI0nAAAAwgAAAAAAMI0nAAAAwgAAAAAAMI0nAAAAwgAAAEIAMI0nAACAwQAAAELXs93BAACAwQAAAADXs93BAACAwQAAAADXs93BAACAwQAAAELXs93BAACAQQAAAELXs93BAACAQQAAAADXs93BAACAQQAAAADXs93BAACAQQAAAELXs93BAAAAQgAAAEIAMA2oAAAAQgAAAAAAMA2o")
+}]
+
 [node name="HexagonGizmo" type="MeshInstance3D"]
+mesh = SubResource("ArrayMesh_coll1")
 script = ExtResource("1_7y75b")

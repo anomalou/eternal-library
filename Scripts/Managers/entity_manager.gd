@@ -8,7 +8,7 @@ var _gallery_types : Dictionary[EnumTypes.GalleryType, PackedScene]
 var _corridor_prefab : PackedScene
 
 func init():
-	self._hexagon_config = load("res://Configurations/hexagon_config.tres")
+	self._hexagon_config = load(Constants.get_value("hexagon_config"))
 	self._gallery_types = {
 		EnumTypes.GalleryType.GENERAL : load("res://Prefabs/Gallery.tscn")
 	}
