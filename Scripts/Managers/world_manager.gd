@@ -4,11 +4,11 @@ class_name WorldManager
 var _game_session : GameSession
 var _seed_manager : SeedManager
 var _entity_manager : EntityManager
+var _navigation : WorldNavigation
 
 var _galleries : Dictionary[Vector2i, Gallery] # position / id
 var _galleries_topology : Dictionary[Vector2i, GalleryTopology]
 var _corridors : Dictionary[String, Array]
-var _navigation : AStar2D = AStar2D.new()
 
 func _ready() -> void:
 	Signals.player_enter_gallery.connect(_process_player_transition)
@@ -20,11 +20,13 @@ func init(game_session : GameSession):
 	self._game_session = game_session
 	self._seed_manager = self._game_session.seed_manager
 	self._entity_manager = self._game_session.entity_manager
+	self._navigation = WorldNavigation.new()
 
 func generate_in_range(_start_gallery : HexCoord, _range : int):
 	var new_galleries = _pregenerate_galleries(_start_gallery, _range)
-	var final_world = _pregenerate_corridor(new_galleries)
-	_generate_world(final_world.get(0), final_world.get(1))
+	var world_topology = _pregenerate_corridor(new_galleries)
+	var gallery_clasters = _generate_navigation_paths(world_topology.get(0).keys(), world_topology.get(1).values())
+	_generate_world(world_topology.get(0), world_topology.get(1))
 	#_generate_world(new_galleries, {})
 
 func _pregenerate_galleries(_start_pos : HexCoord, _range : int) -> Dictionary[Vector2i, GalleryTopology]:
@@ -111,7 +113,7 @@ func _pregenerate_corridor(new_galleries : Dictionary[Vector2i, GalleryTopology]
 						if neigh.entrance_chanse.has(neigh_dir):
 							var corridor_rnd = _seed_manager.get_temp_rnd(corridor_id)
 							var chanse = corridor_rnd.randf()
-							var avg_chanse = new_gallery.entrance_chanse.get(dir) + neigh.entrance_chanse.get(neigh_dir)
+							var avg_chanse = (new_gallery.entrance_chanse.get(dir) + neigh.entrance_chanse.get(neigh_dir))
 							if chanse < avg_chanse:
 								new_gallery.entrancies.push_back(dir)
 								neigh.entrancies.push_back(neigh_dir)
@@ -120,6 +122,32 @@ func _pregenerate_corridor(new_galleries : Dictionary[Vector2i, GalleryTopology]
 						else:
 							print_debug("Neighbour gallery ", neigh_pos.to_str(), " won't connect to ", hex_pos.to_str())
 	return [connected_galleries, corridors]
+
+func _generate_navigation_paths(nodes : Array[Vector2i], connections : Array[Array]) -> Array[Array]:
+	var node_dict : Dictionary[Vector2i, int] = {}
+	for node in nodes:
+		var node_id = _navigation.add_node(node)
+		node_dict.set(node, node_id)
+	
+	for connection : Array[Vector2i] in connections:
+		_navigation.add_connection(connection.get(0), connection.get(1))
+	
+	# clasters calculation
+	var free_nodes = Array(nodes)
+	var clasters : Array[Array] = [] # clasters with connected nodes
+	
+	while not free_nodes.is_empty():
+		var node = free_nodes.pop_front()
+		var claster : Array[Vector2i] = [node]
+		var remains_nodes = Array(free_nodes)
+		for remain_node in remains_nodes:
+			if _navigation.has_path(node, remain_node):
+				free_nodes.erase(remain_node)
+				claster.append(remain_node)
+		clasters.append(claster)
+		print_debug("Claster generated with ", claster.size(), " rooms. Claster: ", claster)
+	
+	return clasters
 
 func _generate_world(pregen_galleries : Dictionary[Vector2i, GalleryTopology], pregen_corridors : Dictionary[String, Array]):
 	for gallery_pos in pregen_galleries.keys():

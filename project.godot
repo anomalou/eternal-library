@@ -21,6 +21,10 @@ GameEnv="*res://Scripts/game_env.gd"
 Signals="*res://Scripts/Utils/signals.gd"
 GalleryDataManager="*res://Scripts/Managers/gallery_data_manager.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [input]
 
 left={

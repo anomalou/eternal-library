@@ -13,3 +13,6 @@ static func gallery_hex(pos : HexCoord, type : EnumTypes.GalleryType) -> String:
 
 static func corridor(gallery1 : HexCoord, gallery2 : HexCoord) -> String:
 	return HexCoord.min(gallery1, gallery2).to_str() + POS_SEP + HexCoord.max(gallery1, gallery2).to_str()
+
+static func to_hash2i(vec : Vector2i) -> int:
+	return abs(hash(str(vec.x) + POS_SEP + str(vec.y)))
