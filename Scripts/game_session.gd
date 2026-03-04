@@ -6,13 +6,16 @@ class_name GameSession
 @onready var world_manager : WorldManager = $WorldManager
 @onready var player_manager : PlayerManager = $PlayerManager
 
+var _config : SessionConfig
+
 # only for caches and outher managers initialization
-func init_subsystems(_seed : int = 0):
-	seed_manager.init(_seed)
+func init(config : SessionConfig):
+	self._config = config
+	
+	seed_manager.init(config.master_seed)
 	entity_manager.init()
-	world_manager.init(self)
-	var player_id = seed_manager.generate_object_id("player")
-	player_manager.init(player_id, seed_manager.get_rnd(player_id))
+	world_manager.init(config, seed_manager, entity_manager)
+	player_manager.init(seed_manager)
 
 # call only when game session exists on game scene
 func generate_world():

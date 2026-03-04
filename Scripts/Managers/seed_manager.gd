@@ -31,7 +31,7 @@ func generate_root_seed():
 	seed_cache.set(ROOT, root_seed)
 
 # also creates seed for this object
-func generate_object_id(object_type : String, context : String = "", parent_id : String = ""):
+func generate_object_id(object_type : String, context : String = "", parent_id : String = "") -> String:
 	if parent_id == null or parent_id.is_empty():
 		parent_id = ROOT
 	var parent_seed = get_seed(parent_id)
@@ -40,7 +40,7 @@ func generate_object_id(object_type : String, context : String = "", parent_id :
 	_generate_seed(object_id)
 	return object_id
 
-func get_seed(id : String = ""):
+func get_seed(id : String = "") -> int:
 	if id.is_empty():
 		return get_root_seed()
 	if seed_cache.has(id):

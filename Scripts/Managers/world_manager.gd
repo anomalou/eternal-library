@@ -1,7 +1,7 @@
 extends Node
 class_name WorldManager
 
-var _game_session : GameSession
+var _config : SessionConfig
 var _seed_manager : SeedManager
 var _entity_manager : EntityManager
 var _navigation : WorldNavigation
@@ -16,10 +16,10 @@ func _ready() -> void:
 func _process_player_transition(_prev_gallery : HexCoord, curr_galley : HexCoord):
 	generate_in_range(curr_galley, 3) # rendering distance as secont property
 
-func init(game_session : GameSession):
-	self._game_session = game_session
-	self._seed_manager = self._game_session.seed_manager
-	self._entity_manager = self._game_session.entity_manager
+func init(config : SessionConfig, seed_manager : SeedManager, entity_manager : EntityManager):
+	self._config = config
+	self._seed_manager = seed_manager
+	self._entity_manager = entity_manager
 	self._navigation = WorldNavigation.new()
 
 func generate_in_range(_start_gallery : HexCoord, _range : int):
