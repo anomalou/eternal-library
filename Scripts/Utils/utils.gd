@@ -23,3 +23,30 @@ static func get_object_name(id : String) -> String:
 		return parts.pop_back()
 	else:
 		return id
+
+static func load_configuration_resources(dir_path : String) -> Array[Resource]:
+	if not dir_path.ends_with("/"):
+		dir_path = dir_path + "/"
+	
+	var resources : Array[Resource] = []
+	
+	var dir = DirAccess.open(dir_path)
+	if not dir:
+		Log.error("Cannot open configuration resource directory")
+		return []
+		
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	
+	while file_name != "":
+		if file_name.ends_with(".tres") or file_name.ends_with(".res"):
+			var full_path = dir_path + file_name
+			var resource = ResourceLoader.load(full_path)
+			if resource:
+				Log.info("Loaded resource ", full_path)
+				resources.append(resource)
+		
+		file_name = dir.get_next()
+	
+	dir.list_dir_end()
+	return resources

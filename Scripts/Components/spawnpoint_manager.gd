@@ -16,7 +16,7 @@ func _create_spawnpoint():
 	spawnpoint.gizmo_extents = 1.0
 	self.add_child(spawnpoint, InternalMode.INTERNAL_MODE_DISABLED)
 	spawnpoint.owner = get_tree().edited_scene_root
-	print_debug("Spawnpoint created")
+	Log.info("Spawnpoint created")
 
 func generate():
 	var spawnpoints : Array[SpawnPoint] = get_children() as Array[SpawnPoint]

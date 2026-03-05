@@ -27,7 +27,7 @@ func generate_root_seed():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var root_seed = rng.randi() ^ hash(SALT)
-	print_debug("Generated root seed = ", root_seed)
+	Log.info("Generated root seed = ", root_seed)
 	seed_cache.set(ROOT, root_seed)
 
 # also creates seed for this object
@@ -96,5 +96,5 @@ func _generate_local_seed(id : String) -> int:
 		var h1 = hash(str(parent_seed) + SEP1 + id)
 		var h2 = hash(id + SEP2 + str(parent_seed))
 		var h = h1 ^ h2
-		print_debug("Seed ", str(h), " for ", id, " generated")
+		Log.info("Seed ", str(h), " for ", id, " generated")
 		return h

@@ -15,7 +15,7 @@ func add_connection(point1 : Vector2i, point2 : Vector2i):
 		_topology.connect_points(p1_id, p2_id)
 
 func has_path(point1 : Vector2i, point2 : Vector2i) -> bool:
-	print_debug("Checking connection between ", point1, " and ", point2)
+	Log.info("Checking connection between ", point1, " and ", point2)
 	var p1_id = ContextBuilder.to_hash2i(point1)
 	var p2_id = ContextBuilder.to_hash2i(point2)
 	return not _topology.get_point_path(p1_id, p2_id).is_empty()

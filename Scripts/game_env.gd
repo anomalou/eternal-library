@@ -3,7 +3,7 @@ var _current_session : WeakRef
 
 func set_current_session(session : GameSession):
 	_current_session = weakref(session)
-	print_debug("New game session is set up as global env property")
+	Log.info("New game session is set up as global env property")
 
 func get_current_session():
 	var session = _current_session.get_ref()

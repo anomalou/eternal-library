@@ -21,8 +21,8 @@ func _physics_process(_delta: float) -> void:
 func debug_player_room(from : HexCoord, to : HexCoord):
 	var distance_from = player.global_position.distance_to(from.global_coord)
 	var distance_to = player.global_position.distance_to(to.global_coord)
-	print_debug("Player moved from ", from.to_str(), " to ", to.to_str())
-	print_debug("Distance from ", distance_from, ", distance to ", distance_to)
+	Log.info("Player moved from ", from.to_str(), " to ", to.to_str())
+	Log.info("Distance from ", distance_from, ", distance to ", distance_to)
 
 func init(seed_manager : SeedManager):
 	self._seed_manager = seed_manager

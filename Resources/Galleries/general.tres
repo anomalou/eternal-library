@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="GalleryData" load_steps=2 format=3 uid="uid://bfq6umsdr88ce"]
+[gd_resource type="Resource" script_class="GalleryConfig" load_steps=3 format=3 uid="uid://bfq6umsdr88ce"]
 
-[ext_resource type="Script" uid="uid://drw60ptxrf7uk" path="res://Scripts/Data/gallery_data.gd" id="1_d8ls0"]
+[ext_resource type="PackedScene" uid="uid://bed5rglkmc220" path="res://Prefabs/Gallery.tscn" id="1_3ri5f"]
+[ext_resource type="Script" uid="uid://drw60ptxrf7uk" path="res://Scripts/Data/gallery_config.gd" id="2_nbni7"]
 
 [resource]
-script = ExtResource("1_d8ls0")
+script = ExtResource("2_nbni7")
 max_entramces = 6
+prefab = ExtResource("1_3ri5f")

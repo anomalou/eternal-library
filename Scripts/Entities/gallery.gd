@@ -33,11 +33,11 @@ func generate(_id : String, hex_position : HexCoord, entrances : Array[EnumTypes
 	self._walls_generator.generate(entrances)
 	self._floor_generator.generate()
 	self._ceil_generator.generate()
-	print_debug("Gallery ", hex_transform.hex_position.to_str(), " is ready with id = ", _id)
+	Log.info("Gallery ", hex_transform.hex_position.to_str(), " is ready with id = ", _id)
 
 func regenerate(entrances : Array[EnumTypes.Direction]):
 	if not id or id.is_empty():
 		push_error("Cannot regenerate gallery that not generated yet")
 		return
 	self._walls_generator.regenerate(entrances)
-	print_debug("Gallery ", hex_transform.hex_position.to_str(), " regenerated")
+	Log.info("Gallery ", hex_transform.hex_position.to_str(), " regenerated")

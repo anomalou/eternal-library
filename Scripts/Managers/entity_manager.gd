@@ -4,19 +4,16 @@ class_name  EntityManager
 var _entity_cache : Dictionary[String, Node3D] = {}
 
 var _hexagon_config : HexagonConfig
-var _gallery_types : Dictionary[EnumTypes.GalleryType, PackedScene]
 var _corridor_prefab : PackedScene
 
 func init():
 	self._hexagon_config = load(Constants.get_value("hexagon_config"))
-	self._gallery_types = {
-		EnumTypes.GalleryType.GENERAL : load("res://Prefabs/Gallery.tscn")
-	}
 	self._corridor_prefab = load("res://Prefabs/Corridor.tscn")
-	print_debug("Entity manager initialized")
+	Log.info("Entity manager initialized")
 
 func create_gallery(_id : String, _pos : Vector2i, _entrances : Array[EnumTypes.Direction] = [], _type : EnumTypes.GalleryType = EnumTypes.GalleryType.GENERAL) -> Gallery:
-	var gallery_pref = _gallery_types.get(_type) as PackedScene
+	var config = GalleryConfigManager.get_config(_type)
+	var gallery_pref = config.prefab
 	var gallery = gallery_pref.instantiate() as Gallery
 	var hex_pos = HexCoord.new(_pos.x, 0, _pos.y)
 	add_child(gallery)

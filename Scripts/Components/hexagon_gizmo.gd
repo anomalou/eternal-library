@@ -18,7 +18,7 @@ func _ready() -> void:
 	_draw_gizmo()
 
 func _draw_gizmo():
-	print_debug("Start gizmo drawing")
+	Log.info("Start gizmo drawing")
 	if not Engine.is_editor_hint():
 		return
 	
@@ -26,7 +26,7 @@ func _draw_gizmo():
 	_size = _config.size
 	_height = _config.height
 	
-	print_debug("Try draw gizmo with size ", _size)
+	Log.info("Try draw gizmo with size ", _size)
 	_draw_armature()
 	
 

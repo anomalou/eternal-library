@@ -1,5 +1,5 @@
 extends Node
-class_name WorldManager
+class_name WorldGenerator
 
 var _config : SessionConfig
 var _seed_manager : SeedManager
@@ -56,7 +56,7 @@ func _pregenerate_gallery(_pos : Vector2i) -> Dictionary[Vector2i, GalleryTopolo
 	var gallery_type_rnd = _seed_manager.get_temp_rnd(gallery_type_id)
 	# use gallery_type_rnd to select room type
 	var gallery_type = EnumTypes.GalleryType.GENERAL
-	var gallery_data = GalleryDataManager.get_data(gallery_type)
+	var gallery_config = GalleryConfigManager.get_config(gallery_type)
 	
 	var gallery_context = ContextBuilder.gallery(_pos.x, 0, _pos.y, gallery_type)
 	var gallery_id = _seed_manager.generate_object_id("gallery", gallery_context)
@@ -64,7 +64,7 @@ func _pregenerate_gallery(_pos : Vector2i) -> Dictionary[Vector2i, GalleryTopolo
 	
 	var entrancies_id = gallery_id + "_entr"
 	var entrancies_rnd = _seed_manager.get_temp_rnd(entrancies_id)
-	var entrance_count = entrancies_rnd.randi_range(gallery_data.min_entrances, gallery_data.max_entramces)
+	var entrance_count = entrancies_rnd.randi_range(gallery_config.min_entrances, gallery_config.max_entramces)
 	
 	var gallery : GalleryTopology = GalleryTopology.new()
 	gallery.id = gallery_id
@@ -108,7 +108,7 @@ func _pregenerate_corridor(new_galleries : Dictionary[Vector2i, GalleryTopology]
 						neigh = _galleries_topology.get(neight_pos2)
 						connected_galleries.set(neight_pos2, neigh)
 					else:
-						print_debug("Corridor between ", pos, " and ", neight_pos2, " will not been created because ", neight_pos2, " not exists")
+						Log.info("Corridor between ", pos, " and ", neight_pos2, " will not been created because ", neight_pos2, " not exists")
 					if neigh:
 						if neigh.entrance_chanse.has(neigh_dir):
 							var corridor_rnd = _seed_manager.get_temp_rnd(corridor_id)
@@ -118,9 +118,9 @@ func _pregenerate_corridor(new_galleries : Dictionary[Vector2i, GalleryTopology]
 								new_gallery.entrancies.push_back(dir)
 								neigh.entrancies.push_back(neigh_dir)
 								corridors.set(corridor_id, [pos, neight_pos2])
-								print_debug("Corridor ", corridor_id, " between ", hex_pos.to_str(), " and ", neigh_pos.to_str(), " created")
+								Log.info("Corridor ", corridor_id, " between ", hex_pos.to_str(), " and ", neigh_pos.to_str(), " created")
 						else:
-							print_debug("Neighbour gallery ", neigh_pos.to_str(), " won't connect to ", hex_pos.to_str())
+							Log.info("Neighbour gallery ", neigh_pos.to_str(), " won't connect to ", hex_pos.to_str())
 	return [connected_galleries, corridors]
 
 func _generate_navigation_paths(nodes : Array[Vector2i], connections : Array[Array]) -> Array[Array]:
@@ -145,7 +145,7 @@ func _generate_navigation_paths(nodes : Array[Vector2i], connections : Array[Arr
 				free_nodes.erase(remain_node)
 				claster.append(remain_node)
 		clasters.append(claster)
-		print_debug("Claster generated with ", claster.size(), " rooms. Claster: ", claster)
+		Log.info("Claster generated with ", claster.size(), " rooms. Claster: ", claster)
 	
 	return clasters
 

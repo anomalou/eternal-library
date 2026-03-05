@@ -3,7 +3,7 @@ class_name GameSession
 
 @onready var seed_manager : SeedManager = $SeedManager
 @onready var entity_manager : EntityManager = $EntityManager
-@onready var world_manager : WorldManager = $WorldManager
+@onready var world_generator : WorldGenerator = $WorldGenerator
 @onready var player_manager : PlayerManager = $PlayerManager
 
 var _config : SessionConfig
@@ -14,12 +14,12 @@ func init(config : SessionConfig):
 	
 	seed_manager.init(config.master_seed)
 	entity_manager.init()
-	world_manager.init(config, seed_manager, entity_manager)
+	world_generator.init(config, seed_manager, entity_manager)
 	player_manager.init(seed_manager)
 
 # call only when game session exists on game scene
 func generate_world():
-	world_manager.generate_in_range(HexCoord.new(), 3)
+	world_generator.generate_in_range(HexCoord.new(), 3)
 
 func create_player():
 	player_manager.spawn_player()

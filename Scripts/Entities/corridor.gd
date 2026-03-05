@@ -30,5 +30,5 @@ func generate(_id : String, height : float, g1 : HexCoord, g2 : HexCoord):
 	_floor_generator.generate(self._width, self._length, self._direction)
 	_ceil_generator.generate(self._width, self._length, height, self._direction)
 	_walls_ganerator.generate(height, self._length, self._width, self._direction)
-	print_debug("Corridor ", id, " is ready between ", g1.to_str(), " and ", g2.to_str())
+	Log.info("Corridor ", id, " is ready between ", g1.to_str(), " and ", g2.to_str())
 	
