@@ -15,7 +15,7 @@ func _load_entity_configurations():
 	var entity_configs = LibraryUtils.load_configuration_resources(ENTITY_CONFIG_PATH)
 	for entity_config in entity_configs:
 		if entity_config is EntityConfig:
-			_entity_configs.set(entity_config.entity_name, entity_config)
+			_entity_configs.set(entity_config.config_id, entity_config)
 			Log.info("Loaded entity configuration: ", entity_config.config_id)
 
 func get_by_name(entity_name : String) -> EntityConfig:

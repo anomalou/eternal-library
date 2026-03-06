@@ -7,12 +7,12 @@ var _hexagon_config : HexagonConfig
 var _corridor_prefab : PackedScene
 
 func init():
-	self._hexagon_config = ConfigurationManager.get_config("hexagon")
+	self._hexagon_config = ConfigurationManager.get_by_id("hexagon")
 	self._corridor_prefab = load("res://Prefabs/Corridor.tscn")
 	Log.info("Entity manager initialized")
 
 func create_gallery(_id : String, _pos : Vector2i, _entrances : Array[EnumTypes.Direction] = [], _type : EnumTypes.GalleryType = EnumTypes.GalleryType.GENERAL) -> Gallery:
-	var config = GalleryConfigManager.get_config(_type)
+	var config = GalleryConfigManager.get_by_type(_type)
 	var gallery_pref = config.prefab
 	var gallery = gallery_pref.instantiate() as Gallery
 	var hex_pos = HexCoord.new(_pos.x, 0, _pos.y)

@@ -56,7 +56,7 @@ func _pregenerate_gallery(_pos : Vector2i) -> Dictionary[Vector2i, GalleryTopolo
 	var gallery_type_rnd = _seed_manager.get_temp_rnd(gallery_type_id)
 	# use gallery_type_rnd to select room type
 	var gallery_type = EnumTypes.GalleryType.GENERAL
-	var gallery_config = GalleryConfigManager.get_config(gallery_type)
+	var gallery_config = GalleryConfigManager.get_by_type(gallery_type)
 	
 	var gallery_context = ContextBuilder.gallery(_pos.x, 0, _pos.y, gallery_type)
 	var gallery_id = _seed_manager.generate_object_id("gallery", gallery_context)

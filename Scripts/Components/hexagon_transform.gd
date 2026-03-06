@@ -16,5 +16,5 @@ var _config : HexagonConfig
 @export var height : float
 
 func _ready() -> void:
-	_config = ConfigurationManager.get_config("hexagon")
+	_config = ConfigurationManager.get_by_id("hexagon")
 	height = _config.height
