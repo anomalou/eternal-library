@@ -12,8 +12,7 @@ static func _debug(level : String, message : Array):
 	if stack.size() > 2:
 		var prev_call : Dictionary = stack.get(2)
 		script_name = prev_call.get("source")
-		script_name = script_name.rsplit(".", true, 1).get(0)
-		script_name = script_name.rsplit("/", true, 1).get(1)
+		script_name = script_name.get_file().get_basename()
 	else:
 		push_error("Incorrect logger usage")
 	

@@ -4,4 +4,3 @@
 
 [node name="SpawnPoint" type="Marker3D"]
 script = ExtResource("1_0sv8o")
-spawnlist = null

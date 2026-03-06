@@ -2,9 +2,9 @@
 extends Marker3D
 class_name SpawnPoint
 
-var id : String
+# Only use for marking spawn points, and base transform for entities
 
-@export var spawnlist : Dictionary[EnumTypes.EntityType, float]
+@export var allowed_spawnlist : Dictionary[String, int] # spawn_table_id, select_weight
 @export var auto_rotate : bool = true
 
 func _process(_delta: float) -> void:

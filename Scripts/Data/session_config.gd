@@ -1,4 +1,4 @@
-extends Resource
+extends Config
 class_name SessionConfig
 
 var name : String

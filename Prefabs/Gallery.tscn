@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://d0f0rdolbfsro"
 [node name="Gallery" type="Node3D"]
 script = ExtResource("1_2iksw")
 
-[node name="SpawnPointManager" parent="." instance=ExtResource("2_o8mrs")]
+[node name="SpawnEntityManager" parent="." instance=ExtResource("2_o8mrs")]
 
 [node name="HexagonGizmo" parent="." instance=ExtResource("3_r0hsk")]
 mesh = null

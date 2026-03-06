@@ -1,4 +1,4 @@
-extends Resource
+extends Config
 class_name GalleryConfig
 
 @export var gallery_type : EnumTypes.GalleryType

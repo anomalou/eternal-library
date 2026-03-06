@@ -1,6 +1,6 @@
 @tool
 extends Component
-class_name SpawnPointManager
+class_name SpawnEntityManager
 
 @warning_ignore("unused_private_class_variable")
 @export_tool_button("Create spawnpoint", "Marker3D") var _create_spawnpoint_action = _create_spawnpoint
@@ -20,3 +20,4 @@ func _create_spawnpoint():
 
 func generate():
 	var spawnpoints : Array[SpawnPoint] = get_children() as Array[SpawnPoint]
+	

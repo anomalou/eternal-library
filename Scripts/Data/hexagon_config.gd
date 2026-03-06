@@ -1,4 +1,4 @@
-extends Resource
+extends Config
 class_name HexagonConfig
 
 const DEFAULT_HEX_SIZE = 32

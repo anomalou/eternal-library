@@ -7,7 +7,7 @@ var _hexagon_config : HexagonConfig
 var _corridor_prefab : PackedScene
 
 func init():
-	self._hexagon_config = load(Constants.get_value("hexagon_config"))
+	self._hexagon_config = ConfigurationManager.get_config("hexagon")
 	self._corridor_prefab = load("res://Prefabs/Corridor.tscn")
 	Log.info("Entity manager initialized")
 

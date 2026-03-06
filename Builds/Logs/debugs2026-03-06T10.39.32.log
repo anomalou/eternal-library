@@ -1,0 +1,46 @@
+Redot Engine LTS v26.1.stable.official.a3e85316f (2026-01-29 02:31:42 UTC) - https://redotengine.org
+OpenGL API 3.3.0 NVIDIA 470.256.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce GT 710
+
+[2026-03-06 10:35:29][INFO][utils] - Loaded resource res://Resources/Configurations/hexagon.tres
+[2026-03-06 10:35:29][INFO][configuration_manager] - Loaded configuration: hexagon
+[2026-03-06 10:35:29][INFO][utils] - Loaded resource res://Resources/Galleries/general.tres
+[2026-03-06 10:35:29][INFO][gallery_config_manager] - Loaded gallery configuration: general
+[2026-03-06 10:35:29][INFO][utils] - Loaded resource res://Resources/Entities/bookshell_general.tres
+[2026-03-06 10:35:29][INFO][entity_config_manager] - Loaded entity configuration: bookshell_general
+[2026-03-06 10:35:29][INFO][game_env] - New game session is set up as global env property
+ERROR: Cannot open file 'res://Configurations/hexagon_config.tres'.
+   at: load (scene/resources/resource_format_text.cpp:1389)
+   GDScript backtrace (most recent call first):
+	   [0] init (res://Scripts/Managers/entity_manager.gd:10)
+	   [1] init (res://Scripts/game_session.gd:16)
+	   [2] start_new_game (res://Scripts/game_master.gd:20)
+	   [3] _ready (res://Scripts/game_master.gd:7)
+ERROR: Failed loading resource: res://Configurations/hexagon_config.tres.
+   at: _load (core/io/resource_loader.cpp:345)
+   GDScript backtrace (most recent call first):
+	   [0] init (res://Scripts/Managers/entity_manager.gd:10)
+	   [1] init (res://Scripts/game_session.gd:16)
+	   [2] start_new_game (res://Scripts/game_master.gd:20)
+	   [3] _ready (res://Scripts/game_master.gd:7)
+[2026-03-06 10:35:29][INFO][entity_manager] - Entity manager initialized
+ERROR: Cannot open file 'res://Configurations/hexagon_config.tres'.
+   at: load (scene/resources/resource_format_text.cpp:1389)
+   GDScript backtrace (most recent call first):
+	   [0] _init (res://Scripts/Data/hex_coord.gd:27)
+	   [1] generate_world (res://Scripts/game_session.gd:22)
+	   [2] start_new_game (res://Scripts/game_master.gd:21)
+	   [3] _ready (res://Scripts/game_master.gd:7)
+ERROR: Failed loading resource: res://Configurations/hexagon_config.tres.
+   at: _load (core/io/resource_loader.cpp:345)
+   GDScript backtrace (most recent call first):
+	   [0] _init (res://Scripts/Data/hex_coord.gd:27)
+	   [1] generate_world (res://Scripts/game_session.gd:22)
+	   [2] start_new_game (res://Scripts/game_master.gd:21)
+	   [3] _ready (res://Scripts/game_master.gd:7)
+SCRIPT ERROR: Invalid access to property or key 'size' on a base object of type 'null instance'.
+   at: HexCoord._init (res://Scripts/Data/hex_coord.gd:28)
+   GDScript backtrace (most recent call first):
+	   [0] _init (res://Scripts/Data/hex_coord.gd:28)
+	   [1] generate_world (res://Scripts/game_session.gd:22)
+	   [2] start_new_game (res://Scripts/game_master.gd:21)
+	   [3] _ready (res://Scripts/game_master.gd:7)

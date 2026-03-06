@@ -4,7 +4,7 @@ class_name Gallery
 var type : EnumTypes.GalleryType
 
 var hex_transform : HexagonTransform
-var _spawnpoint_manager : SpawnPointManager
+var _spawn_entity_manager : SpawnEntityManager
 var _walls_generator : HexWallsGenerator
 var _floor_generator : HexFloorGenerator
 var _ceil_generator : HexCeilGenerator
@@ -12,7 +12,7 @@ var _ceil_generator : HexCeilGenerator
 func _ready() -> void:
 	super()
 	self.hex_transform = $HexagonTransform as HexagonTransform
-	self._spawnpoint_manager = $SpawnPointManager as SpawnPointManager
+	self._spawn_entity_manager = $SpawnEntityManager as SpawnEntityManager
 	self._walls_generator = $WallsGenerator as HexWallsGenerator
 	self._floor_generator = $FloorGenerator as HexFloorGenerator
 	self._ceil_generator = $CeilGenerator as HexCeilGenerator

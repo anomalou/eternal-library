@@ -16,9 +16,9 @@ func _load_entity_configurations():
 	for entity_config in entity_configs:
 		if entity_config is EntityConfig:
 			_entity_configs.set(entity_config.entity_name, entity_config)
-			Log.info("Loaded entity configuration: ", entity_config.entity_name)
+			Log.info("Loaded entity configuration: ", entity_config.config_id)
 
-func get_by_name(entity_name : String):
+func get_by_name(entity_name : String) -> EntityConfig:
 	return _entity_configs.get(entity_name)
 
 func get_by_type(type : EnumTypes.EntityType) -> Array[EntityConfig]:

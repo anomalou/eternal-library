@@ -1,7 +1,0 @@
-Redot Engine LTS v26.1.stable.official.a3e85316f (2026-01-29 02:31:42 UTC) - https://redotengine.org
-OpenGL API 3.3.0 NVIDIA 470.256.02 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce GT 710
-
-[2026-03-05 15:37:36][INFO][utils] - Loaded resource res://Resources/Galleries/general.tres
-[2026-03-05 15:37:56][INFO][log] - Loaded gallery data: 0
-[2026-03-05 15:38:37][INFO][game_env] - New game session is set up as global env property
-[2026-03-05 15:38:48][INFO][game_session] - Entity manager initialized

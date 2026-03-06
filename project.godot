@@ -19,8 +19,10 @@ config/icon="res://icon.svg"
 
 GameEnv="*res://Scripts/game_env.gd"
 Signals="*res://Scripts/Utils/signals.gd"
+ConfigurationManager="*res://Scripts/Managers/configuration_manager.gd"
 GalleryConfigManager="*res://Scripts/Managers/gallery_config_manager.gd"
 EntityConfigManager="*res://Scripts/Managers/entity_config_manager.gd"
+SpawnTableManager="*res://Scripts/Managers/spawn_table_manager.gd"
 
 [debug]
 

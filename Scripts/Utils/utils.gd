@@ -24,11 +24,11 @@ static func get_object_name(id : String) -> String:
 	else:
 		return id
 
-static func load_configuration_resources(dir_path : String) -> Array[Resource]:
+static func load_configuration_resources(dir_path : String) -> Array[Config]:
 	if not dir_path.ends_with("/"):
 		dir_path = dir_path + "/"
 	
-	var resources : Array[Resource] = []
+	var resources : Array[Config] = []
 	
 	var dir = DirAccess.open(dir_path)
 	if not dir:
@@ -42,7 +42,7 @@ static func load_configuration_resources(dir_path : String) -> Array[Resource]:
 		if file_name.ends_with(".tres") or file_name.ends_with(".res"):
 			var full_path = dir_path + file_name
 			var resource = ResourceLoader.load(full_path)
-			if resource:
+			if resource and resource is Config:
 				Log.info("Loaded resource ", full_path)
 				resources.append(resource)
 		
