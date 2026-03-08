@@ -1,15 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfr681nh8onpb"]
+[gd_scene load_steps=5 format=3 uid="uid://bfr681nh8onpb"]
 
 [ext_resource type="Script" uid="uid://b2nvt4aaiyo50" path="res://Scripts/Debug/test_control.gd" id="1_um8lo"]
 [ext_resource type="Environment" uid="uid://ccjcp7s2720r2" path="res://Configurations/player_env.tres" id="2_x3d5u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a5hps"]
 radius = 1.5
-height = 6.0
+height = 6.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x3d5u"]
+radius = 1.5
+height = 6.5
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 512
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_um8lo")
 speed = 15.0
 mouse_sens = 0.005
@@ -18,6 +22,16 @@ mouse_sens = 0.005
 shape = SubResource("CapsuleShape3D_a5hps")
 
 [node name="FPV" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+cull_mask = 1048559
 environment = ExtResource("2_x3d5u")
 current = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="FPV"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+omni_range = 100.0
+omni_attenuation = 0.7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_x3d5u")

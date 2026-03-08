@@ -1,4 +1,4 @@
-extends Entity
+extends GameObject
 class_name Gallery
 
 var type : EnumTypes.GalleryType

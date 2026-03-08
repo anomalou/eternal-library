@@ -13,7 +13,6 @@ func _ready() -> void:
 func _create_spawnpoint():
 	var spawnpoint = _spawnpoint.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE) as SpawnPoint
 	spawnpoint.name = "Spawnpoint" + str(get_child_count())
-	spawnpoint.gizmo_extents = 1.0
 	self.add_child(spawnpoint, InternalMode.INTERNAL_MODE_DISABLED)
 	spawnpoint.owner = get_tree().edited_scene_root
 	Log.info("Spawnpoint created")

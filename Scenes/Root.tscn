@@ -6,7 +6,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kqog5"]
 shader = ExtResource("4_oss8w")
-shader_parameter/vignette_intensity = 0.7
+shader_parameter/vignette_intensity = 0.8
+shader_parameter/vignette_radius = 0.4
 shader_parameter/vignette_color = Vector4(0, 0, 0, 1)
 script = ExtResource("3_sxhdm")
 metadata/_custom_type_script = "uid://dk1u4q6a7iphx"

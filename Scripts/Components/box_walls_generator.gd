@@ -2,8 +2,6 @@ extends WallGenerator
 class_name BoxWallsGenerator
 
 @export var walls_material : Material
-@export var wall_texture : Texture
-@export var texture_scale : float = 8.0
 
 func generate(height : float, length : float, spacing : float, direction : Vector3):
 	var basis_angle = direction.signed_angle_to(Vector3.RIGHT, Vector3.DOWN)
@@ -17,8 +15,10 @@ func _generate_plate(height : float, length : float, angle : float = 0.0, offset
 	var vertices = PackedVector3Array()
 	var indices = PackedInt32Array()
 	var uv = PackedVector2Array()
+	var normals = PackedVector3Array()
 	
 	var center = Vector3(offset, height * 0.5, 0)
+	var normal = Vector3.LEFT
 	
 	vertices.append(Vector3(center.x, height, center.z - length * 0.5))
 	vertices.append(Vector3(center.x, 0, center.z - length * 0.5))
@@ -28,27 +28,28 @@ func _generate_plate(height : float, length : float, angle : float = 0.0, offset
 	indices.append_array([0, 2, 1])
 	indices.append_array([0, 3, 2])
 	
-	var uv_x = 1.0
-	var uv_y = 1.0
-	if wall_texture and wall_texture.has_method("get_size"):
-		var texture_size = wall_texture.get_size() as Vector2
-		uv_x = length / texture_size.x * texture_scale
-		uv_y = height / texture_size.y * texture_scale
+	normals.append_array(range(4).map(func(_i): return normal))
 	
-	uv.append(Vector2(0, uv_y))
+	#var uv_x = 1.0
+	#var uv_y = 1.0
+	#if wall_texture and wall_texture.has_method("get_size"):
+		#var texture_size = wall_texture.get_size() as Vector2
+		#uv_x = length / texture_size.x * texture_scale
+		#uv_y = height / texture_size.y * texture_scale
+	
+	uv.append(Vector2(0, 1))
 	uv.append(Vector2(0, 0))
-	uv.append(Vector2(uv_x, 0))
-	uv.append(Vector2(uv_x, uv_y))
+	uv.append(Vector2(1, 0))
+	uv.append(Vector2(1, 1))
 	
 	var material = walls_material.duplicate(true)
-	if material is TextureShader:
-		material.set_texture(wall_texture)
 	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)
 	array.set(Mesh.ARRAY_VERTEX, vertices)
 	array.set(Mesh.ARRAY_INDEX, indices)
 	array.set(Mesh.ARRAY_TEX_UV, uv)
+	array.set(Mesh.ARRAY_NORMAL, normals)
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)
 	mesh.surface_set_material(0, material)
 	

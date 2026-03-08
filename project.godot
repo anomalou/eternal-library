@@ -29,6 +29,10 @@ SpawnTableManager="*res://Scripts/Managers/spawn_table_manager.gd"
 file_logging/enable_file_logging=true
 file_logging/log_path="res://Builds/Logs/debugs.log"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 left={
@@ -56,8 +60,7 @@ down={
 
 3d_physics/layer_1="wall"
 3d_physics/layer_2="floor"
-3d_physics/layer_3="bookshell"
-3d_physics/layer_4="entrance"
+3d_physics/layer_3="entity"
 3d_physics/layer_9="enemy"
 3d_physics/layer_10="player"
 

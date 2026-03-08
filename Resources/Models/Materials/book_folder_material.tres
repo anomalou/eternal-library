@@ -1,0 +1,24 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://y4pufyw3lkfs"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eqlgi"]
+noise_type = 0
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g523e"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_eqlgi")
+
+[resource]
+albedo_color = Color(1.2032688e-06, 0.6076948, 0.1713534, 1)
+albedo_texture = SubResource("NoiseTexture2D_g523e")
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+texture_filter = 0
+grow_amount = 0.34
+proximity_fade_distance = 717.86
+distance_fade_mode = 3
+distance_fade_max_distance = 0.0

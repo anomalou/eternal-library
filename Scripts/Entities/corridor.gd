@@ -1,4 +1,4 @@
-extends Entity
+extends GameObject
 class_name Corridor
 
 var _direction : Vector3 = Vector3.RIGHT

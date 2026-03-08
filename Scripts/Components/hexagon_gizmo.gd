@@ -22,7 +22,7 @@ func _draw_gizmo():
 	if not Engine.is_editor_hint():
 		return
 	
-	var _config = load(Constants.get_value("hexagon_config")) as HexagonConfig
+	var _config = load("res://Resources/Configurations/hexagon.tres") as HexagonConfig
 	_size = _config.size
 	_height = _config.height
 	

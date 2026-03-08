@@ -8,8 +8,10 @@ func generate(width : float, length : float, height : float, direction : Vector3
 	
 	var verticies = PackedVector3Array()
 	var indices = PackedInt32Array()
+	var normals = PackedVector3Array()
 	
 	var angle = direction.signed_angle_to(Vector3.RIGHT, Vector3.DOWN)
+	var normal = Vector3.DOWN
 	
 	verticies.append(Vector3(width / 2, height, -length / 2))
 	verticies.append(Vector3(-width / 2, height, -length / 2))
@@ -19,11 +21,14 @@ func generate(width : float, length : float, height : float, direction : Vector3
 	indices.append_array([0, 1, 2])
 	indices.append_array([0, 2, 3])
 	
+	normals.append_array(range(4).map(func(_i): return normal))
+	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)
 	
 	array.set(Mesh.ARRAY_VERTEX, verticies)
 	array.set(Mesh.ARRAY_INDEX, indices)
+	array.set(Mesh.ARRAY_NORMAL, normals)
 	
 	var material = ceil_material.duplicate(true)
 	

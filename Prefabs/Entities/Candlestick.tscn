@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://jreq4l1e03ly"]
+
+[ext_resource type="PackedScene" uid="uid://cv15ph55707ks" path="res://Resources/Models/candlestick.glb" id="1_6fnlb"]
+[ext_resource type="PackedScene" uid="uid://g7aytf38b7ux" path="res://Prefabs/Effects/fire.tscn" id="2_3jcx5"]
+
+[node name="Candlestick" type="Node3D"]
+
+[node name="Mesh" parent="." instance=ExtResource("1_6fnlb")]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.7052555, 0)
+light_color = Color(0.8, 0.4, 0, 1)
+light_energy = 5.0
+shadow_enabled = true
+omni_range = 36.0
+
+[node name="Fire" parent="." instance=ExtResource("2_3jcx5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.2426095, 0)
+visibility_range_fade_mode = 2

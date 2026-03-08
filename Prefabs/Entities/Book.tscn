@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://gtr4c33acjus"]
+
+[ext_resource type="PackedScene" uid="uid://dtvhecfn6nxsd" path="res://Resources/Models/book.glb" id="1_t12qb"]
+
+[node name="Book" type="Node3D"]
+
+[node name="Mesh" parent="." instance=ExtResource("1_t12qb")]

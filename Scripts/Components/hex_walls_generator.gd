@@ -1,8 +1,7 @@
 extends WallGenerator
 class_name HexWallsGenerator
 
-@export var wall_shader : ShaderMaterial
-@export var wall_texture : Texture
+@export var wall_shader : Material
 
 var _trfm : HexCoord
 var _height : float = 32.0
@@ -53,9 +52,12 @@ func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) 
 	var vertices = PackedVector3Array()
 	var indices = PackedInt32Array()
 	var uv = PackedVector2Array()
+	var normals = PackedVector3Array()
 	
 	var angle1 = deg_to_rad(60 * direction)
 	var angle2 = deg_to_rad(60 * (direction + 1))
+	var mid_angle = deg_to_rad(60 * direction + 30)
+	var normal = Vector3(-cos(mid_angle), 0, -sin(mid_angle)).normalized()
 	
 	vertices.append(Vector3(_trfm.size * cos(angle1), 0.0, _trfm.size * sin(angle1)))
 	vertices.append(Vector3(_trfm.size * cos(angle1), _height, _trfm.size * sin(angle1)))
@@ -70,17 +72,18 @@ func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) 
 	uv.append(Vector2(1, 0))
 	uv.append(Vector2(1, 1))
 	
+	normals.append_array(range(4).map(func(_i): return normal))
+	
 	var material = wall_shader.duplicate(true)
 	if material is ColorShader:
 		material.set_color(color)
-	elif material is TextureShader:
-		material.set_texture(wall_texture)
 	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)
 	array.set(Mesh.ARRAY_VERTEX, vertices)
 	array.set(Mesh.ARRAY_INDEX, indices)
 	array.set(Mesh.ARRAY_TEX_UV, uv)
+	array.set(Mesh.ARRAY_NORMAL, normals)
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)
 	mesh.surface_set_material(0, material)
 	

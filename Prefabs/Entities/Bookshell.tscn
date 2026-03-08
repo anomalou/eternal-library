@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhw2piv3t5v73"]
+
+[ext_resource type="PackedScene" uid="uid://vg2ejj64sqto" path="res://Resources/Models/bookshell_1.glb" id="1_5wlwa"]
+[ext_resource type="Script" uid="uid://x6cltv0xa8k" path="res://Scripts/Entities/bookshell.gd" id="1_unjhw"]
+[ext_resource type="PackedScene" uid="uid://2kswcqthc7q1" path="res://Resources/Models/bookshell_2.glb" id="2_1to21"]
+
+[node name="Bookshell" type="Node3D"]
+script = ExtResource("1_unjhw")
+
+[node name="bookshell_1" parent="." instance=ExtResource("1_5wlwa")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="bookshell_2" parent="." instance=ExtResource("2_1to21")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 11.5, 0)

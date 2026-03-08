@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode cull_disabled, unshaded;
+render_mode cull_back, blend_mix;
 
 uniform vec4 color = vec4(1, 1, 1, 1);
 

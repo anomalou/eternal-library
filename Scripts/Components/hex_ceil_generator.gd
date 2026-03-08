@@ -22,8 +22,12 @@ func _generate_hex(material : Material, height : float, color : Color = Color.WH
 	
 	var vertices = PackedVector3Array()
 	var indices = PackedInt32Array()
+	var normals = PackedVector3Array()
+	
+	var normal = Vector3.UP if clockwise else Vector3.DOWN
 	
 	vertices.append(Vector3(0, height, 0))
+	normals.append(normal)
 	
 	for i in range(7):
 		var angle = deg_to_rad(60 * i)
@@ -32,6 +36,7 @@ func _generate_hex(material : Material, height : float, color : Color = Color.WH
 			height,
 			_position.size * sin(angle)
 		))
+		normals.append(normal)
 	
 	for i in range(6):
 		if clockwise:
@@ -47,10 +52,10 @@ func _generate_hex(material : Material, height : float, color : Color = Color.WH
 	array.resize(Mesh.ARRAY_MAX)
 	array[Mesh.ARRAY_VERTEX] = vertices
 	array[Mesh.ARRAY_INDEX] = indices
+	array[Mesh.ARRAY_NORMAL] = normals
 	
 	var _material = material.duplicate(true) as ColorShader
 	_material.set_color(color)
-	
 	
 	var mesh = ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)

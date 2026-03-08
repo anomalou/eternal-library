@@ -12,13 +12,13 @@
 script = ExtResource("3_drp33")
 metadata/_custom_type_script = "uid://d0f0rdolbfsro"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apm5d"]
-shading_mode = 0
-albedo_color = Color(0, 0.7294118, 0.9764706, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wca3y"]
+albedo_color = Color(0, 0.8803151, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_drp33"]
-script = ExtResource("3_drp33")
-metadata/_custom_type_script = "uid://d0f0rdolbfsro"
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aj18s"]
+albedo_texture = ExtResource("7_wca3y")
+uv1_scale = Vector3(1, 4, 1)
+texture_filter = 0
 
 [node name="Corridor" type="Node3D"]
 script = ExtResource("1_vdkqu")
@@ -28,8 +28,8 @@ floor_material = SubResource("ShaderMaterial_wca3y")
 floor_texture = ExtResource("3_apm5d")
 
 [node name="BoxCeilGenerator" parent="." instance=ExtResource("4_25di1")]
-ceil_material = SubResource("StandardMaterial3D_apm5d")
+visible = false
+ceil_material = SubResource("StandardMaterial3D_wca3y")
 
 [node name="BoxWallsGenerator" parent="." instance=ExtResource("3_skugv")]
-walls_material = SubResource("ShaderMaterial_drp33")
-wall_texture = ExtResource("7_wca3y")
+walls_material = SubResource("StandardMaterial3D_aj18s")

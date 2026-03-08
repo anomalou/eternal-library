@@ -15,13 +15,16 @@ func _generate_mesh(width : float, length : float, direction : Vector3) -> MeshI
 	var verticies = PackedVector3Array()
 	var indices = PackedInt32Array()
 	var uv = PackedVector2Array()
+	var normals = PackedVector3Array()
 	
 	var angle = direction.signed_angle_to(Vector3.RIGHT, Vector3.DOWN)
+	var normal = Vector3.UP
 	
 	verticies.append(Vector3(width * 0.5, 0, -length * 0.5))
 	verticies.append(Vector3(-width * 0.5, 0, -length * 0.5))
 	verticies.append(Vector3(-width * 0.5, 0, length * 0.5))
 	verticies.append(Vector3(width * 0.5, 0, length * 0.5))
+	normals.append_array(range(4).map(func(_i): return normal))
 	
 	indices.append_array([2, 1, 0])
 	indices.append_array([3, 2, 0])
@@ -45,6 +48,7 @@ func _generate_mesh(width : float, length : float, direction : Vector3) -> MeshI
 	array.set(Mesh.ARRAY_VERTEX, verticies)
 	array.set(Mesh.ARRAY_INDEX, indices)
 	array.set(Mesh.ARRAY_TEX_UV, uv)
+	array.set(Mesh.ARRAY_NORMAL, normals)
 	
 	var material = floor_material.duplicate(true)
 	if material is TextureShader:

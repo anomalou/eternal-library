@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds30xuk17cq8"]
+
+[ext_resource type="PackedScene" uid="uid://101xl5nldog0" path="res://Resources/Models/table.glb" id="1_f16ah"]
+
+[node name="Table" type="Node3D"]
+
+[node name="Mesh" parent="." instance=ExtResource("1_f16ah")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)

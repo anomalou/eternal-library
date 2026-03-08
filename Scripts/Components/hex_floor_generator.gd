@@ -24,12 +24,15 @@ func _generate_hex(material : Material, depth : int = 0, color : Color = Color.W
 	var vertices = PackedVector3Array()
 	var uv = PackedVector2Array()
 	var indices = PackedInt32Array()
+	var normals = PackedVector3Array()
 	
 	var rnd = _seed_manager.get_temp_rnd(id)
 	var rnd_texture_diff = rnd.randf() * PI
+	var normal = Vector3.UP if clockwise else Vector3.DOWN
 	
 	vertices.append(Vector3(0, depth, 0))
 	uv.append(Vector2.ZERO)
+	normals.append(normal)
 	
 	for i in range(7):
 		var angle = deg_to_rad(60 * i)
@@ -39,6 +42,7 @@ func _generate_hex(material : Material, depth : int = 0, color : Color = Color.W
 			_position.size * sin(angle)
 		))
 		uv.append(Vector2(cos(angle + rnd_texture_diff), sin(angle + rnd_texture_diff)))
+		normals.append(normal)
 	
 	for i in range(6):
 		if clockwise:
@@ -55,6 +59,7 @@ func _generate_hex(material : Material, depth : int = 0, color : Color = Color.W
 	array[Mesh.ARRAY_VERTEX] = vertices
 	array[Mesh.ARRAY_INDEX] = indices
 	array[Mesh.ARRAY_TEX_UV] = uv
+	array[Mesh.ARRAY_NORMAL] = normals
 	
 	var _material = material.duplicate(true)
 	if _material is ColorShader:
