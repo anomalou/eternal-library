@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_6j6cn")
-spawn_list = Dictionary[String, int]({
-"bookshell_general": 10
+spawn_list = Dictionary[int, String]({
+1: "bookshell_general"
 })

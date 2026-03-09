@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://4xs33jbrug70"]
+
+[ext_resource type="Shader" uid="uid://b3yv8pqm0jvjv" path="res://Shaders/color.gdshader" id="2_pxpy7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("2_pxpy7")
+shader_parameter/color = Color(0.43442285, 0.26481897, 0.13032258, 1)
+shader_parameter/noise_strength = 0.1
+shader_parameter/noise_seed = 2.0
+shader_parameter/pixel_size = 8.0

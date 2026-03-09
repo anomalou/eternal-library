@@ -6,12 +6,11 @@ frequency = 1.0
 domain_warp_type = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ns80t"]
-width = 128
-height = 1
+width = 1
 noise = SubResource("FastNoiseLite_qdwxh")
+normalize = false
 
 [resource]
 albedo_texture = SubResource("NoiseTexture2D_ns80t")
 uv1_scale = Vector3(0.35, 0.35, 0.35)
-uv1_triplanar = true
 texture_filter = 0

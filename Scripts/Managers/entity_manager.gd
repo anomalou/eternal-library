@@ -37,3 +37,25 @@ func create_corridor(_id : String, g1 : Vector2i, g2 : Vector2i) -> Corridor:
 	corridor.generate(_id, _hexagon_config.height, hex_g1, hex_g2)
 	
 	return corridor
+
+func create_entity(_id : String, entity_name : String, parent : Node3D) -> Entity:
+	var config = EntityConfigManager.get_by_name(entity_name)
+	var entity_prefab = config.prefab
+	var entity = entity_prefab.instantiate() as Entity
+	parent.add_child(entity)
+	entity.set_deferred("owner", parent)
+	entity.name = entity_name
+	_entity_cache.set(_id, entity)
+	
+	entity.generate(_id)
+	
+	return entity
+
+func destroy_entity(_id : String):
+	if _entity_cache.has(_id):
+		var entity : Node3D = _entity_cache.get(_id)
+		_entity_cache.erase(_id)
+		entity.queue_free()
+		Log.info(_id, " freed")
+	else:
+		Log.info(_id, " not exists")

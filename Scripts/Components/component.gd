@@ -6,6 +6,9 @@ var _seed_manager : SeedManager
 var _entity_manager : EntityManager
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	var _session = GameEnv.get_current_session() as GameSession
 	if _session:
 		_seed_manager = _session.seed_manager

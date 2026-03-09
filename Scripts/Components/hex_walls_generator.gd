@@ -29,21 +29,21 @@ func generate(required_entrancies : Array[EnumTypes.Direction]):
 			wall.set_deferred("owner", self)
 			_wall_cache.set(dir, wall)
 
-func regenerate(required_entrancies : Array[EnumTypes.Direction]):
-	self._required_entrancies = required_entrancies
-	
-	var colors = [Color.DARK_RED, Color.DARK_GREEN, Color.DARK_BLUE, Color.DARK_GOLDENROD, Color.DARK_MAGENTA, Color.DARK_CYAN]
-	var directions = EnumTypes.Direction.values()
-	for dir in directions:
-		if not _wall_cache.has(dir) and not required_entrancies.has(dir):
-			var wall : MeshInstance3D = _create_wall(dir, colors.get(dir))
-			self.add_child(wall)
-			wall.set_deferred("owner", self)
-			_wall_cache.set(dir, wall)
-		elif _wall_cache.has(dir) and required_entrancies.has(dir):
-			var wall : MeshInstance3D = _wall_cache.get(dir)
-			_wall_cache.erase(dir)
-			wall.queue_free()
+#func regenerate(required_entrancies : Array[EnumTypes.Direction]):
+	#self._required_entrancies = required_entrancies
+	#
+	#var colors = [Color.DARK_RED, Color.DARK_GREEN, Color.DARK_BLUE, Color.DARK_GOLDENROD, Color.DARK_MAGENTA, Color.DARK_CYAN]
+	#var directions = EnumTypes.Direction.values()
+	#for dir in directions:
+		#if not _wall_cache.has(dir) and not required_entrancies.has(dir):
+			#var wall : MeshInstance3D = _create_wall(dir, colors.get(dir))
+			#self.add_child(wall)
+			#wall.set_deferred("owner", self)
+			#_wall_cache.set(dir, wall)
+		#elif _wall_cache.has(dir) and required_entrancies.has(dir):
+			#var wall : MeshInstance3D = _wall_cache.get(dir)
+			#_wall_cache.erase(dir)
+			#wall.queue_free()
 
 func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) -> MeshInstance3D:
 	var wall : MeshInstance3D = MeshInstance3D.new()

@@ -62,16 +62,18 @@ func invert() -> HexCoord:
 	return HexCoord.new(-q, -y, -r)
 
 static func min(h1 : HexCoord, h2 : HexCoord) -> HexCoord:
-	if Vector3i(h1.q, h1.y, h1.r).length_squared() < Vector3i(h2.q, h2.y, h2.r).length_squared():
-		return h1
-	else:
-		return h2
+	if h1.q != h2.q:
+		return h1 if h1.q < h2.q else h2
+	if h1.y != h2.y:
+		return h1 if h1.y < h2.y else h2
+	return h1 if h1.r < h2.r else h2
 
 static func max(h1 : HexCoord, h2 : HexCoord):
-	if Vector3i(h1.q, h1.y, h1.r).length_squared() < Vector3i(h2.q, h2.y, h2.r).length_squared():
-		return h2
-	else:
-		return h1
+	if h1.q != h2.q:
+		return h1 if h1.q > h2.q else h2
+	if h1.y != h2.y:
+		return h1 if h1.y > h2.y else h2
+	return h1 if h1.r > h2.r else h2
 
 func to_str():
 	return "({x}, {y}, {z})".format({"x":q, "y":y, "z":r})

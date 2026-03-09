@@ -7,7 +7,6 @@ var hex_transform : HexagonTransform
 var _spawn_entity_manager : SpawnEntityManager
 var _walls_generator : HexWallsGenerator
 var _floor_generator : HexFloorGenerator
-var _ceil_generator : HexCeilGenerator
 
 func _ready() -> void:
 	super()
@@ -15,7 +14,6 @@ func _ready() -> void:
 	self._spawn_entity_manager = $SpawnEntityManager as SpawnEntityManager
 	self._walls_generator = $WallsGenerator as HexWallsGenerator
 	self._floor_generator = $FloorGenerator as HexFloorGenerator
-	self._ceil_generator = $CeilGenerator as HexCeilGenerator
 	
 
 func _apply_position(hex_position : HexCoord):
@@ -24,7 +22,6 @@ func _apply_position(hex_position : HexCoord):
 	_walls_generator.setup(walls_id, hex_transform.hex_position, hex_transform.height)
 	var floor_id = _seed_manager.generate_object_id("floor", "", id)
 	_floor_generator.setup(floor_id, hex_transform.hex_position)
-	_ceil_generator.setup(hex_transform.hex_position, hex_transform.height)
 	self.position = hex_transform.hex_position.global_coord
 	
 func generate(_id : String, hex_position : HexCoord, entrances : Array[EnumTypes.Direction] = []):
@@ -32,12 +29,13 @@ func generate(_id : String, hex_position : HexCoord, entrances : Array[EnumTypes
 	_apply_position(hex_position)
 	self._walls_generator.generate(entrances)
 	self._floor_generator.generate()
-	self._ceil_generator.generate()
+	var spawpoints_id = _seed_manager.generate_object_id("spawnpoints", "", id)
+	self._spawn_entity_manager.generate(spawpoints_id)
 	Log.info("Gallery ", hex_transform.hex_position.to_str(), " is ready with id = ", _id)
 
-func regenerate(entrances : Array[EnumTypes.Direction]):
-	if not id or id.is_empty():
-		push_error("Cannot regenerate gallery that not generated yet")
-		return
-	self._walls_generator.regenerate(entrances)
-	Log.info("Gallery ", hex_transform.hex_position.to_str(), " regenerated")
+#func regenerate(entrances : Array[EnumTypes.Direction]):
+	#if not id or id.is_empty():
+		#push_error("Cannot regenerate gallery that not generated yet")
+		#return
+	#self._walls_generator.regenerate(entrances)
+	#Log.info("Gallery ", hex_transform.hex_position.to_str(), " regenerated")

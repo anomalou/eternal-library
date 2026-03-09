@@ -1,7 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://gtr4c33acjus"]
+[gd_scene load_steps=3 format=3 uid="uid://gtr4c33acjus"]
 
 [ext_resource type="PackedScene" uid="uid://dtvhecfn6nxsd" path="res://Resources/Models/book.glb" id="1_t12qb"]
 
+[sub_resource type="SystemFont" id="SystemFont_klgr0"]
+
 [node name="Book" type="Node3D"]
 
+[node name="Title" type="Label3D" parent="."]
+transform = Transform3D(-6.556708e-08, -1.5, 0, 1.5, -6.556708e-08, 0, 0, 0, 1.5, 0, 1.25, 1.01)
+shaded = true
+texture_filter = 0
+text = "Title"
+font = SubResource("SystemFont_klgr0")
+uppercase = true
+
 [node name="Mesh" parent="." instance=ExtResource("1_t12qb")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)

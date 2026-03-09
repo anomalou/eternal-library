@@ -1,68 +1,25 @@
-[gd_scene load_steps=24 format=3 uid="uid://bed5rglkmc220"]
+[gd_scene load_steps=14 format=3 uid="uid://bed5rglkmc220"]
 
 [ext_resource type="Script" uid="uid://dvvp722mn1ybu" path="res://Scripts/Entities/gallery.gd" id="1_2iksw"]
 [ext_resource type="PackedScene" uid="uid://vmtqj2aw7t77" path="res://Components/SpawnPointManager.tscn" id="2_o8mrs"]
 [ext_resource type="PackedScene" uid="uid://bpqcvrwuxsvb2" path="res://Components/SpawnPoint.tscn" id="3_0feh5"]
 [ext_resource type="PackedScene" uid="uid://ksabwyoarwli" path="res://Components/HexagonGizmo.tscn" id="3_r0hsk"]
-[ext_resource type="PackedScene" uid="uid://bhw2piv3t5v73" path="res://Prefabs/Entities/Bookshell.tscn" id="4_obrm2"]
 [ext_resource type="PackedScene" uid="uid://cocrr0tn5562q" path="res://Components/HexagonTransform.tscn" id="4_uq37l"]
 [ext_resource type="PackedScene" uid="uid://ctl0et6b6xca4" path="res://Components/HexWallsGenerator.tscn" id="5_6csmm"]
-[ext_resource type="PackedScene" uid="uid://jreq4l1e03ly" path="res://Prefabs/Entities/Candlestick.tscn" id="5_obrm2"]
-[ext_resource type="PackedScene" uid="uid://ds30xuk17cq8" path="res://Prefabs/Entities/Table.tscn" id="6_4j5gm"]
 [ext_resource type="Script" uid="uid://d0f0rdolbfsro" path="res://Shaders/texture_shader.gd" id="6_6csmm"]
 [ext_resource type="PackedScene" uid="uid://cmuj02u8wt11k" path="res://Components/HexFloorGenerator.tscn" id="6_k7idi"]
-[ext_resource type="Script" uid="uid://d1oafoin5mdbf" path="res://Shaders/color_shader.gd" id="6_o8mrs"]
 [ext_resource type="Texture2D" uid="uid://cf0t2vfshwuf3" path="res://Resources/Textures/planks.png" id="7_uq37l"]
-[ext_resource type="PackedScene" uid="uid://cm6p5h28b3rey" path="res://Components/HexCeilGenerator.tscn" id="8_r0hsk"]
 [ext_resource type="Texture2D" uid="uid://bcv2ix18ydagr" path="res://Resources/Textures/wallpaper.png" id="11_k7idi"]
+[ext_resource type="PackedScene" uid="uid://b3n1auxjbjdh6" path="res://Prefabs/Effects/dust.tscn" id="11_xnomx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k7idi"]
 script = ExtResource("6_6csmm")
 metadata/_custom_type_script = "uid://d0f0rdolbfsro"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uq37l"]
-script = ExtResource("6_o8mrs")
-metadata/_custom_type_script = "uid://d1oafoin5mdbf"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4j5gm"]
 albedo_texture = ExtResource("11_k7idi")
 uv1_scale = Vector3(1, 4, 1)
 texture_filter = 0
-
-[sub_resource type="Curve" id="Curve_4j5gm"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_1dats"]
-curve = SubResource("Curve_4j5gm")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vf364"]
-emission_shape = 3
-emission_box_extents = Vector3(32, 64, 32)
-angle_min = -89.99999
-angle_max = 90.000015
-direction = Vector3(0, 1, 0)
-spread = 180.0
-initial_velocity_min = 0.099999994
-initial_velocity_max = 0.5
-gravity = Vector3(0, -0.2, 0)
-scale_min = 0.19999999
-scale_max = 1.5
-alpha_curve = SubResource("CurveTexture_1dats")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dats"]
-transparency = 1
-vertex_color_use_as_albedo = true
-texture_filter = 0
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="QuadMesh" id="QuadMesh_06auj"]
-material = SubResource("StandardMaterial3D_1dats")
-size = Vector2(0.2, 0.2)
 
 [node name="Gallery" type="Node3D"]
 script = ExtResource("1_2iksw")
@@ -70,34 +27,25 @@ script = ExtResource("1_2iksw")
 [node name="SpawnEntityManager" parent="." instance=ExtResource("2_o8mrs")]
 
 [node name="Spawnpoint0" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(0.50000155, 0, -0.86602443, 0, 1, 0, 0.86602443, 0, 0.50000155, 22.083914, 0, -12.750208)
+spawntable = "firesources"
 
 [node name="Spawnpoint1" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25.5)
-
-[node name="Bookshell" parent="SpawnEntityManager/Spawnpoint1" instance=ExtResource("4_obrm2")]
+spawntable = "bookshells"
 
 [node name="Spawnpoint2" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, -22.083649, 0, -12.749999)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 4.7683716e-06, 0, 25.5)
+spawntable = "bookshells"
 
 [node name="Spawnpoint3" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, -22.083647, 0, 12.750003)
-
-[node name="Spawnpoint4" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 4.7683716e-06, 0, 25.5)
-
-[node name="Spawnpoint5" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(-0.49999985, 0, -0.8660255, 0, 1, 0, 0.8660255, 0, -0.49999985, 22.08365, 0, 12.749995)
-
-[node name="Spawnpoint6" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-
-[node name="Candlestick" parent="SpawnEntityManager/Spawnpoint6" instance=ExtResource("5_obrm2")]
-
-[node name="Spawnpoint7" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(0.9999772, 0, 1.7484156e-07, 0, 1, 0, -1.7484156e-07, 0, 0.9999772, 0, 0, 10)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -10)
+spawntable = "tables"
 invert_rotate = true
 
-[node name="Table" parent="SpawnEntityManager/Spawnpoint7" instance=ExtResource("6_4j5gm")]
+[node name="Spawnpoint4" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
+transform = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 2.3841858e-06, 0, 10)
+spawntable = "tables"
+invert_rotate = true
 
 [node name="HexagonGizmo" parent="." instance=ExtResource("3_r0hsk")]
 mesh = null
@@ -109,19 +57,8 @@ gizmo_visible = false
 floor_material = SubResource("ShaderMaterial_k7idi")
 floor_texture = ExtResource("7_uq37l")
 
-[node name="CeilGenerator" parent="." instance=ExtResource("8_r0hsk")]
-visible = false
-ceil_material = SubResource("ShaderMaterial_uq37l")
-
 [node name="WallsGenerator" parent="." instance=ExtResource("5_6csmm")]
 wall_shader = SubResource("StandardMaterial3D_4j5gm")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="Dust" parent="." instance=ExtResource("11_xnomx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 64, 0)
-amount = 200
-lifetime = 4.0
-preprocess = 4.0
-fixed_fps = 0
-visibility_aabb = AABB(-32, -64, -32, 64, 15, 64)
-process_material = SubResource("ParticleProcessMaterial_vf364")
-draw_pass_1 = SubResource("QuadMesh_06auj")

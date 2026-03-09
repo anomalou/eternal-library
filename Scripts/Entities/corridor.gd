@@ -6,12 +6,10 @@ var _width : float
 var _length : float
 
 var _floor_generator : BoxFloorGenerator
-var _ceil_generator : BoxCeilGenerator
 var _walls_ganerator : BoxWallsGenerator
 
 func _ready() -> void:
 	self._floor_generator = $BoxFloorGenerator
-	self._ceil_generator = $BoxCeilGenerator
 	self._walls_ganerator = $BoxWallsGenerator
 
 func _apply_position(g1 : HexCoord, g2 : HexCoord):
@@ -28,7 +26,6 @@ func generate(_id : String, height : float, g1 : HexCoord, g2 : HexCoord):
 	self.id = _id
 	_apply_position(g1, g2)
 	_floor_generator.generate(self._width, self._length, self._direction)
-	_ceil_generator.generate(self._width, self._length, height, self._direction)
 	_walls_ganerator.generate(height, self._length, self._width, self._direction)
 	Log.info("Corridor ", id, " is ready between ", g1.to_str(), " and ", g2.to_str())
 	

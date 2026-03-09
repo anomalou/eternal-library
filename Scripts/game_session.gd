@@ -19,7 +19,7 @@ func init(config : SessionConfig):
 
 # call only when game session exists on game scene
 func generate_world():
-	world_generator.generate_in_range(HexCoord.new(), 3)
+	world_generator.generate_in_range(HexCoord.new(), 1)
 
 func create_player():
 	player_manager.spawn_player()

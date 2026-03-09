@@ -4,7 +4,7 @@ class_name SpawnPoint
 
 # Only use for marking spawn points, and base transform for entities
 
-@export var allowed_spawnlist : Dictionary[String, int] # spawn_table_id, select_weight
+@export var spawntable : String
 @export var auto_rotate : bool = true
 @export var invert_rotate : bool = false
 @export_placeholder("None") var spawn_group : String

@@ -39,14 +39,14 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"Material.001": {
+"Material": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://Resources/Models/Materials/bookshell_material.tres",
 "use_external/path": "uid://x6fs6roqgjpg"
 }
 },
 "nodes": {
-"PATH:Cube": {
+"PATH:Cube_002": {
 "generate/physics": true,
 "physics/layer": 4,
 "physics/mask": 768,

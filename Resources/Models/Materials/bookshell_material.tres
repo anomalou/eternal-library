@@ -1,4 +1,11 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://x6fs6roqgjpg"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://x6fs6roqgjpg"]
+
+[ext_resource type="Shader" uid="uid://b3yv8pqm0jvjv" path="res://Shaders/color.gdshader" id="2_j5t07"]
 
 [resource]
-texture_filter = 0
+render_priority = 0
+shader = ExtResource("2_j5t07")
+shader_parameter/color = Color(0.45467234, 0.29128775, 0.13235444, 1)
+shader_parameter/noise_strength = 0.1
+shader_parameter/noise_seed = 1.0
+shader_parameter/pixel_size = 8.0

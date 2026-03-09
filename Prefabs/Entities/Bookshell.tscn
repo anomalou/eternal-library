@@ -1,14 +1,235 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhw2piv3t5v73"]
 
-[ext_resource type="PackedScene" uid="uid://vg2ejj64sqto" path="res://Resources/Models/bookshell_1.glb" id="1_5wlwa"]
 [ext_resource type="Script" uid="uid://x6cltv0xa8k" path="res://Scripts/Entities/bookshell.gd" id="1_unjhw"]
-[ext_resource type="PackedScene" uid="uid://2kswcqthc7q1" path="res://Resources/Models/bookshell_2.glb" id="2_1to21"]
+[ext_resource type="PackedScene" uid="uid://cy2q170rso7yc" path="res://Resources/Models/bookshell.glb" id="2_1to21"]
+[ext_resource type="PackedScene" uid="uid://gtr4c33acjus" path="res://Prefabs/Entities/Book.tscn" id="3_unjhw"]
 
 [node name="Bookshell" type="Node3D"]
 script = ExtResource("1_unjhw")
 
-[node name="bookshell_1" parent="." instance=ExtResource("1_5wlwa")]
+[node name="Mesh" parent="." instance=ExtResource("2_1to21")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 
-[node name="bookshell_2" parent="." instance=ExtResource("2_1to21")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 11.5, 0)
+[node name="Shell" type="Node3D" parent="."]
+
+[node name="Book" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 1.5, 0)
+
+[node name="Book2" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1.5, 0)
+
+[node name="Book3" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 1.5, 0)
+
+[node name="Book4" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.5, 0)
+
+[node name="Book5" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.5, 0)
+
+[node name="Book6" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 1.5, 0)
+
+[node name="Book7" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1.5, 0)
+
+[node name="Book8" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.5, 0)
+
+[node name="Book9" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 1.5, 0)
+
+[node name="Book10" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, 0)
+
+[node name="Book11" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.5, 0)
+
+[node name="Book12" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, 0)
+
+[node name="Book13" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0)
+
+[node name="Book14" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.5, 0)
+
+[node name="Book15" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.5, 0)
+
+[node name="Book16" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 1.5, 0)
+
+[node name="Book17" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1.5, 0)
+
+[node name="Book18" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.5, 0)
+
+[node name="Book19" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1.5, 0)
+
+[node name="Book20" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1.5, 0)
+
+[node name="Book21" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 1.5, 0)
+
+[node name="Book22" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 1.5, 0)
+
+[node name="Book23" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1.5, 0)
+
+[node name="Book24" parent="Shell" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 1.5, 0)
+
+[node name="Shell2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+
+[node name="Book" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 1.5, 0)
+
+[node name="Book2" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1.5, 0)
+
+[node name="Book3" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 1.5, 0)
+
+[node name="Book4" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.5, 0)
+
+[node name="Book5" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.5, 0)
+
+[node name="Book6" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 1.5, 0)
+
+[node name="Book7" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1.5, 0)
+
+[node name="Book8" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.5, 0)
+
+[node name="Book9" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 1.5, 0)
+
+[node name="Book10" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, 0)
+
+[node name="Book11" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.5, 0)
+
+[node name="Book12" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, 0)
+
+[node name="Book13" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0)
+
+[node name="Book14" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.5, 0)
+
+[node name="Book15" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.5, 0)
+
+[node name="Book16" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 1.5, 0)
+
+[node name="Book17" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1.5, 0)
+
+[node name="Book18" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.5, 0)
+
+[node name="Book19" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1.5, 0)
+
+[node name="Book20" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1.5, 0)
+
+[node name="Book21" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 1.5, 0)
+
+[node name="Book22" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 1.5, 0)
+
+[node name="Book23" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1.5, 0)
+
+[node name="Book24" parent="Shell2" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 1.5, 0)
+
+[node name="Shell3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.9, 0)
+
+[node name="Book" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 1.5, 0)
+
+[node name="Book2" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1.5, 0)
+
+[node name="Book3" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 1.5, 0)
+
+[node name="Book4" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.5, 0)
+
+[node name="Book5" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.5, 0)
+
+[node name="Book6" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 1.5, 0)
+
+[node name="Book7" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1.5, 0)
+
+[node name="Book8" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.5, 0)
+
+[node name="Book9" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 1.5, 0)
+
+[node name="Book10" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, 0)
+
+[node name="Book11" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.5, 0)
+
+[node name="Book12" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1.5, 0)
+
+[node name="Book13" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.5, 0)
+
+[node name="Book14" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.5, 0)
+
+[node name="Book15" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1.5, 0)
+
+[node name="Book16" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 1.5, 0)
+
+[node name="Book17" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1.5, 0)
+
+[node name="Book18" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 1.5, 0)
+
+[node name="Book19" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1.5, 0)
+
+[node name="Book20" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1.5, 0)
+
+[node name="Book21" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 1.5, 0)
+
+[node name="Book22" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 1.5, 0)
+
+[node name="Book23" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1.5, 0)
+
+[node name="Book24" parent="Shell3" instance=ExtResource("3_unjhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 1.5, 0)
