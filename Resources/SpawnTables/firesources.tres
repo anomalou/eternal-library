@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_sjvk6")
-spawn_list = Dictionary[int, String]({
-1: "candlestick"
+spawn_list = Dictionary[String, int]({
+"candlestick": 10,
+"candlestick_dark": 1
 })

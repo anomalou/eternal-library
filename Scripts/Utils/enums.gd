@@ -1,7 +1,7 @@
 class_name EnumTypes
 
 enum EntityType {
-	BOOKSHELL,
+	BOOKSHELF,
 	TABLE,
 	FIRE_SOURCE,
 	SHELF,

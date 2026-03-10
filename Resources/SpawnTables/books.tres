@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_geiwa")
-spawn_list = Dictionary[int, String]({
-1: "book"
+spawn_list = Dictionary[String, int]({
+"book": 1
 })

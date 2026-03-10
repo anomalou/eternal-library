@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_y5but")
-spawn_list = Dictionary[int, String]({
-1: "shelf_prop"
+spawn_list = Dictionary[String, int]({
+"shelf_prop": 1
 })

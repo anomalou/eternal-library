@@ -33,12 +33,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 2
+stretch_shrink = 3
 
 [node name="WorldRenderer" type="SubViewport" parent="UI/WorldRendererContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(576, 324)
+size = Vector2i(384, 216)
 render_target_update_mode = 4
 
 [node name="GameMaster" type="Node" parent="UI/WorldRendererContainer/WorldRenderer"]

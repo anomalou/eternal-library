@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_t5vfw")
-spawn_list = Dictionary[int, String]({
-1: "table_general"
+spawn_list = Dictionary[String, int]({
+"table_general": 1
 })

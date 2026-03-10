@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7pbeypejkjlj"]
+
+[ext_resource type="Script" uid="uid://do6ywk62bwnyj" path="res://Scripts/Entities/candlestick_dark.gd" id="1_qpwxj"]
+[ext_resource type="PackedScene" uid="uid://cv15ph55707ks" path="res://Resources/Models/candlestick.glb" id="2_0woou"]
+
+[node name="Candlestick" type="Node3D"]
+script = ExtResource("1_qpwxj")
+
+[node name="Mesh" parent="." instance=ExtResource("2_0woou")]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 0, 0, 0)
