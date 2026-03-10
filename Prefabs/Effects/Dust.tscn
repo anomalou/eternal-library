@@ -45,7 +45,7 @@ material = SubResource("StandardMaterial3D_1dats")
 size = Vector2(0.2, 0.2)
 
 [node name="Dust" type="GPUParticles3D"]
-amount = 512
+amount = 1024
 lifetime = 4.0
 preprocess = 4.0
 fixed_fps = 0

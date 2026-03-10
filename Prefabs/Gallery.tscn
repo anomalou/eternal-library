@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cmuj02u8wt11k" path="res://Components/HexFloorGenerator.tscn" id="6_k7idi"]
 [ext_resource type="Texture2D" uid="uid://cf0t2vfshwuf3" path="res://Resources/Textures/planks.png" id="7_uq37l"]
 [ext_resource type="Texture2D" uid="uid://bcv2ix18ydagr" path="res://Resources/Textures/wallpaper.png" id="11_k7idi"]
-[ext_resource type="PackedScene" uid="uid://b3n1auxjbjdh6" path="res://Prefabs/Effects/dust.tscn" id="11_xnomx"]
+[ext_resource type="PackedScene" uid="uid://b3n1auxjbjdh6" path="res://Prefabs/Effects/Dust.tscn" id="11_xnomx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k7idi"]
 script = ExtResource("6_6csmm")
@@ -30,20 +30,20 @@ script = ExtResource("1_2iksw")
 spawntable = "firesources"
 
 [node name="Spawnpoint1" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25.8)
 spawntable = "bookshells"
 
 [node name="Spawnpoint2" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 4.7683716e-06, 0, 25.5)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 25.8)
 spawntable = "bookshells"
 
 [node name="Spawnpoint3" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -10)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10, 0, 0)
 spawntable = "tables"
 invert_rotate = true
 
 [node name="Spawnpoint4" parent="SpawnEntityManager" instance=ExtResource("3_0feh5")]
-transform = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 2.3841858e-06, 0, 10)
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -10, 0, 0)
 spawntable = "tables"
 invert_rotate = true
 

@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_254hq")
+spacing = 48
 height = 128.0

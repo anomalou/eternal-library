@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://g7aytf38b7ux"]
+[gd_scene load_steps=11 format=3 uid="uid://g7aytf38b7ux"]
+
+[ext_resource type="Shader" uid="uid://qa0divhd8ucu" path="res://Shaders/distortion.gdshader" id="1_j1ewg"]
 
 [sub_resource type="Gradient" id="Gradient_6fnlb"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
@@ -47,7 +49,24 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_3jcx5")
 size = Vector2(0.5, 0.5)
 
-[node name="Fire" type="GPUParticles3D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vunn8"]
+render_priority = 0
+shader = ExtResource("1_j1ewg")
+shader_parameter/distortion_strength = 0.02
+shader_parameter/time_scale = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_22e2w"]
+lightmap_size_hint = Vector2i(49, 49)
+material = SubResource("ShaderMaterial_vunn8")
+top_radius = 2.0
+bottom_radius = 1.5
+height = 6.0
+radial_segments = 7
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Effect" type="GPUParticles3D" parent="."]
+sorting_offset = 1.0
 cast_shadow = 0
 amount = 256
 lifetime = 1.5
@@ -55,3 +74,9 @@ randomness = 0.3
 fixed_fps = 0
 process_material = SubResource("ParticleProcessMaterial_6fnlb")
 draw_pass_1 = SubResource("QuadMesh_ach0q")
+
+[node name="Distortion" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1765814, 0)
+sorting_use_aabb_center = false
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_22e2w")

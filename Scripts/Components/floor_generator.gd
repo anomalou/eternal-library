@@ -19,7 +19,7 @@ func _generate_collider(mesh : MeshInstance3D):
 		static_body.set_deferred("owner", mesh)
 		collision_shape.set_deferred("owner", static_body)
 		
-		Log.info("Corridor floor collision generated")
+		#Log.info("Corridor floor collision generated")
 	else:
 		static_body.queue_free()
 		push_error("Failed corridor floor collision shape creation")

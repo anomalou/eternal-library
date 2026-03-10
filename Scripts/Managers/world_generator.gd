@@ -12,16 +12,11 @@ var _galleries : Dictionary[Vector2i, Gallery] # position / id
 var _galleries_topology : Dictionary[Vector2i, GalleryTopology]
 var _corridors : Dictionary[String, Array]
 
-var generation_thread : Thread = Thread.new()
-
 func _ready() -> void:
 	Signals.player_enter_gallery.connect(_process_player_transition)
 
 func _process_player_transition(_prev_gallery : HexCoord, curr_galley : HexCoord):
-	if generation_thread.is_started():
-		generation_thread.wait_to_finish()
-	generation_thread = Thread.new()
-	generation_thread.start(Callable(self, "generate_in_range").bind(curr_galley, 1))
+	generate_in_range(curr_galley, 1)
 	unload_in_range(curr_galley, 2)
 
 func init(config : SessionConfig, seed_manager : SeedManager, entity_manager : EntityManager):

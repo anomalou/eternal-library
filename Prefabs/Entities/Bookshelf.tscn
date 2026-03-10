@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhw2piv3t5v73"]
+
+[ext_resource type="Script" uid="uid://x6cltv0xa8k" path="res://Scripts/Entities/bookshelf.gd" id="1_0410m"]
+[ext_resource type="PackedScene" uid="uid://cy2q170rso7yc" path="res://Resources/Models/bookshelf.glb" id="2_dopaf"]
+[ext_resource type="PackedScene" uid="uid://vmtqj2aw7t77" path="res://Components/SpawnPointManager.tscn" id="3_78ucr"]
+[ext_resource type="PackedScene" uid="uid://bpqcvrwuxsvb2" path="res://Components/SpawnPoint.tscn" id="4_dbffc"]
+
+[node name="Bookshelf" type="Node3D"]
+script = ExtResource("1_0410m")
+
+[node name="Mesh" parent="." instance=ExtResource("2_dopaf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="SpawnPointManager" parent="." instance=ExtResource("3_78ucr")]
+
+[node name="Spawnpoint0" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.5, 0)
+spawntable = "shelves"
+auto_rotate = false
+
+[node name="Spawnpoint1" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 4.952772, 0)
+spawntable = "shelves"
+auto_rotate = false
+
+[node name="Spawnpoint2" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 8.404644, 0)
+spawntable = "shelves"
+auto_rotate = false
+
+[node name="Spawnpoint3" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 11.850688, 0)
+spawntable = "shelves_prop"
+auto_rotate = false
+
+[node name="Spawnpoint4" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 15.298043, 0)
+spawntable = "shelves_prop"
+auto_rotate = false
+
+[node name="Spawnpoint5" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 18.750654, 0)
+spawntable = "shelves_prop"
+auto_rotate = false
+
+[node name="Spawnpoint6" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 22.204542, 0)
+spawntable = "shelves_prop"
+auto_rotate = false
+
+[node name="Spawnpoint7" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 25.647987, 0)
+spawntable = "shelves_prop"
+auto_rotate = false
+
+[node name="Spawnpoint8" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 29.099049, 0)
+spawntable = "shelves_prop"
+auto_rotate = false
+
+[node name="Spawnpoint9" parent="SpawnPointManager" instance=ExtResource("4_dbffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 32.550484, 0)
+spawntable = "shelves_prop"
+auto_rotate = false

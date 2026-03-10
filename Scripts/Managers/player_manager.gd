@@ -3,7 +3,7 @@ class_name PlayerManager
 
 var player_id : String
 var player : PlayerTest
-var player_galley : HexCoord # current gallery player visiting
+var player_gallery : HexCoord # current gallery player visiting
 
 var _seed_manager : SeedManager
 var _randomizer : RandomNumberGenerator
@@ -40,8 +40,8 @@ func spawn_player():
 	add_child(player)
 	player.set_deferred("owner", self)
 	# randomize player position by seed generator (but for now it will be ZERO
-	player_galley = HexCoord.new()
-	player.position = player_galley.global_coord
+	player_gallery = HexCoord.new()
+	player.position = player_gallery.global_coord
 	player.position += Vector3(0, 6, 0)
 
 func _calculate_player_transition():
@@ -49,16 +49,16 @@ func _calculate_player_transition():
 		return # player not exists so no need to calculate
 	
 	var player_position = player.global_position
-	var room_position = player_galley.global_coord
+	var room_position = player_gallery.global_coord
 	
 	var current_distance = player_position.distance_to(room_position)
-	if current_distance > (player_galley.size * sqrt(3) / 2 + player_galley.spacing * 0.55):
+	if current_distance > (player_gallery.size * sqrt(3) / 2 + player_gallery.spacing * 0.65):
 		var min_distance = null
-		var closest_gallery : HexCoord = player_galley
-		for neigh in player_galley.neighbours():
+		var closest_gallery : HexCoord = player_gallery
+		for neigh in player_gallery.neighbours():
 			var dist = player_position.distance_to(neigh.global_coord)
 			if min_distance == null or dist < min_distance:
 				min_distance = dist
 				closest_gallery = neigh
-		Signals.player_enter_gallery.emit(player_galley, closest_gallery)
-		player_galley = closest_gallery
+		Signals.player_enter_gallery.emit(player_gallery, closest_gallery)
+		player_gallery = closest_gallery

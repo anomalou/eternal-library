@@ -3,7 +3,9 @@ class_name EnumTypes
 enum EntityType {
 	BOOKSHELL,
 	TABLE,
-	FIRE_SOURCE
+	FIRE_SOURCE,
+	SHELF,
+	BOOK
 }
 
 enum GalleryType {

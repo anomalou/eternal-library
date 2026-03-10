@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bunrxv8xgltf3"]
+
+[ext_resource type="Script" uid="uid://3wlblhkgeui3" path="res://Scripts/Entities/shelf_interactive.gd" id="1_1p1au"]
+[ext_resource type="ArrayMesh" uid="uid://85y3ol7cl5xw" path="res://Resources/Models/book_prop_mesh.res" id="2_wu5vs"]
+
+[node name="ShelfInteractive" type="Node3D"]
+script = ExtResource("1_1p1au")
+book_prop = ExtResource("2_wu5vs")

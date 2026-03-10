@@ -25,3 +25,4 @@ floor_texture = ExtResource("3_apm5d")
 
 [node name="BoxWallsGenerator" parent="." instance=ExtResource("3_skugv")]
 walls_material = SubResource("StandardMaterial3D_aj18s")
+thickness = 1.0

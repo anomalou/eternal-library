@@ -20,10 +20,10 @@ func _generate_mesh(width : float, length : float, direction : Vector3) -> MeshI
 	var angle = direction.signed_angle_to(Vector3.RIGHT, Vector3.DOWN)
 	var normal = Vector3.UP
 	
-	verticies.append(Vector3(width * 0.5, 0, -length * 0.5))
-	verticies.append(Vector3(-width * 0.5, 0, -length * 0.5))
-	verticies.append(Vector3(-width * 0.5, 0, length * 0.5))
-	verticies.append(Vector3(width * 0.5, 0, length * 0.5))
+	verticies.append(Vector3(length * 0.5, 0, -width * 0.5))
+	verticies.append(Vector3(-length * 0.5, 0, -width * 0.5))
+	verticies.append(Vector3(-length * 0.5, 0, width * 0.5))
+	verticies.append(Vector3(length * 0.5, 0, width * 0.5))
 	normals.append_array(range(4).map(func(_i): return normal))
 	
 	indices.append_array([2, 1, 0])
@@ -34,8 +34,8 @@ func _generate_mesh(width : float, length : float, direction : Vector3) -> MeshI
 	
 	if floor_texture and floor_texture.has_method("get_size"):
 		var texture_size = floor_texture.get_size() as Vector2
-		uv_x = width / texture_size.x * texture_scale
-		uv_y = length / texture_size.y * texture_scale
+		uv_x = length / texture_size.x * texture_scale
+		uv_y = width / texture_size.y * texture_scale
 	
 	uv.append(Vector2(uv_x, 0))
 	uv.append(Vector2(0, 0))

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cy2q170rso7yc"
-path="res://.godot/imported/bookshell.glb-873631b9b4154b271e394eaeb21c0d43.scn"
+uid="uid://iu0jotselcp8"
+path="res://.godot/imported/book_prop.glb-d82dcf0f8df23294eb01a440e6ef71b3.scn"
 
 [deps]
 
-source_file="res://Resources/Models/bookshell.glb"
-dest_files=["res://.godot/imported/bookshell.glb-873631b9b4154b271e394eaeb21c0d43.scn"]
+source_file="res://Resources/Models/book_prop.glb"
+dest_files=["res://.godot/imported/book_prop.glb-d82dcf0f8df23294eb01a440e6ef71b3.scn"]
 
 [params]
 
@@ -39,18 +39,21 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "materials": {
-"Material": {
+"Material.001": {
 "use_external/enabled": true,
-"use_external/fallback_path": "res://Resources/Models/Materials/bookshell_material.tres",
-"use_external/path": "uid://x6fs6roqgjpg"
+"use_external/fallback_path": "res://Resources/Models/Materials/book_prop_material.tres",
+"use_external/path": "uid://cir4okfqhmqog"
 }
 },
-"nodes": {
-"PATH:Cube_002": {
-"generate/physics": true,
-"physics/layer": 4,
-"physics/mask": 768,
-"physics/shape_type": 1
+"meshes": {
+"book_prop_Cube_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://Resources/Models/book_prop_mesh.res",
+"save_to_file/path": "uid://85y3ol7cl5xw"
 }
 }
 }

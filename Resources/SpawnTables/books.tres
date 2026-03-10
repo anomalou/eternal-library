@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SpawnTable" load_steps=2 format=3 uid="uid://iniynq0uqg7u"]
+
+[ext_resource type="Script" uid="uid://chxuxnh1bd6pl" path="res://Scripts/Data/spawn_table.gd" id="1_geiwa"]
+
+[resource]
+script = ExtResource("1_geiwa")
+spawn_list = Dictionary[int, String]({
+1: "book"
+})

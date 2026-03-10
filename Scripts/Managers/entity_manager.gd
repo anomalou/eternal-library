@@ -12,6 +12,9 @@ func init():
 	Log.info("Entity manager initialized")
 
 func create_gallery(_id : String, _pos : Vector2i, _entrances : Array[EnumTypes.Direction] = [], _type : EnumTypes.GalleryType = EnumTypes.GalleryType.GENERAL) -> Gallery:
+	if _entity_cache.get(_id):
+		destroy_entity(_id)
+	
 	var config = GalleryConfigManager.get_by_type(_type)
 	var gallery_pref = config.prefab
 	var gallery = gallery_pref.instantiate() as Gallery
@@ -26,6 +29,9 @@ func create_gallery(_id : String, _pos : Vector2i, _entrances : Array[EnumTypes.
 	return gallery
 
 func create_corridor(_id : String, g1 : Vector2i, g2 : Vector2i) -> Corridor:
+	if _entity_cache.get(_id):
+		destroy_entity(_id)
+	
 	var corridor = _corridor_prefab.instantiate() as Corridor
 	var hex_g1 = HexCoord.new(g1.x, 0, g1.y)
 	var hex_g2 = HexCoord.new(g2.x, 0, g2.y)
@@ -39,6 +45,9 @@ func create_corridor(_id : String, g1 : Vector2i, g2 : Vector2i) -> Corridor:
 	return corridor
 
 func create_entity(_id : String, entity_name : String, parent : Node3D) -> Entity:
+	if _entity_cache.get(_id):
+		destroy_entity(_id)
+	
 	var config = EntityConfigManager.get_by_name(entity_name)
 	var entity_prefab = config.prefab
 	var entity = entity_prefab.instantiate() as Entity
@@ -53,9 +62,13 @@ func create_entity(_id : String, entity_name : String, parent : Node3D) -> Entit
 
 func destroy_entity(_id : String):
 	if _entity_cache.has(_id):
-		var entity : Node3D = _entity_cache.get(_id)
+		var entity : GameObject = _entity_cache.get(_id)
 		_entity_cache.erase(_id)
 		entity.queue_free()
+		var old_cache = Dictionary(_entity_cache)
+		for id in old_cache:
+			if not old_cache.get(id):
+				_entity_cache.erase(id)
 		Log.info(_id, " freed")
 	else:
 		Log.info(_id, " not exists")

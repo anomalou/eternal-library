@@ -26,7 +26,7 @@ func _init(_x = 0, _y = 0, _z = 0) -> void:
 	self.s = -self.q - self.r
 	self._config = ConfigurationManager.get_by_id("hexagon")
 	self.size = _config.size
-	self.spacing = _config.size
+	self.spacing = _config.spacing
 	
 	_calculate_vectors()
 	_calculate_global()

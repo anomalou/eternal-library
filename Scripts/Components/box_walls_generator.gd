@@ -58,3 +58,23 @@ func _generate_plate(height : float, length : float, angle : float = 0.0, offset
 	
 	add_child(plate)
 	plate.set_deferred("owner", self)
+	
+	_generate_collider(plate, height, length, offset)
+
+func _generate_collider(mesh : MeshInstance3D, height : float, lenght : float, offset : float):
+	var static_body = StaticBody3D.new()
+	static_body.collision_layer = collision_layers
+	static_body.collision_mask = collision_mask
+	
+	var collision_shape = CollisionShape3D.new()
+	var shape = BoxShape3D.new()
+	
+	var center = Vector3(offset, height * 0.5, 0)
+	shape.size = Vector3(thickness, height, lenght)
+	collision_shape.shape = shape
+	collision_shape.position = center
+	
+	static_body.add_child(collision_shape)
+	mesh.add_child(static_body)
+	collision_shape.set_deferred("owner", static_body)
+	static_body.set_deferred("owner", mesh)

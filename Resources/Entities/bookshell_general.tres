@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EntityConfig" load_steps=3 format=3 uid="uid://mnqtyctby82x"]
 
-[ext_resource type="PackedScene" uid="uid://bhw2piv3t5v73" path="res://Prefabs/Entities/Bookshell.tscn" id="1_bi84e"]
+[ext_resource type="PackedScene" uid="uid://bhw2piv3t5v73" path="res://Prefabs/Entities/Bookshelf.tscn" id="1_bi84e"]
 [ext_resource type="Script" uid="uid://cfrmnou2j2n8r" path="res://Scripts/Data/entity_config.gd" id="1_dcban"]
 
 [resource]

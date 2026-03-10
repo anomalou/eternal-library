@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EntityConfig" load_steps=3 format=3 uid="uid://bhbdgrns5vw3y"]
+
+[ext_resource type="Script" uid="uid://cfrmnou2j2n8r" path="res://Scripts/Data/entity_config.gd" id="1_12o5t"]
+[ext_resource type="PackedScene" uid="uid://bunrxv8xgltf3" path="res://Prefabs/Entities/ShelfInteractive.tscn" id="1_wyvfn"]
+
+[resource]
+script = ExtResource("1_12o5t")
+type = 3
+prefab = ExtResource("1_wyvfn")

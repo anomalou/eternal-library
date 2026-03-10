@@ -2,20 +2,24 @@
 
 [ext_resource type="PackedScene" uid="uid://cv15ph55707ks" path="res://Resources/Models/candlestick.glb" id="1_6fnlb"]
 [ext_resource type="Script" uid="uid://b5msmf2jejdr8" path="res://Scripts/Entities/candlestick.gd" id="1_ach0q"]
-[ext_resource type="PackedScene" uid="uid://g7aytf38b7ux" path="res://Prefabs/Effects/fire.tscn" id="2_3jcx5"]
+[ext_resource type="PackedScene" uid="uid://g7aytf38b7ux" path="res://Prefabs/Effects/Fire.tscn" id="2_3jcx5"]
 
 [node name="Candlestick" type="Node3D"]
 script = ExtResource("1_ach0q")
+flicker_speed = 0.03
 
 [node name="Mesh" parent="." instance=ExtResource("1_6fnlb")]
 transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 0, 0, 0)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="Light" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.7052555, 0)
 light_color = Color(0.8, 0.4, 0, 1)
-light_energy = 5.0
+light_energy = 0.0
 shadow_enabled = true
+shadow_bias = 0.2
+shadow_normal_bias = 2.5
 omni_range = 40.0
+omni_attenuation = 0.8
 
 [node name="Fire" parent="." instance=ExtResource("2_3jcx5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.2426095, 0)

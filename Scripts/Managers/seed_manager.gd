@@ -32,7 +32,7 @@ func generate_root_seed():
 
 # also creates seed for this object
 func generate_object_id(object_type : String, context : String = "", parent_id : String = "") -> String:
-	Log.info("Generation id for ", object_type, " with context ", context)
+	#Log.info("Generation id for ", object_type, " with context ", context)
 	if parent_id == null or parent_id.is_empty():
 		parent_id = ROOT
 	var parent_seed = get_seed(parent_id)
@@ -97,5 +97,5 @@ func _generate_local_seed(id : String) -> int:
 		var h1 = hash(str(parent_seed) + SEP1 + id)
 		var h2 = hash(id + SEP2 + str(parent_seed))
 		var h = h1 ^ h2
-		Log.info("Seed ", str(h), " for ", id, " generated")
+		#Log.info("Seed ", str(h), " for ", id, " generated")
 		return h
