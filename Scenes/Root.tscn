@@ -2,13 +2,15 @@
 
 [ext_resource type="Script" uid="uid://c6k4ay6r0w556" path="res://Scripts/game_master.gd" id="1_a5hps"]
 [ext_resource type="Script" uid="uid://dk1u4q6a7iphx" path="res://Shaders/vignette_shader.gd" id="3_sxhdm"]
-[ext_resource type="Shader" uid="uid://cidfo8ltamdor" path="res://Shaders/vignette_posteffect.gdshader" id="4_oss8w"]
+[ext_resource type="Shader" uid="uid://cidfo8ltamdor" path="res://Shaders/posteffects.gdshader" id="4_oss8w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kqog5"]
 shader = ExtResource("4_oss8w")
 shader_parameter/vignette_intensity = 0.8
 shader_parameter/vignette_radius = 0.4
 shader_parameter/vignette_color = Vector4(0, 0, 0, 1)
+shader_parameter/color_levels = 20.0
+shader_parameter/noise_strength = 0.05
 script = ExtResource("3_sxhdm")
 metadata/_custom_type_script = "uid://dk1u4q6a7iphx"
 

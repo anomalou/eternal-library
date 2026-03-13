@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckpwsqdy3uhh1"]
+
+[ext_resource type="Theme" uid="uid://36fenmwm3464" path="res://Resources/Themes/journal_text.tres" id="1_gdu7v"]
+[ext_resource type="Script" uid="uid://c5n3vyisnfrtw" path="res://Scripts/Components/page_builder.gd" id="2_lxi00"]
+[ext_resource type="Script" uid="uid://co26c2e7wtang" path="res://Scripts/FontEffect/text_jitter.gd" id="3_pdqun"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_yrs4c"]
+script = ExtResource("3_pdqun")
+metadata/_custom_type_script = "uid://co26c2e7wtang"
+
+[node name="PageBuilder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gdu7v")
+script = ExtResource("2_lxi00")
+
+[node name="VContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 648.0
+
+[node name="TabContainer" type="TabContainer" parent="VContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+tabs_visible = false
+
+[node name="Note" type="VBoxContainer" parent="VContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Content" type="RichTextLabel" parent="VContainer/TabContainer/Note"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Library"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_yrs4c")]
+threaded = true
+visible_characters = 677
+visible_ratio = 96.71429
+
+[node name="Page" type="Label" parent="VContainer"]
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1

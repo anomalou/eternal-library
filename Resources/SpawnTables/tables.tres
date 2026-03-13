@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="SpawnTable" load_steps=2 format=3 uid="uid://l2maqaarqgej"]
 
-[ext_resource type="Script" uid="uid://chxuxnh1bd6pl" path="res://Scripts/Data/spawn_table.gd" id="1_t5vfw"]
+[ext_resource type="Script" uid="uid://chxuxnh1bd6pl" path="res://Scripts/Data/Configs/spawn_table.gd" id="1_t5vfw"]
 
 [resource]
 script = ExtResource("1_t5vfw")

@@ -24,11 +24,11 @@ environment = ExtResource("2_x3d5u")
 doppler_tracking = 1
 current = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="FPV"]
+[node name="AmbientLight" type="OmniLight3D" parent="FPV"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 light_color = Color(0.8, 0.4, 0, 1)
 light_energy = 0.5
 omni_attenuation = 0.0
 
-[node name="librarian" parent="." instance=ExtResource("3_b43ah")]
+[node name="Mesh" parent="." instance=ExtResource("3_b43ah")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -3.25, 0)

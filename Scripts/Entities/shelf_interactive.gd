@@ -1,10 +1,28 @@
 extends Shelf
 class_name ShelfInteractive
 
+var _knowledge_books : Array[int]
+
 func generate(_id : String):
 	super(_id)
+	_generate_knowledge()
+
+func _generate_knowledge():
+	for i in range(book_number):
+		var book_id = _seed_manager.generate_object_id("book", str(i), id)
+		var rnd = _seed_manager.get_temp_rnd(book_id)
+		if rnd.randf() > 0.9:
+			if rnd.randf() > 0.2:
+				_knowledge_books.append(i)
+			var inst_transform = multimesh.get_instance_transform(i)
+			inst_transform.origin = inst_transform.origin + Vector3(0, 0, rnd.randf_range(0.0, 0.6))
+			multimesh.set_instance_transform(i, inst_transform)
 
 func hide_book(_hide : bool, index : int):
 	var inst_transform = multimesh.get_instance_transform(index)
 	inst_transform = inst_transform.scaled_local(Vector3.ZERO if _hide else Vector3.ONE)
 	multimesh.set_instance_transform(index, inst_transform)
+	if _hide:
+		taken_books.append(index)
+	else:
+		taken_books.erase(index)

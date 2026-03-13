@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EntityConfig" load_steps=3 format=3 uid="uid://cdig23186aole"]
 
 [ext_resource type="PackedScene" uid="uid://gtr4c33acjus" path="res://Prefabs/Entities/Book.tscn" id="1_a0ht3"]
-[ext_resource type="Script" uid="uid://cfrmnou2j2n8r" path="res://Scripts/Data/entity_config.gd" id="2_upbf2"]
+[ext_resource type="Script" uid="uid://cfrmnou2j2n8r" path="res://Scripts/Data/Configs/entity_config.gd" id="2_upbf2"]
 
 [resource]
 script = ExtResource("2_upbf2")

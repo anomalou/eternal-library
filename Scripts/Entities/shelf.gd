@@ -1,7 +1,9 @@
 extends Entity
 class_name Shelf
 
+@export var book_number : int = 24
 @export var book_prop : ArrayMesh
+var taken_books : Array[int]
 
 var multimesh : MultiMesh
 
@@ -16,9 +18,9 @@ func _generate_multimesh():
 	multimesh.mesh = book_prop
 	multimesh.use_colors = true
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	multimesh.instance_count = 24
+	multimesh.instance_count = book_number
 	
-	for i in range(24):
+	for i in range(book_number):
 		var offset_id = _seed_manager.generate_object_id("offset", str(i), id)
 		var rnd = _seed_manager.get_temp_rnd(offset_id)
 		

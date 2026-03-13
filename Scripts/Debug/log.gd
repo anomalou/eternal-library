@@ -3,6 +3,9 @@ class_name Log
 static func info(...message):
 	_debug("INFO", message)
 
+static func warn(...message):
+	_debug("WARN", message)
+
 static func error(...message):
 	_debug("ERROR", message)
 

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EntityConfig" load_steps=3 format=3 uid="uid://fjag52fd4yji"]
 
 [ext_resource type="PackedScene" uid="uid://jreq4l1e03ly" path="res://Prefabs/Entities/Candlestick.tscn" id="1_34exs"]
-[ext_resource type="Script" uid="uid://cfrmnou2j2n8r" path="res://Scripts/Data/entity_config.gd" id="2_ahhvj"]
+[ext_resource type="Script" uid="uid://cfrmnou2j2n8r" path="res://Scripts/Data/Configs/entity_config.gd" id="2_ahhvj"]
 
 [resource]
 script = ExtResource("2_ahhvj")

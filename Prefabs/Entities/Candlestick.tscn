@@ -18,6 +18,7 @@ light_energy = 0.0
 shadow_enabled = true
 shadow_bias = 0.2
 shadow_normal_bias = 2.5
+shadow_blur = 0.0
 omni_range = 40.0
 omni_attenuation = 0.8
 

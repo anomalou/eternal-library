@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://36fenmwm3464"]
+
+[ext_resource type="FontFile" uid="uid://bgw8i512b07pj" path="res://Resources/Fonts/Caveat-VariableFont_wght.ttf" id="1_cxp5l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cxp5l"]
+
+[resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 31
+Label/fonts/font = ExtResource("1_cxp5l")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/font_sizes/normal_font_size = 31
+RichTextLabel/fonts/bold_font = ExtResource("1_cxp5l")
+RichTextLabel/fonts/bold_italics_font = ExtResource("1_cxp5l")
+RichTextLabel/fonts/italics_font = ExtResource("1_cxp5l")
+RichTextLabel/fonts/mono_font = ExtResource("1_cxp5l")
+RichTextLabel/fonts/normal_font = ExtResource("1_cxp5l")
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_cxp5l")

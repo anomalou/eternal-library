@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://chpyyl04pssp4"]
+
+[ext_resource type="Script" uid="uid://dbc6oyptd05nn" path="res://Scripts/Components/content_builder.gd" id="1_o13gn"]
+[ext_resource type="PackedScene" uid="uid://ckpwsqdy3uhh1" path="res://Components/PageGenerator.tscn" id="2_4oaur"]
+
+[node name="ContentBuilder" type="Node"]
+script = ExtResource("1_o13gn")
+
+[node name="LeftPage" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(480, 648)
+
+[node name="PageBuilder" parent="LeftPage" instance=ExtResource("2_4oaur")]
+
+[node name="RightPage" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(480, 648)
+
+[node name="PageBuilder" parent="RightPage" instance=ExtResource("2_4oaur")]
