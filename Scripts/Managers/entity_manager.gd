@@ -11,6 +11,9 @@ func init():
 	self._corridor_prefab = load("res://Prefabs/Corridor.tscn")
 	Log.info("Entity manager initialized")
 
+func find(_id : String):
+	return _entity_cache.get(_id)
+
 func create_gallery(_id : String, _pos : Vector2i, _entrances : Array[EnumTypes.Direction] = [], _type : EnumTypes.GalleryType = EnumTypes.GalleryType.GENERAL) -> Gallery:
 	if _entity_cache.get(_id):
 		destroy_entity(_id)
@@ -44,7 +47,7 @@ func create_corridor(_id : String, g1 : Vector2i, g2 : Vector2i) -> Corridor:
 	
 	return corridor
 
-func create_entity(_id : String, entity_name : String, parent : Node3D) -> Entity:
+func create_entity(_id : String, entity_name : String, parent : Node = self) -> Entity:
 	if _entity_cache.get(_id):
 		destroy_entity(_id)
 	

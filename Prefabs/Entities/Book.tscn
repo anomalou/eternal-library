@@ -1,9 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://gtr4c33acjus"]
+[gd_scene load_steps=7 format=3 uid="uid://gtr4c33acjus"]
 
 [ext_resource type="Script" uid="uid://c63u7g3nwcqpj" path="res://Scripts/Entities/book.gd" id="1_swk3h"]
+[ext_resource type="Material" uid="uid://x7wr20ra4a38" path="res://Resources/Models/Materials/text_material.tres" id="2_d3qs1"]
 [ext_resource type="PackedScene" uid="uid://chpyyl04pssp4" path="res://Components/ContentBuilder.tscn" id="2_dwo58"]
+[ext_resource type="Material" uid="uid://b3bhqeeusyve3" path="res://Resources/Models/Materials/paper_material.tres" id="3_swk3h"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_d3qs1"]
+resource_local_to_scene = true
+size = Vector2(1.7, 2.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_8rvnc"]
+resource_local_to_scene = true
+size = Vector2(1.7, 2.5)
 
 [node name="Book" type="Node3D"]
 script = ExtResource("1_swk3h")
+paper_material = ExtResource("3_swk3h")
+text_material = ExtResource("2_d3qs1")
 
 [node name="ContentBuilder" parent="." instance=ExtResource("2_dwo58")]
+
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="LeftPage" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.87, 0, 0)
+mesh = SubResource("QuadMesh_d3qs1")
+
+[node name="RightPage" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0.87, 0, 0)
+mesh = SubResource("QuadMesh_8rvnc")
+skeleton = NodePath("../LeftPage")

@@ -23,9 +23,3 @@ enum Direction {
 	NW = 4,
 	NE = 5
 }
-
-enum PageType {
-	GIBBERISH = 0,
-	KNOWLEDGE = 1,
-	NOTES = 2
-}

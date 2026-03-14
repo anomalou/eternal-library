@@ -6,10 +6,10 @@
 
 [resource]
 Label/colors/font_color = Color(0, 0, 0, 1)
-Label/font_sizes/font_size = 31
+Label/font_sizes/font_size = 120
 Label/fonts/font = ExtResource("1_cxp5l")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
-RichTextLabel/font_sizes/normal_font_size = 31
+RichTextLabel/font_sizes/normal_font_size = 120
 RichTextLabel/fonts/bold_font = ExtResource("1_cxp5l")
 RichTextLabel/fonts/bold_italics_font = ExtResource("1_cxp5l")
 RichTextLabel/fonts/italics_font = ExtResource("1_cxp5l")

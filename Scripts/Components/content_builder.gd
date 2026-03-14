@@ -7,8 +7,6 @@ class_name ContentBuilder
 @onready var left_page : SubViewport = $LeftPage
 @onready var right_page : SubViewport = $RightPage
 
-func build_left():
-	pass
-
-func build_right():
-	pass
+func build(pages : Array[PageData]):
+	left_page_builder.build(pages.get(0))
+	right_page_generator.build(pages.get(1))

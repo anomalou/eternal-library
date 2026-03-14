@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dexydb78b1xtx"]
+[gd_scene load_steps=8 format=3 uid="uid://dexydb78b1xtx"]
 
 [ext_resource type="Script" uid="uid://bcbo1qabm3bcw" path="res://Scripts/game_session.gd" id="1_u852i"]
 [ext_resource type="Script" uid="uid://bb6ch6olcwpsd" path="res://Scripts/Managers/world_generator.gd" id="2_2kh3l"]
 [ext_resource type="PackedScene" uid="uid://duv6xca8efxj6" path="res://Scenes/PlayerManager.tscn" id="3_6b235"]
 [ext_resource type="Script" uid="uid://bmwuiicvslpgu" path="res://Scripts/Managers/seed_manager.gd" id="5_6b235"]
 [ext_resource type="Script" uid="uid://bq8dun44btrkl" path="res://Scripts/Managers/entity_manager.gd" id="6_468i8"]
+[ext_resource type="Script" uid="uid://b1eph4tpr45m7" path="res://Scripts/Managers/book_manager.gd" id="6_wwytc"]
+[ext_resource type="Script" uid="uid://bgtud37toygi3" path="res://Scripts/Managers/book_controller.gd" id="7_wwytc"]
 
 [node name="GameSession" type="Node"]
 script = ExtResource("1_u852i")
@@ -19,3 +21,9 @@ script = ExtResource("5_6b235")
 
 [node name="EntityManager" type="Node" parent="."]
 script = ExtResource("6_468i8")
+
+[node name="BookManager" type="Node" parent="."]
+script = ExtResource("6_wwytc")
+
+[node name="BookController" type="Node" parent="."]
+script = ExtResource("7_wwytc")
