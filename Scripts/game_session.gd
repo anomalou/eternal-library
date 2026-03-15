@@ -29,7 +29,7 @@ func create_player():
 	player_manager.spawn_player()
 	var journal_id = book_manager.generate_player_journal(player_manager.player_id)
 	var book : Entity = entity_manager.create_entity(journal_id, "book")
-	book.rotate_x(deg_to_rad(30))
+	#book.rotate_x(deg_to_rad(90))
 	book.position = Vector3(0, 5.3, -9.0)
 	
 	Signals.select_book.emit(journal_id)

@@ -3,5 +3,4 @@
 [resource]
 resource_local_to_scene = true
 transparency = 1
-cull_mode = 2
 texture_filter = 0

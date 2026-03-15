@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b3bhqeeusyve3"]
+
+[ext_resource type="Texture2D" uid="uid://ct7nwiy163aoh" path="res://Resources/Textures/paper.png" id="1_sffuu"]
+
+[resource]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_sffuu")
+texture_filter = 0

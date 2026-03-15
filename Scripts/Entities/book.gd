@@ -2,8 +2,8 @@ extends Entity
 class_name Book
 
 @onready var content_builder : ContentBuilder = $ContentBuilder
-@onready var left_page : MeshInstance3D = $Mesh/LeftPage
-@onready var right_page : MeshInstance3D = $Mesh/RightPage
+@onready var left_page : MeshInstance3D = $Mesh/left_block
+@onready var right_page : MeshInstance3D = $Mesh/right_block
 
 @export var paper_material : StandardMaterial3D
 @export var text_material : StandardMaterial3D
@@ -13,8 +13,8 @@ func generate(_id : String):
 	var left_material = paper_material.duplicate(true)
 	var right_material = paper_material.duplicate(true)
 	
-	left_page.mesh.surface_set_material(0, left_material)
-	right_page.mesh.surface_set_material(0, right_material)
+	left_page.mesh.surface_set_material(1, left_material)
+	right_page.mesh.surface_set_material(1, right_material)
 	
 	left_material.next_pass = text_material.duplicate(true)
 	right_material.next_pass = text_material.duplicate(true)

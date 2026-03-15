@@ -71,7 +71,7 @@ func _positions_in_range(center : Vector2i, radius : int) -> Array[Vector2i]:
 	return positions
 
 func _pregenerate_gallery(_pos : Vector2i) -> Dictionary[Vector2i, GalleryTopology]:
-	var gallery_type_id = _seed_manager.generate_object_id("gallery_type", str(_pos))
+	# var gallery_type_id = _seed_manager.generate_object_id("gallery_type", str(_pos))
 	# var gallery_type_rnd = _seed_manager.get_temp_rnd(gallery_type_id)
 	# use gallery_type_rnd to select room type
 	var gallery_type = EnumTypes.GalleryType.GENERAL

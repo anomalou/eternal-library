@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://duv6xca8efxj6"]
 
 [ext_resource type="Script" uid="uid://docmvalc37osn" path="res://Scripts/Managers/player_manager.gd" id="1_hbelu"]
-[ext_resource type="Material" uid="uid://b3bhqeeusyve3" path="res://Resources/Models/Materials/paper_material.tres" id="2_8h6nq"]
+[ext_resource type="Material" uid="uid://b3bhqeeusyve3" path="res://Resources/Models/Materials/paper_material_0.tres" id="2_8h6nq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3bde7"]
 material = ExtResource("2_8h6nq")

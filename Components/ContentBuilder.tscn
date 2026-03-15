@@ -8,12 +8,12 @@ script = ExtResource("1_o13gn")
 
 [node name="LeftPage" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(960, 1296)
+size = Vector2i(1440, 1944)
 
 [node name="PageBuilder" parent="LeftPage" instance=ExtResource("2_4oaur")]
 
 [node name="RightPage" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(960, 1296)
+size = Vector2i(1440, 1944)
 
 [node name="PageBuilder" parent="RightPage" instance=ExtResource("2_4oaur")]

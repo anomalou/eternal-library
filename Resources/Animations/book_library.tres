@@ -1,0 +1,10 @@
+[gd_resource type="AnimationLibrary" load_steps=3 format=3 uid="uid://ddnkarp2485nn"]
+
+[ext_resource type="Animation" uid="uid://cckwke1llx0d1" path="res://Resources/Animations/open_book.anim" id="1_77wyo"]
+[ext_resource type="Animation" uid="uid://co52cmfmxh7ok" path="res://Resources/Animations/reset_book.anim" id="2_1elku"]
+
+[resource]
+_data = {
+&"open_book": ExtResource("1_77wyo"),
+&"reset_book": ExtResource("2_1elku")
+}

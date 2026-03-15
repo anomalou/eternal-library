@@ -41,8 +41,7 @@ metadata/_tab_index = 0
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[color=blue]Library
-"
+text = "Phasellus molestie tellus ut nibh luctus, a venenatis dolor dignissim. Donec nisi justo, euismod lacinia risus ac, euismod facilisis elit. Donec malesuada tincidunt ipsum sed aliquet. Fusce dapibus, ligula vitae aliquet iaculis, ligula sapien laoreet ipsum, sit amet consectetur ex enim ac velit. Quisque egestas dolor sit amet hendrerit fringilla."
 scroll_active = false
 custom_effects = [SubResource("RichTextEffect_yrs4c")]
 threaded = true

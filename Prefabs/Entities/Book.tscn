@@ -1,32 +1,60 @@
-[gd_scene load_steps=7 format=3 uid="uid://gtr4c33acjus"]
+[gd_scene load_steps=14 format=3 uid="uid://gtr4c33acjus"]
 
 [ext_resource type="Script" uid="uid://c63u7g3nwcqpj" path="res://Scripts/Entities/book.gd" id="1_swk3h"]
 [ext_resource type="Material" uid="uid://x7wr20ra4a38" path="res://Resources/Models/Materials/text_material.tres" id="2_d3qs1"]
 [ext_resource type="PackedScene" uid="uid://chpyyl04pssp4" path="res://Components/ContentBuilder.tscn" id="2_dwo58"]
-[ext_resource type="Material" uid="uid://b3bhqeeusyve3" path="res://Resources/Models/Materials/paper_material.tres" id="3_swk3h"]
+[ext_resource type="Material" uid="uid://bk4cuyy43g44x" path="res://Resources/Models/Materials/paper_material_1.tres" id="2_v1itn"]
+[ext_resource type="PackedScene" uid="uid://c3qwi0xxsllvi" path="res://Resources/Models/book_ui_v2.glb" id="5_8rvnc"]
+[ext_resource type="AnimationLibrary" uid="uid://ddnkarp2485nn" path="res://Resources/Animations/book_library.tres" id="6_v1itn"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_d3qs1"]
-resource_local_to_scene = true
-size = Vector2(1.7, 2.5)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v1itn"]
+animation = &"Book/open_book"
+play_mode = 1
 
-[sub_resource type="QuadMesh" id="QuadMesh_8rvnc"]
-resource_local_to_scene = true
-size = Vector2(1.7, 2.5)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0itbn"]
+animation = &"Book/open_book"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cvk23"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pj5bn"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v1itn"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qwkjv"]
+states/Start/position = Vector2(371, 57)
+states/close_book/node = SubResource("AnimationNodeAnimation_v1itn")
+states/close_book/position = Vector2(603, 113)
+states/open_book/node = SubResource("AnimationNodeAnimation_0itbn")
+states/open_book/position = Vector2(603, -31)
+transitions = ["open_book", "close_book", SubResource("AnimationNodeStateMachineTransition_cvk23"), "close_book", "open_book", SubResource("AnimationNodeStateMachineTransition_pj5bn"), "Start", "open_book", SubResource("AnimationNodeStateMachineTransition_v1itn")]
+graph_offset = Vector2(7, -139)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0itbn"]
+graph_offset = Vector2(-198, 110)
+nodes/BookState/node = SubResource("AnimationNodeStateMachine_qwkjv")
+nodes/BookState/position = Vector2(-20, 180)
+node_connections = [&"output", 0, &"BookState"]
 
 [node name="Book" type="Node3D"]
 script = ExtResource("1_swk3h")
-paper_material = ExtResource("3_swk3h")
+paper_material = ExtResource("2_v1itn")
 text_material = ExtResource("2_d3qs1")
 
 [node name="ContentBuilder" parent="." instance=ExtResource("2_dwo58")]
 
-[node name="Mesh" type="Node3D" parent="."]
+[node name="Mesh" parent="." instance=ExtResource("5_8rvnc")]
 
-[node name="LeftPage" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.87, 0, 0)
-mesh = SubResource("QuadMesh_d3qs1")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Mesh")
+libraries = {
+&"Book": ExtResource("6_v1itn")
+}
 
-[node name="RightPage" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0.87, 0, 0)
-mesh = SubResource("QuadMesh_8rvnc")
-skeleton = NodePath("../LeftPage")
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Mesh")
+tree_root = SubResource("AnimationNodeBlendTree_0itbn")
+anim_player = NodePath("../AnimationPlayer")

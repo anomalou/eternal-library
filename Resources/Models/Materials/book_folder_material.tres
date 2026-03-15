@@ -1,19 +1,9 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://y4pufyw3lkfs"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://y4pufyw3lkfs"]
 
 [ext_resource type="Texture2D" uid="uid://bxfey3xbimrcn" path="res://Resources/Textures/book_0.png" id="1_g523e"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_g523e"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g523e"]
-resource_local_to_scene = true
-transparency = 1
-albedo_texture = SubResource("ViewportTexture_g523e")
-texture_filter = 0
-
 [resource]
-next_pass = SubResource("StandardMaterial3D_g523e")
-albedo_color = Color(0, 0.4509558, 0.13780704, 1)
+resource_local_to_scene = true
 albedo_texture = ExtResource("1_g523e")
 heightmap_deep_parallax = true
 heightmap_min_layers = 8
