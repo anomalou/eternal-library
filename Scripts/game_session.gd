@@ -3,6 +3,7 @@ class_name GameSession
 
 @onready var seed_manager : SeedManager = $SeedManager
 @onready var entity_manager : EntityManager = $EntityManager
+@onready var state_manager : StateManager = $StateManager
 @onready var world_generator : WorldGenerator = $WorldGenerator
 @onready var player_manager : PlayerManager = $PlayerManager
 @onready var book_manager : BookManager = $BookManager
@@ -16,10 +17,11 @@ func init(config : SessionConfig):
 	
 	seed_manager.init(config.master_seed)
 	entity_manager.init()
+	state_manager.init()
 	world_generator.init(config, seed_manager, entity_manager)
 	player_manager.init(seed_manager)
 	book_manager.init(seed_manager)
-	book_controller.init(entity_manager, book_manager)
+	book_controller.init(entity_manager, state_manager, book_manager)
 
 # call only when game session exists on game scene
 func generate_world():

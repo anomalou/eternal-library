@@ -24,7 +24,8 @@ func split() -> Array[PageData]:
 		words = words.slice(page_words.size(), words.size())
 		var page : NotePage = NotePage.new()
 		page.text = " ".join(page_words)
+		page.index = pages.size() + 1
 		pages.append(page)
 	if pages.size() % 2 != 0:
-		pages.append(EmptyPage.new())
+		pages.append(EmptyPage.new(pages.size() + 1))
 	return pages
