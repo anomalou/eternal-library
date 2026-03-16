@@ -1,8 +1,7 @@
 extends FloorGenerator
 class_name HexFloorGenerator
 
-@export var floor_material : ShaderMaterial
-@export var floor_texture : Texture
+@export var material : Material
 
 var _position : HexCoord
 
@@ -11,14 +10,14 @@ func setup(_id : String, pos : HexCoord):
 	self._position = pos
 
 func generate():
-	if not self.floor_material:
-		push_error("Cant generate floor cause shader material not provided")
+	if not self.material:
+		push_error("Cant generate floor cause material not provided")
 		return
 	
-	var _floor = _generate_hex(self.floor_material, 0, Color.DIM_GRAY) as MeshInstance3D
+	var _floor = _generate_hex(0) as MeshInstance3D
 	_generate_collider(_floor)
 
-func _generate_hex(material : Material, depth : int = 0, color : Color = Color.WHITE, clockwise : bool = true) -> MeshInstance3D:
+func _generate_hex(depth : int = 0, clockwise : bool = true) -> MeshInstance3D:
 	var hex = MeshInstance3D.new()
 	
 	var vertices = PackedVector3Array()
@@ -62,10 +61,6 @@ func _generate_hex(material : Material, depth : int = 0, color : Color = Color.W
 	array[Mesh.ARRAY_NORMAL] = normals
 	
 	var _material = material.duplicate(true)
-	if _material is ColorShader:
-		_material.set_color(color)
-	elif _material is TextureShader:
-		_material.set_texture(floor_texture)
 	
 	var mesh = ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)

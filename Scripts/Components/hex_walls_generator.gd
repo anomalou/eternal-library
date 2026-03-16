@@ -1,7 +1,7 @@
 extends WallGenerator
 class_name HexWallsGenerator
 
-@export var wall_shader : Material
+@export var material : Material
 
 var _trfm : HexCoord
 var _height : float = 32.0
@@ -16,15 +16,14 @@ func setup(_id : String, trfm : HexCoord, height : float):
 func generate(required_entrancies : Array[EnumTypes.Direction]):
 	self._required_entrancies = required_entrancies
 	
-	if not wall_shader:
-		push_error("Wall shader not set up")
+	if not material:
+		push_error("Wall material not set up")
 		return
 	
-	var colors = [Color.DARK_RED, Color.DARK_GREEN, Color.DARK_BLUE, Color.DARK_GOLDENROD, Color.DARK_MAGENTA, Color.DARK_CYAN]
 	var directions = EnumTypes.Direction.values()
 	for dir in directions:
 		if dir not in self._required_entrancies:
-			var wall : MeshInstance3D = _create_wall(dir, colors.get(dir))
+			var wall : MeshInstance3D = _create_wall(dir)
 			self.add_child(wall)
 			wall.set_deferred("owner", self)
 			_wall_cache.set(dir, wall)
@@ -45,7 +44,7 @@ func generate(required_entrancies : Array[EnumTypes.Direction]):
 			#_wall_cache.erase(dir)
 			#wall.queue_free()
 
-func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) -> MeshInstance3D:
+func _create_wall(direction : EnumTypes.Direction) -> MeshInstance3D:
 	var wall : MeshInstance3D = MeshInstance3D.new()
 	
 	var mesh = ArrayMesh.new()
@@ -74,9 +73,7 @@ func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) 
 	
 	normals.append_array(range(4).map(func(_i): return normal))
 	
-	var material = wall_shader.duplicate(true)
-	if material is ColorShader:
-		material.set_color(color)
+	var _material = material.duplicate(true)
 	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)
@@ -85,7 +82,7 @@ func _create_wall(direction : EnumTypes.Direction, color : Color = Color.WHITE) 
 	array.set(Mesh.ARRAY_TEX_UV, uv)
 	array.set(Mesh.ARRAY_NORMAL, normals)
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)
-	mesh.surface_set_material(0, material)
+	mesh.surface_set_material(0, _material)
 	
 	wall.mesh = mesh
 	

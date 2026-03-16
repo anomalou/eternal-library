@@ -1,8 +1,7 @@
 extends FloorGenerator
 class_name BoxFloorGenerator
 
-@export var floor_material : Material
-@export var floor_texture : Texture
+@export var material : Material
 @export var texture_scale : float = 8.0
 
 func generate(width : float, length : float, direction : Vector3):
@@ -32,10 +31,10 @@ func _generate_mesh(width : float, length : float, direction : Vector3) -> MeshI
 	var uv_x = 1.0
 	var uv_y = 1.0
 	
-	if floor_texture and floor_texture.has_method("get_size"):
-		var texture_size = floor_texture.get_size() as Vector2
-		uv_x = length / texture_size.x * texture_scale
-		uv_y = width / texture_size.y * texture_scale
+	#if floor_texture and floor_texture.has_method("get_size"):
+		#var texture_size = floor_texture.get_size() as Vector2
+		#uv_x = length / texture_size.x * texture_scale
+		#uv_y = width / texture_size.y * texture_scale
 	
 	uv.append(Vector2(uv_x, 0))
 	uv.append(Vector2(0, 0))
@@ -50,13 +49,11 @@ func _generate_mesh(width : float, length : float, direction : Vector3) -> MeshI
 	array.set(Mesh.ARRAY_TEX_UV, uv)
 	array.set(Mesh.ARRAY_NORMAL, normals)
 	
-	var material = floor_material.duplicate(true)
-	if material is TextureShader:
-		material.set_texture(floor_texture)
+	var _material = material.duplicate(true)
 	
 	var mesh = ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, array)
-	mesh.surface_set_material(0, material)
+	mesh.surface_set_material(0, _material)
 	
 	plate.mesh = mesh
 	plate.rotate_y(angle)

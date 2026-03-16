@@ -1,7 +1,7 @@
 extends WallGenerator
 class_name BoxWallsGenerator
 
-@export var walls_material : Material
+@export var material : Material
 
 func generate(height : float, length : float, spacing : float, direction : Vector3):
 	var basis_angle = direction.signed_angle_to(Vector3.RIGHT, Vector3.DOWN)
@@ -42,7 +42,7 @@ func _generate_plate(height : float, length : float, angle : float = 0.0, offset
 	uv.append(Vector2(1, 0))
 	uv.append(Vector2(1, 1))
 	
-	var material = walls_material.duplicate(true)
+	var _material = material.duplicate(true)
 	
 	var array = []
 	array.resize(Mesh.ARRAY_MAX)

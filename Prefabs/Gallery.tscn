@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bed5rglkmc220"]
+[gd_scene load_steps=11 format=3 uid="uid://bed5rglkmc220"]
 
 [ext_resource type="Script" uid="uid://dvvp722mn1ybu" path="res://Scripts/Entities/gallery.gd" id="1_2iksw"]
 [ext_resource type="PackedScene" uid="uid://vmtqj2aw7t77" path="res://Components/SpawnPointManager.tscn" id="2_o8mrs"]
@@ -6,20 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ksabwyoarwli" path="res://Components/HexagonGizmo.tscn" id="3_r0hsk"]
 [ext_resource type="PackedScene" uid="uid://cocrr0tn5562q" path="res://Components/HexagonTransform.tscn" id="4_uq37l"]
 [ext_resource type="PackedScene" uid="uid://ctl0et6b6xca4" path="res://Components/HexWallsGenerator.tscn" id="5_6csmm"]
-[ext_resource type="Script" uid="uid://d0f0rdolbfsro" path="res://Shaders/texture_shader.gd" id="6_6csmm"]
 [ext_resource type="PackedScene" uid="uid://cmuj02u8wt11k" path="res://Components/HexFloorGenerator.tscn" id="6_k7idi"]
-[ext_resource type="Texture2D" uid="uid://cf0t2vfshwuf3" path="res://Resources/Textures/planks.png" id="7_uq37l"]
-[ext_resource type="Texture2D" uid="uid://bcv2ix18ydagr" path="res://Resources/Textures/wallpaper.png" id="11_k7idi"]
+[ext_resource type="Material" uid="uid://b0muprokhdw74" path="res://Resources/Models/Materials/floor_material.tres" id="7_6csmm"]
+[ext_resource type="Material" uid="uid://pav48lo6vrpt" path="res://Resources/Models/Materials/wall_material.tres" id="10_k7idi"]
 [ext_resource type="PackedScene" uid="uid://b3n1auxjbjdh6" path="res://Prefabs/Effects/Dust.tscn" id="11_xnomx"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_k7idi"]
-script = ExtResource("6_6csmm")
-metadata/_custom_type_script = "uid://d0f0rdolbfsro"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4j5gm"]
-albedo_texture = ExtResource("11_k7idi")
-uv1_scale = Vector3(1, 4, 1)
-texture_filter = 0
 
 [node name="Gallery" type="Node3D"]
 script = ExtResource("1_2iksw")
@@ -54,11 +44,10 @@ gizmo_visible = false
 [node name="HexagonTransform" parent="." instance=ExtResource("4_uq37l")]
 
 [node name="FloorGenerator" parent="." instance=ExtResource("6_k7idi")]
-floor_material = SubResource("ShaderMaterial_k7idi")
-floor_texture = ExtResource("7_uq37l")
+material = ExtResource("7_6csmm")
 
 [node name="WallsGenerator" parent="." instance=ExtResource("5_6csmm")]
-wall_shader = SubResource("StandardMaterial3D_4j5gm")
+material = ExtResource("10_k7idi")
 
 [node name="Dust" parent="." instance=ExtResource("11_xnomx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 64, 0)

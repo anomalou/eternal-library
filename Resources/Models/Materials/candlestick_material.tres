@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://v7hukmjgu30n"]
 
-[ext_resource type="Shader" uid="uid://b3yv8pqm0jvjv" path="res://Shaders/color.gdshader" id="2_d6fm8"]
+[ext_resource type="Shader" uid="uid://b3yv8pqm0jvjv" path="res://Shaders/noise_solid_texture.gdshader" id="2_d6fm8"]
 
 [resource]
 render_priority = 0
