@@ -34,9 +34,9 @@ transitions = ["open_book", "close_book", SubResource("AnimationNodeStateMachine
 graph_offset = Vector2(7, -139)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0itbn"]
-graph_offset = Vector2(-198, 110)
+graph_offset = Vector2(-378, -8)
 nodes/BookState/node = SubResource("AnimationNodeStateMachine_qwkjv")
-nodes/BookState/position = Vector2(-20, 180)
+nodes/BookState/position = Vector2(0, 120)
 node_connections = [&"output", 0, &"BookState"]
 
 [node name="Book" type="Node3D"]
