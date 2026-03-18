@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bunrxv8xgltf3"]
+[gd_scene load_steps=4 format=3 uid="uid://bunrxv8xgltf3"]
 
 [ext_resource type="Script" uid="uid://3wlblhkgeui3" path="res://Scripts/Entities/shelf_interactive.gd" id="1_1p1au"]
 [ext_resource type="ArrayMesh" uid="uid://85y3ol7cl5xw" path="res://Resources/Models/book_prop_mesh.res" id="2_wu5vs"]
+[ext_resource type="PackedScene" uid="uid://dn0fwnb84pgn1" path="res://Components/Interactable.tscn" id="3_tx13t"]
 
 [node name="ShelfInteractive" type="Node3D"]
 script = ExtResource("1_1p1au")
 book_prop = ExtResource("2_wu5vs")
+
+[node name="Interactable" parent="." instance=ExtResource("3_tx13t")]

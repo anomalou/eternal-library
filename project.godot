@@ -61,6 +61,7 @@ down={
 3d_physics/layer_1="wall"
 3d_physics/layer_2="floor"
 3d_physics/layer_3="entity"
+3d_physics/layer_4="interactable"
 3d_physics/layer_9="enemy"
 3d_physics/layer_10="player"
 

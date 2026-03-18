@@ -8,6 +8,7 @@ var look_x : float = 0.0
 var look_y : float = 0.0
 
 @onready var _camera : Camera3D = $FPV
+@onready var _raycast : RayCast3D = $FPV/RayCast3D 
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -30,6 +31,12 @@ func _input(event: InputEvent) -> void:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			else:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _process(delta: float) -> void:
+	if _raycast.is_colliding():
+		var collide_point = _raycast.get_collision_point()
+		var collider = _raycast.get_collider()
+		Log.info("Raycast collision: ", collide_point)
 
 func _physics_process(_delta: float) -> void:
 	var input_dir = Input.get_vector("left", "right", "up", "down")

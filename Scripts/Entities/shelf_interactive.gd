@@ -1,11 +1,16 @@
 extends Shelf
 class_name ShelfInteractive
 
+@onready var _interactable : Interactable = $Interactable
+
 var _knowledge_books : Array[int]
 
 func generate(_id : String):
 	super(_id)
 	_generate_knowledge()
+	var mesh_size = Vector3(book_number, 2.5, 1)
+	var mesh_offset = Vector3(book_number / 2.0, 1.3, 1)
+	_interactable.configure_area(mesh_size, mesh_offset)
 
 func _generate_knowledge():
 	for i in range(book_number):
