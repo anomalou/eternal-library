@@ -36,6 +36,8 @@ func _process(delta: float) -> void:
 	if _raycast.is_colliding():
 		var collide_point = _raycast.get_collision_point()
 		var collider = _raycast.get_collider()
+		if collider and collider is InteractableArea:
+			collider.interact.emit(collide_point)
 		Log.info("Raycast collision: ", collide_point)
 
 func _physics_process(_delta: float) -> void:
