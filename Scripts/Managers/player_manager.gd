@@ -2,7 +2,7 @@ extends Node
 class_name PlayerManager
 
 var player_id : String
-var player : PlayerTest
+var player : CharacterBody3D
 var player_gallery : HexCoord # current gallery player visiting
 
 var _seed_manager : SeedManager

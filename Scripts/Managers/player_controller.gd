@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name PlayerTest
+class_name PlayerController
 
 @export var speed : float = 5.0
 @export var mouse_sens : float = 0.003
@@ -8,7 +8,10 @@ var look_x : float = 0.0
 var look_y : float = 0.0
 
 @onready var _camera : Camera3D = $FPV
-@onready var _raycast : RayCast3D = $FPV/RayCast3D 
+@onready var _raycast : RayCast3D = $FPV/RayCast3D
+
+var interaction_collider : InteractableArea
+var interact_point : Vector3
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -25,6 +28,10 @@ func _input(event: InputEvent) -> void:
 		if event.keycode == KEY_ESCAPE and event.pressed:
 			get_tree().quit()
 	
+	if Input.is_action_just_pressed("use"):
+		if interaction_collider:
+			interaction_collider.interact.emit(interact_point)
+	
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_RIGHT and event.pressed:
 			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -32,12 +39,15 @@ func _input(event: InputEvent) -> void:
 			else:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _raycast.is_colliding():
 		var collide_point = _raycast.get_collision_point()
 		var collider = _raycast.get_collider()
 		if collider and collider is InteractableArea:
-			collider.interact.emit(collide_point)
+			interaction_collider = collider
+			interact_point = collide_point
+		else:
+			interaction_collider = null
 		Log.info("Raycast collision: ", collide_point)
 
 func _physics_process(_delta: float) -> void:

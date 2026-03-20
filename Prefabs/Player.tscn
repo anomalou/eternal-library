@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bfr681nh8onpb"]
 
-[ext_resource type="Script" uid="uid://b2nvt4aaiyo50" path="res://Scripts/Debug/test_control.gd" id="1_um8lo"]
+[ext_resource type="Script" uid="uid://b2nvt4aaiyo50" path="res://Scripts/Managers/player_controller.gd" id="1_um8lo"]
 [ext_resource type="Environment" uid="uid://ccjcp7s2720r2" path="res://Configurations/player_env.tres" id="2_x3d5u"]
 [ext_resource type="PackedScene" uid="uid://cbmi8824ofiib" path="res://Resources/Models/librarian.glb" id="3_b43ah"]
 
