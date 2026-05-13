@@ -46,9 +46,10 @@ func _process(_delta: float) -> void:
 		if collider and collider is InteractableArea:
 			interaction_collider = collider
 			interact_point = collide_point
+			interaction_collider.hover.emit(interact_point)
 		else:
 			interaction_collider = null
-		Log.info("Raycast collision: ", collide_point)
+		#Log.info("Raycast collision: ", collide_point)
 
 func _physics_process(_delta: float) -> void:
 	var input_dir = Input.get_vector("left", "right", "up", "down")

@@ -3,7 +3,6 @@ class_name Shelf
 
 @export var book_number : int = 24
 @export var book_prop : ArrayMesh
-var taken_books : Array[int]
 
 var multimesh : MultiMesh
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://sdvoyak3ymgj"]
+
+[ext_resource type="ArrayMesh" uid="uid://ctsbiuxqo10vv" path="res://Resources/Models/book_prop_mesh_outline.res" id="1_xe6x3"]
+
+[node name="BookOutliner" type="Node3D"]
+
+[node name="Model" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_xe6x3")
