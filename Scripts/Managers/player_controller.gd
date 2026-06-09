@@ -39,19 +39,32 @@ func _input(event: InputEvent) -> void:
 			else:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	_raycast_process()
+	_movement_process(_delta)
+
+func _raycast_process() -> void:
 	if _raycast.is_colliding():
 		var collide_point = _raycast.get_collision_point()
 		var collider = _raycast.get_collider()
 		if collider and collider is InteractableArea:
+			if interaction_collider and interaction_collider != collider:
+				interaction_collider.end_hover.emit()
 			interaction_collider = collider
 			interact_point = collide_point
 			interaction_collider.hover.emit(interact_point)
 		else:
-			interaction_collider = null
+			_clear_current_interaction()
+	else:
+		_clear_current_interaction()
 		#Log.info("Raycast collision: ", collide_point)
 
-func _physics_process(_delta: float) -> void:
+func _clear_current_interaction():
+	if interaction_collider:
+		interaction_collider.end_hover.emit()
+	interaction_collider = null
+
+func _movement_process(_delta : float) -> void:
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
@@ -66,4 +79,3 @@ func _physics_process(_delta: float) -> void:
 		velocity.y -= 9.8 * _delta
 	
 	move_and_slide()
-	

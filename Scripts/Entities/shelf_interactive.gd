@@ -5,6 +5,7 @@ class_name ShelfInteractive
 
 var _knowledge_books : Array[int]
 var taken_books : Array[int]
+var _selection_index : int = -1 # -1 mean it have no selection right now
 
 func generate(_id : String):
 	super(_id)
@@ -12,7 +13,7 @@ func generate(_id : String):
 	var mesh_size = Vector3(book_number, 2.5, 1)
 	var mesh_offset = Vector3(book_number / 2.0, 1.3, 1)
 	_interactable.configure_area(mesh_size, mesh_offset)
-	_interactable.connect_actions(_interact_action, _hover_action)
+	_interactable.connect_actions(_interact_action, _hover_action, _end_hover_action)
 
 func _generate_knowledge():
 	for i in range(book_number):
@@ -34,6 +35,9 @@ func hide_book(_hide : bool, index : int):
 	else:
 		taken_books.erase(index)
 
+func _process(_delta: float) -> void:
+	_process_selection(_selection_index)
+
 func _interact_action(point : Vector3):
 	# calculate book with point of use
 	var index = _get_book_index(point)
@@ -41,8 +45,13 @@ func _interact_action(point : Vector3):
 
 func _hover_action(point : Vector3):
 	var index = _get_book_index(point)
-	_process_selection(index)
-	
+	if index >= 0 or index < book_number:
+		_selection_index = index
+	else:
+		_selection_index = -1
+
+func _end_hover_action():
+	_selection_index = -1
 
 func _get_book_index(point : Vector3) -> int:
 	point = to_local(point)
@@ -50,8 +59,7 @@ func _get_book_index(point : Vector3) -> int:
 	return index
 
 func _process_selection(index : int):
-	if index >= 0 or index < book_number:
+	if index != -1:
 		var book_transfrom = multimesh.get_instance_transform(index)
-		book_transfrom.origin
 		
-	
+		
