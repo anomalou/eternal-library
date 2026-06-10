@@ -6,4 +6,6 @@ signal player_enter_gallery(from : HexCoord, to : HexCoord)
 signal player_move(position : Vector3, view : Vector2)
 
 @warning_ignore("unused_signal")
-signal select_book(id : String)
+signal prepare_book(id : String, color : Color, pos : Vector3)
+@warning_ignore("unused_signal")
+signal control_book(id : String)

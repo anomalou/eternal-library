@@ -22,5 +22,5 @@ func generate_player_journal(player_id : String) -> String:
 	return journal_id
 	
 
-func generate_book(id : String):
+func generate_book(id : String, is_gibberish : bool):
 	pass

@@ -7,7 +7,7 @@ var _seed_manager : SeedManager
 var _entity_manager : EntityManager
 
 func _ready() -> void:
-	var _session = GameEnv.get_current_session() as GameSession
+	var _session : GameSession = GameEnv.get_current_session()
 	if _session:
 		self._seed_manager = _session.seed_manager
 		self._entity_manager = _session.entity_manager

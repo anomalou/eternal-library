@@ -11,7 +11,8 @@ var _book_data : BookData
 var _book_state : BookState
 
 func _ready() -> void:
-	Signals.select_book.connect(_control_book)
+	Signals.prepare_book.connect(_prepare_book)
+	Signals.control_book.connect(_control_book)
 
 # Also need state manager here 
 func init(entity_manager : EntityManager, state_manager : StateManager, book_manager : BookManager):
@@ -19,6 +20,10 @@ func init(entity_manager : EntityManager, state_manager : StateManager, book_man
 	self._state_manager = state_manager
 	self._book_manager = book_manager
 	Log.info("Book controller initialized")
+
+func _prepare_book(book_id : String, color : Color, pos : Vector3):
+	# spawn book here
+	pass
 
 func _control_book(book_id : String):
 	var entity = _entity_manager.find(book_id)

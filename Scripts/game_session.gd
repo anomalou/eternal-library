@@ -34,4 +34,4 @@ func create_player():
 	#book.rotate_x(deg_to_rad(90))
 	book.position = Vector3(0, 5.3, -9.0)
 	
-	Signals.select_book.emit(journal_id)
+	Signals.control_book.emit(journal_id)

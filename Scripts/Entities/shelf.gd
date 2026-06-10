@@ -20,14 +20,15 @@ func _generate_multimesh():
 	multimesh.instance_count = book_number
 	
 	for i in range(book_number):
-		var offset_id = _seed_manager.generate_object_id("offset", str(i), id)
+		var book_id = _seed_manager.generate_object_id("book", str(i), id)
+		var offset_id = _seed_manager.generate_object_id("offset", "", book_id)
 		var rnd = _seed_manager.get_temp_rnd(offset_id)
 		
 		var inst_transform : Transform3D = Transform3D()
 		inst_transform.origin = Vector3(0.5 + i, 0, rnd.randf_range(0, 0.4))
 		inst_transform.basis = Basis(Vector3.UP, PI / 2)
 		multimesh.set_instance_transform(i, inst_transform)
-		multimesh.set_instance_color(i, _generate_color(i))
+		multimesh.set_instance_color(i, _generate_color(book_id))
 	
 	multimesh_instance.multimesh = multimesh
 	
@@ -35,8 +36,8 @@ func _generate_multimesh():
 	multimesh_instance.set_deferred("owner", self)
 	
 
-func _generate_color(index : int):
-	var color_id = _seed_manager.generate_object_id("color", str(index), id)
+func _generate_color(book_id : String):
+	var color_id = _seed_manager.generate_object_id("color", "", book_id)
 	var rnd = _seed_manager.get_temp_rnd(color_id)
 	var h = rnd.randf()
 	var s = rnd.randf_range(0.5, 0.8)

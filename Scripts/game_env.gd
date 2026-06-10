@@ -5,12 +5,13 @@ func set_current_session(session : GameSession):
 	_current_session = weakref(session)
 	Log.info("New game session is set up as global env property")
 
-func get_current_session():
+func get_current_session() -> GameSession:
 	var session = _current_session.get_ref()
 	if session:
 		return session
 	else:
 		push_error("Session not valid and not exists. Exceptions will be occured")
+		return null
 
 func is_session_exist() -> bool:
 	return _current_session.get_ref() != null

@@ -6,6 +6,8 @@ class_name ShelfInteractive
 var _knowledge_books : Array[int]
 var taken_books : Array[int]
 var _selection_index : int = -1 # -1 mean it have no selection right now
+var _selection_color : Color = Color(0.755, 0.563, 0.0, 1.0)
+var _selected_book_base_color : Color
 
 func generate(_id : String):
 	super(_id)
@@ -26,7 +28,7 @@ func _generate_knowledge():
 			inst_transform.origin = inst_transform.origin + Vector3(0, 0, rnd.randf_range(0.0, 0.6))
 			multimesh.set_instance_transform(i, inst_transform)
 
-func hide_book(_hide : bool, index : int):
+func _hide_book(_hide : bool, index : int):
 	var inst_transform = multimesh.get_instance_transform(index)
 	inst_transform = inst_transform.scaled_local(Vector3.ZERO if _hide else Vector3.ONE)
 	multimesh.set_instance_transform(index, inst_transform)
@@ -39,27 +41,47 @@ func _process(_delta: float) -> void:
 	_process_selection(_selection_index)
 
 func _interact_action(point : Vector3):
-	# calculate book with point of use
 	var index = _get_book_index(point)
+	var book_id = _seed_manager.generate_object_id("book", "", id)
+	var color : Color = multimesh.get_instance_color(index)
+	var pos : Vector3 = multimesh.get_instance_transform(index).origin
+	Signals.prepare_book.emit(book_id, color, pos)
+	var book = _entity_manager.find(book_id)
+	_hide_book(true, index)
+	Signals.control_book.emit(book_id)
+	# wait here book animation end
+	_hide_book(false, index)
 	Log.info("Used ", index, " book on bookshell ", id)
 
 func _hover_action(point : Vector3):
 	var index = _get_book_index(point)
-	if index >= 0 or index < book_number:
-		_selection_index = index
-	else:
-		_selection_index = -1
+	if index >= 0 and index < book_number:
+		if index != _selection_index:
+			var prev_index = _selection_index
+			var prev_color = _selected_book_base_color
+			_selected_book_base_color = multimesh.get_instance_color(index)
+			_selection_index = index
+			await get_tree().process_frame
+			if prev_index != -1 and prev_index != index:
+				_deselect_book(prev_index, prev_color)
 
 func _end_hover_action():
+	if _selection_index != -1:
+		_deselect_book(_selection_index, _selected_book_base_color)
 	_selection_index = -1
 
 func _get_book_index(point : Vector3) -> int:
 	point = to_local(point)
-	var index = round(point.x)
+	var index = floor(point.x)
 	return index
 
 func _process_selection(index : int):
 	if index != -1:
-		var book_transfrom = multimesh.get_instance_transform(index)
-		
-		
+		_select_book(index)
+
+func _select_book(index : int):
+	var highlight = _selected_book_base_color * Color(1.0, 1.0, 1.0) + _selection_color
+	multimesh.set_instance_color(index, highlight)
+
+func _deselect_book(index : int, base_color : Color):
+	multimesh.set_instance_color(index, base_color)
