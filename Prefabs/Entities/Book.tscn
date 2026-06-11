@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://gtr4c33acjus"]
+[gd_scene load_steps=15 format=3 uid="uid://gtr4c33acjus"]
 
 [ext_resource type="Script" uid="uid://c63u7g3nwcqpj" path="res://Scripts/Entities/book.gd" id="1_swk3h"]
+[ext_resource type="Material" uid="uid://y4pufyw3lkfs" path="res://Resources/Models/Materials/book_folder_material.tres" id="2_0itbn"]
 [ext_resource type="Material" uid="uid://x7wr20ra4a38" path="res://Resources/Models/Materials/text_material.tres" id="2_d3qs1"]
 [ext_resource type="PackedScene" uid="uid://chpyyl04pssp4" path="res://Components/ContentBuilder.tscn" id="2_dwo58"]
 [ext_resource type="Material" uid="uid://bk4cuyy43g44x" path="res://Resources/Models/Materials/paper_material_1.tres" id="2_v1itn"]
@@ -22,25 +23,25 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v1itn"]
 switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qwkjv"]
 states/Start/position = Vector2(371, 57)
 states/close_book/node = SubResource("AnimationNodeAnimation_v1itn")
-states/close_book/position = Vector2(603, 113)
+states/close_book/position = Vector2(603, 114)
 states/open_book/node = SubResource("AnimationNodeAnimation_0itbn")
 states/open_book/position = Vector2(603, -31)
 transitions = ["open_book", "close_book", SubResource("AnimationNodeStateMachineTransition_cvk23"), "close_book", "open_book", SubResource("AnimationNodeStateMachineTransition_pj5bn"), "Start", "open_book", SubResource("AnimationNodeStateMachineTransition_v1itn")]
-graph_offset = Vector2(7, -139)
+graph_offset = Vector2(97, -72)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0itbn"]
-graph_offset = Vector2(-378, -8)
+graph_offset = Vector2(-281.57028, 32.421448)
 nodes/BookState/node = SubResource("AnimationNodeStateMachine_qwkjv")
 nodes/BookState/position = Vector2(0, 120)
 node_connections = [&"output", 0, &"BookState"]
 
 [node name="Book" type="Node3D"]
 script = ExtResource("1_swk3h")
+folder_material = ExtResource("2_0itbn")
 paper_material = ExtResource("2_v1itn")
 text_material = ExtResource("2_d3qs1")
 

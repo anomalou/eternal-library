@@ -12,7 +12,7 @@ var _book_state : BookState
 
 func _ready() -> void:
 	Signals.prepare_book.connect(_prepare_book)
-	Signals.control_book.connect(_control_book)
+	Signals.start_reading.connect(_start_reading)
 
 # Also need state manager here 
 func init(entity_manager : EntityManager, state_manager : StateManager, book_manager : BookManager):
@@ -21,32 +21,77 @@ func init(entity_manager : EntityManager, state_manager : StateManager, book_man
 	self._book_manager = book_manager
 	Log.info("Book controller initialized")
 
-func _prepare_book(book_id : String, color : Color, pos : Vector3):
-	# spawn book here
-	pass
+func _input(event: InputEvent) -> void:
+	if GameEnv.get_current_session().input_block.get("book", false):
+		# process input here
+		pass
 
-func _control_book(book_id : String):
+func _prepare_book(book_id : String, color : Color, pos : Vector3):
+	var book : Book = _entity_manager.create_entity(book_id, "book")
+	book.set_color(color)
+	book.global_position = pos
+
+func _start_reading(book_id : String, is_gibberish : bool):
+	# commented only for tests
+	#GameEnv.get_current_session().input_block.set("book", true) 
+	var book : Book = await _wait_for_book(book_id)
+	if not book:
+		GameEnv.get_current_session().input_block.set("book", false)
+		return
+	_init_book_state(book_id, book, is_gibberish)
+	_render_pages()
+	_book_entity.open()
+
+func _wait_for_book(book_id : String) -> Book:
+	var timeout = 10.0
+	var elapsed = 0
+	
 	var entity = _entity_manager.find(book_id)
-	var data = _book_manager.find(book_id)
-	if not entity or not entity is Book or not data:
+	while not entity and elapsed < timeout:
+		var entity_id = await _entity_manager.entity_registered
+		if entity_id == book_id:
+			entity = _entity_manager.find(book_id)
+		elapsed += get_process_delta_time()
+	
+	if not entity or not entity is Book:
 		Log.error("Something wrong with book = ", book_id)
-	else:
-		var state
-		if _state_manager.has_state(book_id):
-			state = _state_manager.restore(book_id)
-		
-		if not state or not state is BookData:
-			state = BookState.new()
-			state.current_page = 0
-			_state_manager.save(book_id, state)
-		
-		self._book_id = book_id
-		self._book_entity = entity
-		self._book_data = data
-		self._book_state = state
-		
-		# only for tests
-		_render_pages()
+	
+	# now wait animation end here
+	
+	return entity
+
+func _init_book_state(book_id : String, entity : Book, is_gibberish : bool) -> void:
+	var data = _book_manager.find(book_id)
+	
+	if not data:
+		data = _book_manager.generate_book(book_id, is_gibberish)
+	
+	var state
+	if _state_manager.has_state(book_id):
+		state = _state_manager.restore(book_id)
+	
+	if not state or not state is BookState:
+		state = BookState.new()
+		state.current_page = 0
+		_state_manager.save(book_id, state)
+	
+	self._book_id = book_id
+	self._book_entity = entity
+	self._book_data = data
+	self._book_state = state
+
+func _stop_reading():
+	_state_manager.save(_book_id, _book_state)
+	await _book_entity.close()
+	# play return animation here
+	# await animation end
+	Signals.return_book.emit(_book_id)
+	_entity_manager.destroy_entity(_book_id)
+	_book_id = ""
+	_book_entity = null
+	_book_data = null
+	_book_state = null
+	GameEnv.get_current_session().input_block.set("book", false)
 
 func _turn_page(forward : bool = true):
 	if _book_id:

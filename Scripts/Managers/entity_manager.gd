@@ -1,6 +1,9 @@
 extends Node
 class_name  EntityManager
 
+@warning_ignore("unused_signal")
+signal entity_registered(id : String)
+
 var _entity_cache : Dictionary[String, Node3D] = {}
 
 var _hexagon_config : HexagonConfig
@@ -47,20 +50,21 @@ func create_corridor(_id : String, g1 : Vector2i, g2 : Vector2i) -> Corridor:
 	
 	return corridor
 
-func create_entity(_id : String, entity_name : String, parent : Node = self) -> Entity:
+func create_entity(_id : String, entity_config_name : String, parent : Node = self) -> Entity:
 	if _entity_cache.get(_id):
 		destroy_entity(_id)
 	
-	var config = EntityConfigManager.get_by_name(entity_name)
+	var config = EntityConfigManager.get_by_name(entity_config_name)
 	var entity_prefab = config.prefab
 	var entity = entity_prefab.instantiate() as Entity
 	parent.add_child(entity)
 	entity.set_deferred("owner", parent)
-	entity.name = entity_name
+	entity.name = entity_config_name
 	_entity_cache.set(_id, entity)
 	
 	entity.generate(_id)
 	
+	entity_registered.emit(_id)
 	return entity
 
 func destroy_entity(_id : String):

@@ -17,20 +17,9 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		rotate_y(-event.relative.x * mouse_sens)
-		look_y = rotation.y
-		look_x -= event.relative.y * mouse_sens
-		look_x = clamp(look_x, -1.5, 1.5)
-		_camera.rotation.x = look_x
-	
 	if event is InputEventKey:
 		if event.keycode == KEY_ESCAPE and event.pressed:
 			get_tree().quit()
-	
-	if Input.is_action_just_pressed("use"):
-		if interaction_collider:
-			interaction_collider.interact.emit(interact_point)
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MouseButton.MOUSE_BUTTON_RIGHT and event.pressed:
@@ -38,10 +27,15 @@ func _input(event: InputEvent) -> void:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			else:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if not GameEnv.get_current_session().is_input_blocked():
+		_camera_process(event)
+		_intraction_process()
 
 func _physics_process(_delta: float) -> void:
-	_raycast_process()
-	_movement_process(_delta)
+	if not GameEnv.get_current_session().is_input_blocked():
+		_raycast_process()
+		_movement_process(_delta)
 
 func _raycast_process() -> void:
 	if _raycast.is_colliding():
@@ -64,6 +58,14 @@ func _clear_current_interaction():
 		interaction_collider.end_hover.emit()
 	interaction_collider = null
 
+func _camera_process(event : InputEvent) -> void:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		rotate_y(-event.relative.x * mouse_sens)
+		look_y = rotation.y
+		look_x -= event.relative.y * mouse_sens
+		look_x = clamp(look_x, -1.5, 1.5)
+		_camera.rotation.x = look_x
+
 func _movement_process(_delta : float) -> void:
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -79,3 +81,8 @@ func _movement_process(_delta : float) -> void:
 		velocity.y -= 9.8 * _delta
 	
 	move_and_slide()
+
+func _intraction_process() -> void:
+	if Input.is_action_just_pressed("use"):
+		if interaction_collider:
+			interaction_collider.interact.emit(interact_point)

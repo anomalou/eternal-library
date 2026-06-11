@@ -10,6 +10,7 @@ class_name GameSession
 @onready var book_controller : BookController = $BookController
 
 var _config : SessionConfig
+var input_block : Dictionary[String, bool]
 
 # only for caches and outher managers initialization
 func init(config : SessionConfig):
@@ -34,4 +35,8 @@ func create_player():
 	#book.rotate_x(deg_to_rad(90))
 	book.position = Vector3(0, 5.3, -9.0)
 	
-	Signals.control_book.emit(journal_id)
+	Signals.start_reading.emit(journal_id, false)
+
+func is_input_blocked():
+	return not input_block.is_empty() and input_block.values().has(true)
+	
