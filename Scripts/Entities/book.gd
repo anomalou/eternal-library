@@ -45,6 +45,7 @@ func set_color(color : Color):
 	_folder_material.albedo_color = color
 	left_folder.set_surface_override_material(0, _folder_material)
 	right_folder.set_surface_override_material(0, _folder_material)
+	spine.set_surface_override_material(0, _folder_material)
 
 func open():
 	var book_state : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/BookState/playback")

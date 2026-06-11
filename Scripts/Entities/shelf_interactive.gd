@@ -35,9 +35,10 @@ func _hide_book(_hide : bool, index : int):
 	multimesh.set_instance_transform(index, inst_transform)
 
 func _take_book(book_id : String, index : int) -> void:
-	_taken_books.set(book_id, index)
-	_hide_book(true, index)
-	Log.info("Book ", book_id, " taken from bookshelf ", id)
+	if not _taken_books.values().has(index):
+		_taken_books.set(book_id, index)
+		_hide_book(true, index)
+		Log.info("Book ", book_id, " taken from bookshelf ", id)
 
 func _return_book(book_id : String) -> void:
 	if _taken_books.has(book_id):
@@ -50,12 +51,15 @@ func _process(_delta: float) -> void:
 	_process_selection(_selection_index)
 
 func _interact_action(_point : Vector3):
-	var book_id = _seed_manager.generate_object_id("book", str(_selection_index), id)
-	var pos : Vector3 = multimesh.get_instance_transform(_selection_index).origin
-	Signals.prepare_book.emit(book_id, _selected_book_base_color, to_global(pos))
-	_take_book(book_id, _selection_index)
-	Signals.start_reading.emit(book_id, not _knowledge_books.has(_selection_index))
-	Log.info("Used ", _selection_index, " book on bookshell ", id)
+	if not _taken_books.values().has(_selection_index):
+		var book_id = _seed_manager.generate_object_id("book", str(_selection_index), id)
+		var origin : Vector3 = multimesh.get_instance_transform(_selection_index).origin + Vector3(0.0, 1.25, 1.0)
+		var raw_rotation = global_rotation + Vector3(0, deg_to_rad(90), 0)
+		var book_transfrom : Transform3D = Transform3D(Basis.from_euler(raw_rotation), to_global(origin))
+		Signals.prepare_book.emit(book_id, _selected_book_base_color, book_transfrom)
+		_take_book(book_id, _selection_index)
+		Signals.start_reading.emit(book_id, not _knowledge_books.has(_selection_index))
+		Log.info("Used ", _selection_index, " book on bookshell ", id)
 
 func _hover_action(point : Vector3):
 	var index = _get_book_index(point)

@@ -5,10 +5,12 @@ var _entity_manager : EntityManager
 var _state_manager : StateManager
 var _book_manager : BookManager
 
+# Controlling right now book's properties
 var _book_id : String
 var _book_entity : Book
 var _book_data : BookData
 var _book_state : BookState
+var _shelf_place_transform : Transform3D
 
 func _ready() -> void:
 	Signals.prepare_book.connect(_prepare_book)
@@ -26,10 +28,11 @@ func _input(event: InputEvent) -> void:
 		# process input here
 		pass
 
-func _prepare_book(book_id : String, color : Color, pos : Vector3):
+func _prepare_book(book_id : String, color : Color, transform : Transform3D):
 	var book : Book = _entity_manager.create_entity(book_id, "book")
 	book.set_color(color)
-	book.global_position = pos
+	book.global_transform = transform
+	_shelf_place_transform = transform
 
 func _start_reading(book_id : String, is_gibberish : bool):
 	# commented only for tests
@@ -56,7 +59,7 @@ func _wait_for_book(book_id : String) -> Book:
 	if not entity or not entity is Book:
 		Log.error("Something wrong with book = ", book_id)
 	
-	# now wait animation end here
+	# now wait book fly animation end here
 	
 	return entity
 
@@ -91,6 +94,7 @@ func _stop_reading():
 	_book_entity = null
 	_book_data = null
 	_book_state = null
+	_shelf_place_transform = Transform3D.IDENTITY
 	GameEnv.get_current_session().input_block.set("book", false)
 
 func _turn_page(forward : bool = true):
