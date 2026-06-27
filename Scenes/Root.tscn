@@ -11,6 +11,8 @@ shader_parameter/vignette_radius = 0.4
 shader_parameter/vignette_color = Vector4(0, 0, 0, 1)
 shader_parameter/color_levels = 20.0
 shader_parameter/noise_strength = 0.05
+shader_parameter/pixel_size = 3.0
+shader_parameter/screen_resolution = Vector2(1920, 1080)
 script = ExtResource("3_sxhdm")
 metadata/_custom_type_script = "uid://dk1u4q6a7iphx"
 
@@ -35,12 +37,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 2
 
 [node name="WorldRenderer" type="SubViewport" parent="UI/WorldRendererContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(576, 324)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="GameMaster" type="Node" parent="UI/WorldRendererContainer/WorldRenderer"]

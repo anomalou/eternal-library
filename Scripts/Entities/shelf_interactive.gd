@@ -5,6 +5,7 @@ class_name ShelfInteractive
 
 var _knowledge_books : Array[int]
 var _taken_books : Dictionary[String, int]
+var _taken_books_transf : Dictionary[int, Transform3D]
 var _selection_index : int = -1 # -1 mean it have no selection right now
 var _selection_color : Color = Color(0.755, 0.563, 0.0, 1.0)
 var _selected_book_base_color : Color
@@ -31,7 +32,15 @@ func _generate_knowledge():
 
 func _hide_book(_hide : bool, index : int):
 	var inst_transform = multimesh.get_instance_transform(index)
-	inst_transform = inst_transform.scaled_local(Vector3.ZERO if _hide else Vector3.ONE)
+	if _hide:
+		_taken_books_transf.set(index, inst_transform)
+		inst_transform = inst_transform.scaled(Vector3.ZERO)
+	else:
+		if not _taken_books_transf.has(index):
+			Log.error("Book ", str(index), " not taken or something wrong happened on shelf ", id)
+		inst_transform = _taken_books_transf.get(index)
+		_taken_books_transf.erase(index)
+	
 	multimesh.set_instance_transform(index, inst_transform)
 
 func _take_book(book_id : String, index : int) -> void:

@@ -12,6 +12,10 @@ var _book_data : BookData
 var _book_state : BookState
 var _shelf_place_transform : Transform3D
 
+var camera : Camera3D
+
+var _reset_start_reading = false
+
 func _ready() -> void:
 	Signals.prepare_book.connect(_prepare_book)
 	Signals.start_reading.connect(_start_reading)
@@ -25,8 +29,8 @@ func init(entity_manager : EntityManager, state_manager : StateManager, book_man
 
 func _input(event: InputEvent) -> void:
 	if GameEnv.get_current_session().input_block.get("book", false):
-		# process input here
-		pass
+		if event.is_action_pressed("close_book"):
+			_stop_reading()
 
 func _prepare_book(book_id : String, color : Color, transform : Transform3D):
 	var book : Book = _entity_manager.create_entity(book_id, "book")
@@ -35,15 +39,22 @@ func _prepare_book(book_id : String, color : Color, transform : Transform3D):
 	_shelf_place_transform = transform
 
 func _start_reading(book_id : String, is_gibberish : bool):
-	# commented only for tests
-	#GameEnv.get_current_session().input_block.set("book", true) 
+	Log.info("Book ", _book_id, " start reading")
+	GameEnv.get_current_session().input_block.set("book", true)
 	var book : Book = await _wait_for_book(book_id)
 	if not book:
 		GameEnv.get_current_session().input_block.set("book", false)
 		return
+	_reset_start_reading = false
 	_init_book_state(book_id, book, is_gibberish)
 	_render_pages()
-	_book_entity.open()
+	if not _reset_start_reading:
+		await _book_entity.eject_from_shelf()
+	if not _reset_start_reading:
+		await _book_entity.fly_to_camera(camera.global_transform)
+	if not _reset_start_reading:
+		await _book_entity.open()
+	Log.info("Book ", _book_id, " opened")
 
 func _wait_for_book(book_id : String) -> Book:
 	var timeout = 10.0
@@ -58,8 +69,6 @@ func _wait_for_book(book_id : String) -> Book:
 	
 	if not entity or not entity is Book:
 		Log.error("Something wrong with book = ", book_id)
-	
-	# now wait book fly animation end here
 	
 	return entity
 
@@ -84,18 +93,23 @@ func _init_book_state(book_id : String, entity : Book, is_gibberish : bool) -> v
 	self._book_state = state
 
 func _stop_reading():
+	Log.info("Book ", _book_id, " stop reading")
+	_reset_start_reading = true
 	_state_manager.save(_book_id, _book_state)
 	await _book_entity.close()
+	GameEnv.get_current_session().input_block.set("book", false)
+	await _book_entity.fly_to_shelf(_shelf_place_transform)
 	# play return animation here
 	# await animation end
 	Signals.return_book.emit(_book_id)
 	_entity_manager.destroy_entity(_book_id)
+	Log.info("Book ", _book_id, " closed")
 	_book_id = ""
 	_book_entity = null
 	_book_data = null
 	_book_state = null
 	_shelf_place_transform = Transform3D.IDENTITY
-	GameEnv.get_current_session().input_block.set("book", false)
+	
 
 func _turn_page(forward : bool = true):
 	if _book_id:

@@ -7,7 +7,7 @@ class_name PlayerController
 var look_x : float = 0.0
 var look_y : float = 0.0
 
-@onready var _camera : Camera3D = $FPV
+@onready var camera : Camera3D = $FPV
 @onready var _raycast : RayCast3D = $FPV/RayCast3D
 
 var interaction_collider : InteractableArea
@@ -64,7 +64,7 @@ func _camera_process(event : InputEvent) -> void:
 		look_y = rotation.y
 		look_x -= event.relative.y * mouse_sens
 		look_x = clamp(look_x, -1.5, 1.5)
-		_camera.rotation.x = look_x
+		camera.rotation.x = look_x
 
 func _movement_process(_delta : float) -> void:
 	var input_dir = Input.get_vector("left", "right", "up", "down")

@@ -2,8 +2,9 @@ extends Node
 class_name PlayerManager
 
 var player_id : String
-var player : CharacterBody3D
+var player : PlayerController
 var player_gallery : HexCoord # current gallery player visiting
+var camera : Camera3D
 
 var _seed_manager : SeedManager
 var _randomizer : RandomNumberGenerator
@@ -43,6 +44,7 @@ func spawn_player():
 	player_gallery = HexCoord.new()
 	player.position = player_gallery.global_coord
 	player.position += Vector3(0, 6, 0)
+	camera = player.camera
 
 func _calculate_player_transition():
 	if not player:

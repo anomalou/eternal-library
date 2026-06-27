@@ -30,12 +30,13 @@ func generate_world():
 
 func create_player():
 	player_manager.spawn_player()
+	book_controller.camera = player_manager.camera
 	var journal_id = book_manager.generate_player_journal(player_manager.player_id)
 	var book : Entity = entity_manager.create_entity(journal_id, "book")
 	#book.rotate_x(deg_to_rad(90))
 	book.position = Vector3(0, 5.3, -9.0)
 	
-	Signals.start_reading.emit(journal_id, false)
+	#Signals.start_reading.emit(journal_id, false)
 
 func is_input_blocked():
 	return not input_block.is_empty() and input_block.values().has(true)
