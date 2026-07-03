@@ -31,6 +31,10 @@ func _input(event: InputEvent) -> void:
 	if GameEnv.get_current_session().input_block.get("book", false):
 		if event.is_action_pressed("close_book"):
 			_stop_reading()
+		if event.is_action_pressed("next_page"):
+			_turn_page(true)
+		if event.is_action_pressed("prev_page"):
+			_turn_page(false)
 
 func _prepare_book(book_id : String, color : Color, transform : Transform3D):
 	var book : Book = _entity_manager.create_entity(book_id, "book")
@@ -47,7 +51,7 @@ func _start_reading(book_id : String, is_gibberish : bool):
 		return
 	_reset_start_reading = false
 	_init_book_state(book_id, book, is_gibberish)
-	_render_pages()
+	_render_pages([0, 1])
 	if not _reset_start_reading:
 		await _book_entity.eject_from_shelf()
 	if not _reset_start_reading:
@@ -118,18 +122,45 @@ func _turn_page(forward : bool = true):
 		if forward:
 			if (current_index + 2) < book_size:
 				_book_state.current_page = current_index + 2
-				_render_pages()
+				_render_pages([-2, 1, -1, 0])
+				_book_entity.set_page_visible(true)
+				await _book_entity.turn_page(forward)
+				_render_pages([0, 1])
+				_book_entity.set_page_visible(false)
 		else:
 			if (current_index - 2) >= 0:
 				_book_state.current_page = current_index - 2
-				_render_pages()
+				_render_pages([0, 3, 1, 2])
+				_book_entity.set_page_visible(true)
+				await _book_entity.turn_page(forward)
+				_render_pages([0, 1])
+				_book_entity.set_page_visible(false)
+		
+			
 
 # only usable when book is open. Book state will be in state manager
 # also state manager handle current opened page
-func _render_pages():
+# order structure:
+# [ 0 , 1 , 2 , 3 ]
+#  \__^__/ \__^__/
+#   Block   Thick
+#   pages   page
+# 
+# Order stores page index offset for properly rendering of each pade side
+func _render_pages(order : Array[int]):
 	if not _book_id:
 		return
 	var pages : Array[PageData] = _book_data.split()
 	var current_page = _book_state.current_page
-	pages = pages.slice(current_page, pages.size())
-	_book_entity.render_pages(pages)
+	if order.size() > 2:
+		_book_entity.render_pages([
+			pages.get(current_page + order.get(0)), 
+			pages.get(current_page + order.get(1)), 
+			pages.get(current_page + order.get(2)), 
+			pages.get(current_page + order.get(3))
+		])
+	else:
+		_book_entity.render_pages([
+			pages.get(current_page + order.get(0)), 
+			pages.get(current_page + order.get(1))
+		])

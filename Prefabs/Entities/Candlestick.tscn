@@ -19,6 +19,9 @@ shadow_enabled = true
 shadow_bias = 0.2
 shadow_normal_bias = 2.5
 shadow_blur = 0.0
+distance_fade_enabled = true
+distance_fade_begin = 100.0
+distance_fade_shadow = 60.0
 omni_range = 40.0
 omni_attenuation = 0.8
 

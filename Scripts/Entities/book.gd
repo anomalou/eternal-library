@@ -11,7 +11,8 @@ signal ready_to_read()
 @onready var spine : MeshInstance3D = $Mesh/spine
 @onready var page : MeshInstance3D = $Mesh/page
 
-@onready var content_builder : ContentBuilder = $ContentBuilder
+@onready var block_content_builder : ContentBuilder = $BlockContentBuilder
+@onready var page_content_builder : ContentBuilder = $PageContentBuilder
 @onready var left_block : MeshInstance3D = $Mesh/left_block
 @onready var right_block : MeshInstance3D = $Mesh/right_block
 
@@ -24,22 +25,39 @@ signal ready_to_read()
 
 func generate(_id : String):
 	self.id = _id
-	var left_material = paper_material.duplicate(true)
-	var right_material = paper_material.duplicate(true)
+#	Left and right pages blocks of book
+	var left_block_material = paper_material.duplicate(true)
+	var right_block_material = paper_material.duplicate(true)
 	
-	left_block.mesh.surface_set_material(1, left_material)
-	right_block.mesh.surface_set_material(1, right_material)
+	left_block.mesh.surface_set_material(1, left_block_material)
+	right_block.mesh.surface_set_material(1, right_block_material)
 	
-	left_material.next_pass = text_material.duplicate(true)
-	right_material.next_pass = text_material.duplicate(true)
+	left_block_material.next_pass = text_material.duplicate(true)
+	right_block_material.next_pass = text_material.duplicate(true)
 	
-	left_material.next_pass.albedo_texture = content_builder.left_page.get_texture()
-	right_material.next_pass.albedo_texture = content_builder.right_page.get_texture()
+	left_block_material.next_pass.albedo_texture = block_content_builder.left_page.get_texture()
+	right_block_material.next_pass.albedo_texture = block_content_builder.right_page.get_texture()
+	
+#	Thick page that play turn animation
+	var left_page_material = paper_material.duplicate(true)
+	var right_page_material = paper_material.duplicate(true)
+	
+	page.mesh.surface_set_material(1, left_page_material)
+	page.mesh.surface_set_material(0, right_page_material)
+	
+	left_page_material.next_pass = text_material.duplicate(true)
+	right_page_material.next_pass = text_material.duplicate(true)
+	
+	left_page_material.next_pass.albedo_texture = page_content_builder.left_page.get_texture()
+	right_page_material.next_pass.albedo_texture = page_content_builder.right_page.get_texture()
+	
+	page.visible = false
 
 # only takes 2 first pages
 func render_pages(pages : Array[PageData]):
-	pages.resize(2)
-	content_builder.build(pages)
+	block_content_builder.build([pages.get(0), pages.get(1)])
+	if pages.size() > 2:
+		page_content_builder.build([pages.get(2), pages.get(3)])
 
 func set_color(color : Color):
 	var _folder_material : StandardMaterial3D = folder_material.duplicate(true)
@@ -61,7 +79,17 @@ func close():
 	var state = ""
 	while state != "close_book":
 		state = await book_state.state_finished
-	
+
+func set_page_visible(visibility : bool = true):
+	page.visible = visibility
+
+func turn_page(forward : bool):
+	var turn_state : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/TurnState/playback")
+	if forward:
+		turn_state.start("turn_page_forward")
+	else:
+		turn_state.start("turn_page_backward")
+	await turn_state.state_finished
 
 func eject_from_shelf():
 	var tween : Tween = create_tween()

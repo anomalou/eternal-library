@@ -1,10 +1,12 @@
-[gd_resource type="AnimationLibrary" load_steps=3 format=3 uid="uid://ddnkarp2485nn"]
+[gd_resource type="AnimationLibrary" load_steps=4 format=3 uid="uid://ddnkarp2485nn"]
 
 [ext_resource type="Animation" uid="uid://cckwke1llx0d1" path="res://Resources/Animations/open_book.anim" id="1_77wyo"]
 [ext_resource type="Animation" uid="uid://co52cmfmxh7ok" path="res://Resources/Animations/reset_book.anim" id="2_1elku"]
+[ext_resource type="Animation" uid="uid://be8s7ibl05jia" path="res://Resources/Animations/turn_page.res" id="3_af1ul"]
 
 [resource]
 _data = {
 &"open_book": ExtResource("1_77wyo"),
-&"reset_book": ExtResource("2_1elku")
+&"reset_book": ExtResource("2_1elku"),
+&"turn_page": ExtResource("3_af1ul")
 }

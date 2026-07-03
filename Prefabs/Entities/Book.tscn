@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://gtr4c33acjus"]
+[gd_scene load_steps=25 format=3 uid="uid://gtr4c33acjus"]
 
 [ext_resource type="Script" uid="uid://c63u7g3nwcqpj" path="res://Scripts/Entities/book.gd" id="1_swk3h"]
 [ext_resource type="Material" uid="uid://y4pufyw3lkfs" path="res://Resources/Models/Materials/book_folder_material.tres" id="2_0itbn"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c3qwi0xxsllvi" path="res://Resources/Models/book_ui_v2.glb" id="5_8rvnc"]
 [ext_resource type="AnimationLibrary" uid="uid://ddnkarp2485nn" path="res://Resources/Animations/book_library.tres" id="6_v1itn"]
 
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_0itbn"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v1itn"]
 animation = &"Book/open_book"
 play_mode = 1
@@ -16,9 +18,6 @@ play_mode = 1
 animation = &"Book/open_book"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cvk23"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pj5bn"]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v1itn"]
@@ -34,19 +33,53 @@ states/close_book/node = SubResource("AnimationNodeAnimation_v1itn")
 states/close_book/position = Vector2(603, 114)
 states/open_book/node = SubResource("AnimationNodeAnimation_0itbn")
 states/open_book/position = Vector2(603, -31)
-transitions = ["open_book", "close_book", SubResource("AnimationNodeStateMachineTransition_cvk23"), "close_book", "open_book", SubResource("AnimationNodeStateMachineTransition_pj5bn"), "Start", "open_book", SubResource("AnimationNodeStateMachineTransition_v1itn"), "close_book", "End", SubResource("AnimationNodeStateMachineTransition_0itbn")]
-graph_offset = Vector2(77, -74)
+transitions = ["open_book", "close_book", SubResource("AnimationNodeStateMachineTransition_cvk23"), "Start", "open_book", SubResource("AnimationNodeStateMachineTransition_v1itn"), "close_book", "End", SubResource("AnimationNodeStateMachineTransition_0itbn")]
+graph_offset = Vector2(183, -53)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_w0qbv"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0itbn"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3gpl2"]
+animation = &"Book/turn_page"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cvk23"]
+animation = &"Book/turn_page"
+play_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pj5bn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwkjv"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mb530"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5hqcs"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vwtnr"]
+states/turn_page_backward/node = SubResource("AnimationNodeAnimation_3gpl2")
+states/turn_page_backward/position = Vector2(524, 134)
+states/turn_page_forward/node = SubResource("AnimationNodeAnimation_cvk23")
+states/turn_page_forward/position = Vector2(524, 43)
+transitions = ["Start", "turn_page_forward", SubResource("AnimationNodeStateMachineTransition_pj5bn"), "Start", "turn_page_backward", SubResource("AnimationNodeStateMachineTransition_qwkjv"), "turn_page_forward", "End", SubResource("AnimationNodeStateMachineTransition_mb530"), "turn_page_backward", "End", SubResource("AnimationNodeStateMachineTransition_5hqcs")]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0itbn"]
-graph_offset = Vector2(-34, 60)
-nodes/output/position = Vector2(500, 160)
+graph_offset = Vector2(-295, 161)
+nodes/output/position = Vector2(720, 280)
 nodes/BookState/node = SubResource("AnimationNodeStateMachine_qwkjv")
 nodes/BookState/position = Vector2(-40, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_0itbn")
 nodes/TimeScale/position = Vector2(260, 120)
-node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"BookState"]
+nodes/Add2/node = SubResource("AnimationNodeAdd2_0itbn")
+nodes/Add2/position = Vector2(500, 220)
+nodes/TurnState/node = SubResource("AnimationNodeStateMachine_vwtnr")
+nodes/TurnState/position = Vector2(-20, 360)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_w0qbv")
+"nodes/TimeScale 2/position" = Vector2(280, 360)
+node_connections = [&"output", 0, &"Add2", &"TimeScale", 0, &"BookState", &"Add2", 0, &"TimeScale", &"Add2", 1, &"TimeScale 2", &"TimeScale 2", 0, &"TurnState"]
 
 [node name="Book" type="Node3D"]
 script = ExtResource("1_swk3h")
@@ -54,7 +87,9 @@ folder_material = ExtResource("2_0itbn")
 paper_material = ExtResource("2_v1itn")
 text_material = ExtResource("2_d3qs1")
 
-[node name="ContentBuilder" parent="." instance=ExtResource("2_dwo58")]
+[node name="BlockContentBuilder" parent="." instance=ExtResource("2_dwo58")]
+
+[node name="PageContentBuilder" parent="." instance=ExtResource("2_dwo58")]
 
 [node name="Mesh" parent="." instance=ExtResource("5_8rvnc")]
 
@@ -69,3 +104,5 @@ root_node = NodePath("../Mesh")
 tree_root = SubResource("AnimationNodeBlendTree_0itbn")
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 2.0
+parameters/Add2/add_amount = 1.0
+"parameters/TimeScale 2/scale" = 1.0
