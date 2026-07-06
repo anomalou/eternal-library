@@ -102,7 +102,7 @@ func _stop_reading():
 	_state_manager.save(_book_id, _book_state)
 	await _book_entity.close()
 	GameEnv.get_current_session().input_block.set("book", false)
-	await _book_entity.fly_to_shelf(_shelf_place_transform)
+	await _book_entity.fly_to_origin(_shelf_place_transform)
 	# play return animation here
 	# await animation end
 	Signals.return_book.emit(_book_id)
@@ -113,7 +113,6 @@ func _stop_reading():
 	_book_data = null
 	_book_state = null
 	_shelf_place_transform = Transform3D.IDENTITY
-	
 
 func _turn_page(forward : bool = true):
 	if _book_id:
@@ -123,6 +122,8 @@ func _turn_page(forward : bool = true):
 			if (current_index + 2) < book_size:
 				_book_state.current_page = current_index + 2
 				_render_pages([-2, 1, -1, 0])
+				# render order: current page index 2
+				# Rendered pages (from left to right) index: 0, 1, 2, 3 (in middle pages on animated page)
 				_book_entity.set_page_visible(true)
 				await _book_entity.turn_page(forward)
 				_render_pages([0, 1])
@@ -135,8 +136,6 @@ func _turn_page(forward : bool = true):
 				await _book_entity.turn_page(forward)
 				_render_pages([0, 1])
 				_book_entity.set_page_visible(false)
-		
-			
 
 # only usable when book is open. Book state will be in state manager
 # also state manager handle current opened page
@@ -152,15 +151,7 @@ func _render_pages(order : Array[int]):
 		return
 	var pages : Array[PageData] = _book_data.split()
 	var current_page = _book_state.current_page
-	if order.size() > 2:
-		_book_entity.render_pages([
-			pages.get(current_page + order.get(0)), 
-			pages.get(current_page + order.get(1)), 
-			pages.get(current_page + order.get(2)), 
-			pages.get(current_page + order.get(3))
-		])
-	else:
-		_book_entity.render_pages([
-			pages.get(current_page + order.get(0)), 
-			pages.get(current_page + order.get(1))
-		])
+	var pages_for_render : Array[PageData] = []
+	for offset in order:
+		pages_for_render.append(pages.get(current_page + offset))
+	_book_entity.render_pages(pages_for_render)

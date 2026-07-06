@@ -53,7 +53,9 @@ func generate(_id : String):
 	
 	page.visible = false
 
-# only takes 2 first pages
+# pages can have 2 or 4 elements
+# first 2 is block pages
+# next 2 belongs to animated page
 func render_pages(pages : Array[PageData]):
 	block_content_builder.build([pages.get(0), pages.get(1)])
 	if pages.size() > 2:
@@ -104,8 +106,8 @@ func fly_to_camera(camera_transf : Transform3D):
 	var tween = fly_to_transf(target)
 	await tween.finished
 
-func fly_to_shelf(shelf_transf : Transform3D):
-	var tween = fly_to_transf(shelf_transf)
+func fly_to_origin(origin_transf : Transform3D):
+	var tween = fly_to_transf(origin_transf)
 	await tween.finished
 
 func fly_to_transf(transf : Transform3D) -> Tween:

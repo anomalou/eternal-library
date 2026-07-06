@@ -29,6 +29,10 @@ SpawnTableManager="*res://Scripts/Managers/spawn_table_manager.gd"
 file_logging/enable_file_logging=true
 file_logging/log_path="res://Builds/Logs/debugs.log"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/QuestsPlugin/plugin.cfg")
+
 [filesystem]
 
 import/blender/enabled=false

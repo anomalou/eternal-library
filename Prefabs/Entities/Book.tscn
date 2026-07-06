@@ -67,7 +67,7 @@ states/turn_page_forward/position = Vector2(524, 43)
 transitions = ["Start", "turn_page_forward", SubResource("AnimationNodeStateMachineTransition_pj5bn"), "Start", "turn_page_backward", SubResource("AnimationNodeStateMachineTransition_qwkjv"), "turn_page_forward", "End", SubResource("AnimationNodeStateMachineTransition_mb530"), "turn_page_backward", "End", SubResource("AnimationNodeStateMachineTransition_5hqcs")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0itbn"]
-graph_offset = Vector2(-295, 161)
+graph_offset = Vector2(-272.80707, -30.397552)
 nodes/output/position = Vector2(720, 280)
 nodes/BookState/node = SubResource("AnimationNodeStateMachine_qwkjv")
 nodes/BookState/position = Vector2(-40, 140)
