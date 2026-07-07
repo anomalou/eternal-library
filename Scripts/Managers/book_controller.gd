@@ -14,10 +14,7 @@ var _shelf_place_transform : Transform3D
 
 var camera : Camera3D
 
-var _reset_start_reading = false
-
 func _ready() -> void:
-	Signals.prepare_book.connect(_prepare_book)
 	Signals.start_reading.connect(_start_reading)
 
 # Also need state manager here 
@@ -36,45 +33,19 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("prev_page"):
 			_turn_page(false)
 
-func _prepare_book(book_id : String, color : Color, transform : Transform3D):
-	var book : Book = _entity_manager.create_entity(book_id, "book")
-	book.set_color(color)
-	book.global_transform = transform
-	_shelf_place_transform = transform
-
-func _start_reading(book_id : String, is_gibberish : bool):
+func _start_reading(book_id : String, book_properties : BookEntityProperties):
 	Log.info("Book ", _book_id, " start reading")
+	var book : Book = _entity_manager.create_entity(book_id, "book")
+	book.set_color(book_properties.color)
+	book.global_transform = book_properties.bookshelf_origin_transform
+	_shelf_place_transform = book_properties.bookshelf_origin_transform
 	GameEnv.get_current_session().input_block.set("book", true)
-	var book : Book = await _wait_for_book(book_id)
-	if not book:
-		GameEnv.get_current_session().input_block.set("book", false)
-		return
-	_reset_start_reading = false
-	_init_book_state(book_id, book, is_gibberish)
+	_init_book_state(book_id, book, book_properties.is_gibberish)
 	_render_pages([0, 1])
-	if not _reset_start_reading:
-		await _book_entity.eject_from_shelf()
-	if not _reset_start_reading:
-		await _book_entity.fly_to_camera(camera.global_transform)
-	if not _reset_start_reading:
-		await _book_entity.open()
+	await _book_entity.eject_from_shelf()
+	await _book_entity.fly_to_camera(camera.global_transform)
+	await _book_entity.open()
 	Log.info("Book ", _book_id, " opened")
-
-func _wait_for_book(book_id : String) -> Book:
-	var timeout = 10.0
-	var elapsed = 0
-	
-	var entity = _entity_manager.find(book_id)
-	while not entity and elapsed < timeout:
-		var entity_id = await _entity_manager.entity_registered
-		if entity_id == book_id:
-			entity = _entity_manager.find(book_id)
-		elapsed += get_process_delta_time()
-	
-	if not entity or not entity is Book:
-		Log.error("Something wrong with book = ", book_id)
-	
-	return entity
 
 func _init_book_state(book_id : String, entity : Book, is_gibberish : bool) -> void:
 	var data = _book_manager.find(book_id)
@@ -98,7 +69,6 @@ func _init_book_state(book_id : String, entity : Book, is_gibberish : bool) -> v
 
 func _stop_reading():
 	Log.info("Book ", _book_id, " stop reading")
-	_reset_start_reading = true
 	_state_manager.save(_book_id, _book_state)
 	await _book_entity.close()
 	GameEnv.get_current_session().input_block.set("book", false)

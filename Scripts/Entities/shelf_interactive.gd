@@ -65,9 +65,12 @@ func _interact_action(_point : Vector3):
 		var origin : Vector3 = multimesh.get_instance_transform(_selection_index).origin + Vector3(0.0, 1.25, 1.0)
 		var raw_rotation = global_rotation + Vector3(0, deg_to_rad(90), 0)
 		var book_transfrom : Transform3D = Transform3D(Basis.from_euler(raw_rotation), to_global(origin))
-		Signals.prepare_book.emit(book_id, _selected_book_base_color, book_transfrom)
+		var book_entity_properties : BookEntityProperties = BookEntityProperties.new()
+		book_entity_properties.color = _selected_book_base_color
+		book_entity_properties.bookshelf_origin_transform = book_transfrom
+		book_entity_properties.is_gibberish = not _knowledge_books.has(_selection_index)
+		Signals.start_reading.emit(book_id, book_entity_properties)
 		_take_book(book_id, _selection_index)
-		Signals.start_reading.emit(book_id, not _knowledge_books.has(_selection_index))
 		Log.info("Used ", _selection_index, " book on bookshell ", id)
 
 func _hover_action(point : Vector3):
