@@ -10,6 +10,11 @@ func _init(_callback_data : CallbackNodeData = CallbackNodeData.new()) -> void:
 func _enter_tree() -> void:
 	super()
 	title = "Callback"
+	var left_label : Label = Label.new()
+	left_label.text = "in"
+	add_child(left_label)
+	
+	
 
 func _on_node_selected() -> void:
 	EditorInterface.inspect_object(callback_data)

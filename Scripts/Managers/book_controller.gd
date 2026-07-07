@@ -6,11 +6,7 @@ var _state_manager : StateManager
 var _book_manager : BookManager
 
 # Controlling right now book's properties
-var _book_id : String
-var _book_entity : Book
-var _book_data : BookData
-var _book_state : BookState
-var _shelf_place_transform : Transform3D
+var _controlled_book : ReadingSession
 
 var camera : Camera3D
 
@@ -34,18 +30,18 @@ func _input(event: InputEvent) -> void:
 			_turn_page(false)
 
 func _start_reading(book_id : String, book_properties : BookEntityProperties):
-	Log.info("Book ", _book_id, " start reading")
+	Log.info("Book ", _controlled_book.book_id, " start reading")
 	var book : Book = _entity_manager.create_entity(book_id, "book")
 	book.set_color(book_properties.color)
 	book.global_transform = book_properties.bookshelf_origin_transform
-	_shelf_place_transform = book_properties.bookshelf_origin_transform
+	_controlled_book.shelf_place_transform = book_properties.bookshelf_origin_transform
 	GameEnv.get_current_session().input_block.set("book", true)
 	_init_book_state(book_id, book, book_properties.is_gibberish)
 	_render_pages([0, 1])
-	await _book_entity.eject_from_shelf()
-	await _book_entity.fly_to_camera(camera.global_transform)
-	await _book_entity.open()
-	Log.info("Book ", _book_id, " opened")
+	await _controlled_book.book_entity.eject_from_shelf()
+	await _controlled_book.book_entity.fly_to_camera(camera.global_transform)
+	await _controlled_book.book_entity.open()
+	Log.info("Book ", _controlled_book.book_id, " opened")
 
 func _init_book_state(book_id : String, entity : Book, is_gibberish : bool) -> void:
 	var data = _book_manager.find(book_id)
@@ -68,44 +64,41 @@ func _init_book_state(book_id : String, entity : Book, is_gibberish : bool) -> v
 	self._book_state = state
 
 func _stop_reading():
-	Log.info("Book ", _book_id, " stop reading")
-	_state_manager.save(_book_id, _book_state)
-	await _book_entity.close()
+	Log.info("Book ", _controlled_book.book_id, " stop reading")
+	_state_manager.save(_controlled_book.book_id, _controlled_book.book_state)
+	await _controlled_book.book_entity.close()
 	GameEnv.get_current_session().input_block.set("book", false)
-	await _book_entity.fly_to_origin(_shelf_place_transform)
+	await _controlled_book.book_entity.fly_to_origin(_controlled_book.shelf_place_transform)
 	# play return animation here
 	# await animation end
-	Signals.return_book.emit(_book_id)
-	_entity_manager.destroy_entity(_book_id)
-	Log.info("Book ", _book_id, " closed")
-	_book_id = ""
-	_book_entity = null
-	_book_data = null
-	_book_state = null
-	_shelf_place_transform = Transform3D.IDENTITY
+	Signals.return_book.emit(_controlled_book.book_id)
+	_entity_manager.destroy_entity(_controlled_book.book_id)
+	Log.info("Book ", _controlled_book.book_id, " closed")
+	_controlled_book.free()
+	_controlled_book = null
 
 func _turn_page(forward : bool = true):
-	if _book_id:
-		var book_size : int = _book_data.cached_book_size
-		var current_index : int = _book_state.current_page
+	if _controlled_book:
+		var book_size : int = _controlled_book.book_data.cached_book_size
+		var current_index : int = _controlled_book.book_state.current_page
 		if forward:
 			if (current_index + 2) < book_size:
-				_book_state.current_page = current_index + 2
+				_controlled_book.book_state.current_page = current_index + 2
 				_render_pages([-2, 1, -1, 0])
 				# render order: current page index 2
 				# Rendered pages (from left to right) index: 0, 1, 2, 3 (in middle pages on animated page)
-				_book_entity.set_page_visible(true)
-				await _book_entity.turn_page(forward)
+				_controlled_book.book_entity.set_page_visible(true)
+				await _controlled_book.book_entity.turn_page(forward)
 				_render_pages([0, 1])
-				_book_entity.set_page_visible(false)
+				_controlled_book.book_entity.set_page_visible(false)
 		else:
 			if (current_index - 2) >= 0:
-				_book_state.current_page = current_index - 2
+				_controlled_book.book_state.current_page = current_index - 2
 				_render_pages([0, 3, 1, 2])
-				_book_entity.set_page_visible(true)
-				await _book_entity.turn_page(forward)
+				_controlled_book.book_entity.set_page_visible(true)
+				await _controlled_book.book_entity.turn_page(forward)
 				_render_pages([0, 1])
-				_book_entity.set_page_visible(false)
+				_controlled_book.book_entity.set_page_visible(false)
 
 # only usable when book is open. Book state will be in state manager
 # also state manager handle current opened page
@@ -117,11 +110,11 @@ func _turn_page(forward : bool = true):
 # 
 # Order stores page index offset for properly rendering of each pade side
 func _render_pages(order : Array[int]):
-	if not _book_id:
+	if not _controlled_book:
 		return
-	var pages : Array[PageData] = _book_data.split()
-	var current_page = _book_state.current_page
+	var pages : Array[PageData] = _controlled_book.book_data.split()
+	var current_page = _controlled_book.book_state.current_page
 	var pages_for_render : Array[PageData] = []
 	for offset in order:
 		pages_for_render.append(pages.get(current_page + offset))
-	_book_entity.render_pages(pages_for_render)
+	_controlled_book.book_entity.render_pages(pages_for_render)

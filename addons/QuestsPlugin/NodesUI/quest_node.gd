@@ -11,6 +11,7 @@ func _enter_tree() -> void:
 	node_selected.connect(_on_node_selected)
 
 func _close() -> void:
+	EditorInterface.inspect_object(null)
 	queue_free()
 
 func _on_node_selected() -> void:
