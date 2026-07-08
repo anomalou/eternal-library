@@ -1,5 +1,5 @@
 @tool
-extends GraphNode
+extends BaseNode
 class_name QuestNode
 
 func _enter_tree() -> void:
