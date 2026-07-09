@@ -16,10 +16,10 @@ func _enter_tree() -> void:
 func check_connection_from(node : BaseNode, slot : int) -> bool:
 	return true
 
-func connect_to_node(node : BaseNode, slot : int):
+func connect_to_node(node : BaseNode, slot : int, is_right : bool):
 	_is_connected = true
 
-func on_disconnection(slot : int):
+func on_disconnection(slot : int, is_right : bool):
 	_is_connected = false
 
 func has_connection(slot : int, is_right : bool):

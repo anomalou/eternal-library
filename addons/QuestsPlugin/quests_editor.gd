@@ -9,7 +9,9 @@ func _ready() -> void:
 	_build_editor()
 
 func _build_editor() -> void:
-	custom_minimum_size = Vector2i(200, 200)
+	set_anchors_preset(PRESET_FULL_RECT)
+	size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	size_flags_vertical = Control.SIZE_EXPAND_FILL
 	
 	_root = VBoxContainer.new()
 	_root.set_anchors_preset(PRESET_FULL_RECT)
@@ -61,7 +63,7 @@ func _create_quest():
 	_graph_edit.set_anchors_preset(PRESET_FULL_RECT)
 	_graph_edit.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_graph_edit.show_grid = true
-	_graph_edit.add_valid_left_disconnect_type(1)
+	_graph_edit.add_valid_right_disconnect_type(0)
 	_root.add_child(_graph_edit)
 	
 	var start : StartNode = StartNode.new()
@@ -88,16 +90,18 @@ func _create_node(id : int):
 	_graph_edit.add_child(node)
 
 func _on_connection_request(from_node : StringName, from_slot : int, to_node : StringName, to_slot : int):
-	print("Try to connect")
+	print("Try to connect from ", from_node, " slot ", from_slot, " to ", to_node, " slot ", to_slot)
 	var from : BaseNode = _graph_edit.get_node(NodePath(from_node))
 	var to : BaseNode = _graph_edit.get_node(NodePath(to_node))
 	
 	var from_check : bool = from.check_connection_to(to, from_slot)
 	var to_check : bool = to.check_connection_from(from, to_slot)
 	
+	print("Connection checks [", from_check, ", ", to_check, "]")
+	
 	if from_check and to_check:
-		from.connect_to_node(to, from_slot)
-		to.connect_to_node(from, to_slot)
+		from.connect_to_node(to, from_slot, true)
+		to.connect_to_node(from, to_slot, false)
 		_graph_edit.connect_node(from_node, from_slot, to_node, to_slot)
 		print("Connected")
 
@@ -106,8 +110,8 @@ func _on_disconnection_request(from_node : StringName, from_slot : int, to_node 
 	var from : BaseNode = _graph_edit.get_node(NodePath(from_node))
 	var to : BaseNode = _graph_edit.get_node(NodePath(to_node))
 	
-	from.on_disconnection(from_slot)
-	to.on_disconnection(to_slot)
+	from.on_disconnection(from_slot, true)
+	to.on_disconnection(to_slot, false)
 	
 	_graph_edit.disconnect_node(from_node, from_slot, to_node, to_slot)
 

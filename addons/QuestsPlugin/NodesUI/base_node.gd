@@ -11,10 +11,10 @@ func check_connection_from(node : BaseNode, slot : int) -> bool:
 func check_connection_to(node : BaseNode, slot : int) -> bool:
 	return false
 
-func on_disconnection(slot : int):
+func on_disconnection(slot : int, is_right : bool):
 	pass
 
-func connect_to_node(node : BaseNode, slot : int):
+func connect_to_node(node : BaseNode, slot : int, is_right : bool):
 	pass
 
 func has_connection(slot : int, is_right : bool):

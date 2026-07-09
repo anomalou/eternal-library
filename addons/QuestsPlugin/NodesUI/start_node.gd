@@ -16,8 +16,8 @@ func _enter_tree() -> void:
 func check_connection_to(node : BaseNode, slot : int) -> bool:
 	return not _is_connected
 
-func on_disconnection(slot : int):
+func on_disconnection(slot : int, is_right : bool):
 	_is_connected = false
 
-func connect_to_node(node : BaseNode, slot : int):
+func connect_to_node(node : BaseNode, slot : int, is_right : bool):
 	_is_connected = true
